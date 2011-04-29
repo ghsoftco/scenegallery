@@ -1,0 +1,19 @@
+struct VS_OUTPUT
+{
+    float4 Position         : POSITION;
+    float2 UV                : TEXCOORD0;
+    float4 TriID            : TEXCOORD1;
+};
+
+struct PS_OUTPUT
+{
+    float4 Color[2] : COLOR0;
+};
+
+PS_OUTPUT PShaderEntry( VS_OUTPUT input )
+{
+    PS_OUTPUT Output;
+    Output.Color[0] = input.TriID;
+    Output.Color[1] = float4(input.UV, 0.0, 0.0);
+    return Output;
+}

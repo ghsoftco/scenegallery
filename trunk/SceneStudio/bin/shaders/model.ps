@@ -1,0 +1,56 @@
+
+uniform float4 Color;
+uniform float3 ColorShift;
+
+struct VS_OUTPUT
+{
+    float4 Position         : POSITION;   // vertex position
+    float4 TexCoord         : TEXCOORD0;  // vertex interpolation value
+    float3 Normal           : TEXCOORD1;  // vertex normal
+};
+
+struct PS_OUTPUT
+{
+    float4 Color    : COLOR0;
+};
+
+sampler s = sampler_state
+{ 
+    MinFilter = Linear;
+    MagFilter = Linear;
+};/* : register( s0 );*/
+
+PS_OUTPUT PShaderEntry( VS_OUTPUT input )
+{
+    PS_OUTPUT Output;
+    
+    float4 TexColor = tex2D( s, float2(input.TexCoord.x, 1.0 - input.TexCoord.y) );
+    float3 NormalizedNormal = normalize(input.Normal);
+    float LightScaling = sqrt(sqrt(min((2.0 - (abs(NormalizedNormal.x) + abs(NormalizedNormal.y) + abs(NormalizedNormal.z))), 1.0)));
+    
+    float Theta = acos(NormalizedNormal.z);
+    float SinTheta = sin(Theta) / 2.0;
+    float AWeight = SinTheta;
+    if(Theta < 3.14159 / 2.0)
+    {
+        AWeight = 1.0 - AWeight;
+    }
+    
+    //float3 ColorA = float3(153.0 / 255.0, 217.0 / 255.0, 234.0 / 255.0);
+    //float3 ColorB = float3(168.0 / 255.0, 230.0 / 255.0, 29.0 / 255.0);
+    
+    float3 ColorA = float3(0.9, 1.0, 1.0);
+    float3 ColorB = float3(1.0, 1.0, 0.95);
+    
+    float3 LightIntensity = LightScaling * (AWeight * ColorA + (1.0 - AWeight) * ColorB);
+
+    //LightIntensity = max(LightIntensity, float3(1.0, 1.0, 1.0));
+    
+    //Output.Color = float4(TexColor.x * LightIntensity.x, TexColor.y * LightIntensity.y, TexColor.z * LightIntensity.z, TexColor.w * Color.w);
+    Output.Color = float4(TexColor.x * Color.x * LightIntensity.x + ColorShift.x,
+                          TexColor.y * Color.y * LightIntensity.y + ColorShift.y,
+                          TexColor.z * Color.z * LightIntensity.z + ColorShift.z,
+                          TexColor.w * Color.w);
+    //Output.Color = float4(NormalizedNormal * 0.5 + float3(0.5, 0.5, 0.5), Color.w);
+    return Output;
+}
