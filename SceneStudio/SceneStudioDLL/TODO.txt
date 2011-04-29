@@ -1,0 +1,43 @@
+**** Important
+Direct 9.0 SDK Summer 2004: http://www.microsoft.com/downloads/en/confirmation.aspx?FamilyID=fd044a42-9912-42a3-9a9e-d857199f888e
+fetch email: http://mailsystem.codeplex.com/ https://addons.mozilla.org/en-US/thunderbird/addon/attachmentextractor/
+deep/cascading copy?
+arbitrary axis rotation
+copy more features from sketchup
+show other model views (maybe hover-over, maybe radio box, maybe only for selected)
+cleanup right hand panel (thumbnail is pretty isolated)
+parse and use HTML description, view/downloads, rating
+better list of things in ppls rooms
+more aggressive caching
+display the version so ppl can know if they're out of date (possibly with a note that there is a new version etc. etc.) - maybe a new menu bar entry
+
+**** UI Changes
+toggle line mesh rendering on a per-object basis
+scale transparency on a per-object basis
+easy object size normalization (make objects same height etc.)
+polygon & model count/stats for scene and selected model (and descendants)
+the problem with mouse/render events is not that there are multiple threads (mutexing) but that C# is building up a giant queue and processing them very slowly, maybe switch to a timer system
+reflection transform
+FPS+WASD mode?
+
+**** Backend changes
+toggle non-axis aligned bbox mode (project points into XY-plane, find theta with best planar oriented bounding box)
+update transparency to COLLADA spec ex. 1944938643bdb1dd56538cee362f80d0 (may be a sketchup 5 problem)
+make simple poster from local image file
+filter object duplicates by image similarity
+subgeometry elimination
+toggleable ceiling
+transparent walls
+deal with doors (ex. light switch occurs near doors)
+export back to sketchup
+final eye-candy rendering (maybe ask Paul how he did this)
+redo edge lines (ex. fans)
+_modelFromGeometryIndex is probably growing to absurd sizes (and is responsible for things being slow when moving objects around), could switch to binary search or a simple while loop
+basic profiler
+hybrid solution for picking - GPU for "pickingA" CPU for "pickingB" to remove need for PickMesh
+update TextSearch to be more reasonable and incorporate TF/IDF
+
+**** Projects
+The use of MMR, diversity-based reranking for reordering documents and producing summaries (Maximal Marginal Relevance)
+coarse object alignment - start off with just theta rotation, look for strong clusters, etc.
+context search integration

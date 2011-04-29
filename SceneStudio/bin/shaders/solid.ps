@@ -1,0 +1,19 @@
+
+uniform float4 Color;
+
+struct VS_OUTPUT
+{
+    float4 Position         : POSITION;
+};
+
+struct PS_OUTPUT
+{
+    float4 Color    : COLOR0;
+};
+
+PS_OUTPUT PShaderEntry( VS_OUTPUT input )
+{
+    PS_OUTPUT Output;
+    Output.Color = Color;
+    return Output;
+}

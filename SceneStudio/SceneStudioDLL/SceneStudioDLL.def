@@ -1,0 +1,14 @@
+LIBRARY SceneStudio.dll
+
+EXPORTS
+    SSInitD3D
+    SSRenderFrame
+    SSMouseMove
+    SSMouseDown
+    SSMouseUp
+    SSMouseWheel
+    SSKeyPress
+    SSModelChosen
+    SSQueryString
+    SSQueryInteger
+    SSProcessCommand

@@ -1,0 +1,2 @@
+baseAssetDirectory=cache/
+multisampleCount=8

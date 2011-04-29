@@ -1,0 +1,191 @@
+void Picker::PickTriangle(AppState &state, UINT x, UINT y, bool makeGrid)
+{
+    D3D9ProtectRenderTarget protector(state.device, true, true);
+
+    D3D9RenderTargetSurface &surfaceRGB = state.globalAssets.pickingSurfaceRGB;
+    D3D9RenderTargetSurface &surfaceUV = state.globalAssets.pickingSurfaceUV;
+    
+    surfaceRGB.ReSizeToBackBuffer(state.GD, D3DFMT_A8R8G8B8);
+    surfaceUV.ReSizeToBackBuffer(state.GD, D3DFMT_G32R32F);
+
+    surfaceRGB.SetAsRenderTarget(state.GD, 0);
+    surfaceUV.SetAsRenderTarget(state.GD, 1);
+
+    state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
+    
+    state.scene.RenderPickingB(state);
+
+    state.device->SetRenderTarget(1, NULL);
+
+    surfaceRGB.CopySurfaceToOffScreen(state.GD);
+    surfaceUV.CopySurfaceToOffScreen(state.GD);
+
+    auto capturedSurfaceRGB = surfaceRGB.OffScreenPlainSurface();
+    auto capturedSurfaceUV = surfaceUV.OffScreenPlainSurface();
+
+    D3DSURFACE_DESC desc;
+    capturedSurfaceRGB->GetDesc(&desc);
+    
+    if(x < desc.Width && y < desc.Height)
+    {
+        D3DLOCKED_RECT rect;
+        if(makeGrid)
+        {
+            capturedSurfaceRGB->LockRect(&rect, NULL, 0);
+            _faceIDGrid.Allocate(desc.Height, desc.Width);
+            for(UINT row = 0; row < desc.Height; row++)
+            {
+                memcpy(&_faceIDGrid.Cell(row, 0), ((BYTE *)rect.pBits) + rect.Pitch * row, sizeof(RGBColor) * desc.Width);
+            }
+
+            state.selectedFaceIndex = 0xFFFFFFFF;
+        
+            BYTE* base = ((BYTE *)rect.pBits) + rect.Pitch * y + sizeof(RGBColor) * x;
+            state.selectedFaceIndex = *(UINT32*)base;
+
+            capturedSurfaceRGB->UnlockRect();
+
+            capturedSurfaceUV->LockRect(&rect, NULL, 0);
+            _uvGrid.Allocate(desc.Height, desc.Width);
+            for(UINT row = 0; row < desc.Height; row++)
+            {
+                memcpy(&_uvGrid.Cell(row, 0), ((BYTE *)rect.pBits) + rect.Pitch * row, sizeof(float) * 2 * desc.Width);
+            }
+
+            state.selectedUV = Vec2f(-1.0f, -1.0f);
+
+            base = ((BYTE *)rect.pBits) + rect.Pitch * y + sizeof(float) * 2 * x;
+            state.selectedUV = *(Vec2f*)base;
+
+            capturedSurfaceUV->UnlockRect();
+        }
+        else
+        {
+            RECT region;
+            region.left = x;
+            region.right = x + 1;
+            region.top = y;
+            region.bottom = y + 1;
+
+            capturedSurfaceRGB->LockRect(&rect, &region, 0);
+            
+            state.selectedFaceIndex = 0xFFFFFFFF;
+            BYTE* base = ((BYTE *)rect.pBits);
+            state.selectedFaceIndex = *(UINT32*)base;
+
+            capturedSurfaceRGB->UnlockRect();
+
+            capturedSurfaceUV->LockRect(&rect, &region, 0);
+            
+            state.selectedUV = Vec2f(-1.0f, -1.0f);
+            base = ((BYTE *)rect.pBits);
+            state.selectedUV = *(Vec2f*)base;
+            
+            capturedSurfaceUV->UnlockRect();
+        }
+    }
+}
+
+if(x < desc.Width && y < desc.Height)
+    {
+        D3DLOCKED_RECT rect;
+        if(makeGrid)
+        {
+            _geometryIDGrid.Allocate(desc.Height, desc.Width);
+    
+            capturedSurface->LockRect(&rect, NULL, 0);
+
+            for(UINT row = 0; row < desc.Height; row++)
+            {
+                memcpy(&_geometryIDGrid.Cell(row, 0), ((BYTE *)rect.pBits) + rect.Pitch * row, sizeof(RGBColor) * desc.Width);
+            }
+
+            state.selectedGeometryIndex = 0xFFFFFFFF;
+            BYTE* base = ((BYTE *)rect.pBits) + rect.Pitch * y + sizeof(RGBColor) * x;
+            state.selectedGeometryIndex = *(UINT32*)base;
+            capturedSurface->UnlockRect();
+        }
+        else
+        {
+            _geometryIDGrid.Allocate(desc.Height, desc.Width);
+    
+            RECT region;
+            region.left = x;
+            region.right = x + 1;
+            region.top = y;
+            region.bottom = y + 1;
+            capturedSurface->LockRect(&rect, &region, 0);
+            BYTE* base = ((BYTE *)rect.pBits);
+            state.selectedGeometryIndex = *(UINT32*)base;
+            capturedSurface->UnlockRect();
+        }
+    }
+void Scene::RenderChosenModel(AppState &state)
+{
+    return;
+    if(state.chosenModel == NULL)
+    {
+        return;
+    }
+    Vec3f pos, normal;
+    if(!GetSelectedPos(state, pos, normal))
+    {
+        return;
+    }
+
+    Matrix4 transform = MakeFirstTransform(state, *state.chosenModel, state.chosenFace, pos, normal) * Matrix4::Rotation(normal, state.chosenRotation) * Matrix4::Scaling(state.chosenScale) * Matrix4::Translation(pos);
+
+    auto device = state.GD.GetDevice();
+
+    device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+    device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+
+    D3D9VertexShader &vs = state.globalAssets.VertexShaders.model;
+    D3D9PixelShader  &ps = state.globalAssets.PixelShaders.model;
+    
+    vs.Set();
+    ps.Set();
+
+    const Matrix4 transformViewProjection = transform * state.viewProjection;
+
+    for(UINT geometryIndex = 0; geometryIndex < state.chosenModel->geometry().Length(); geometryIndex++)
+    {
+        const ModelGeometryEntry &curGeometry = state.chosenModel->geometry()[geometryIndex];
+
+        if(curGeometry.texture == NULL)
+        {
+            state.globalAssets.whiteTexture.Set(0);
+        }
+        else
+        {
+            curGeometry.texture->Set(0);
+        }
+
+        vs.SetMatrix("WorldViewProj", curGeometry.transform * transformViewProjection);
+        vs.SetMatrix("World", curGeometry.transform);
+        
+        Vec4f color = curGeometry.diffuse;
+        Vec3f colorShift = Vec3f::Origin;
+        ps.SetVec4("Color", color);
+        ps.SetVec3("ColorShift", colorShift);
+        
+        curGeometry.mesh->Render();
+    }
+}
+
+/*
+D3D9Texture *newTexture = new D3D9Texture;
+newTexture->Init(_state->GD);
+
+D3D9Texture *bufferTexture = new D3D9Texture;
+bufferTexture->Init(_state->GD);
+        
+Bitmap bmp;
+bmp.LoadPNG(_state->parameters.textureDirectory + name);
+bufferTexture->Load(bmp);
+        
+newTexture->Allocate(D3DFMT_DXT1, bmp.Width(), bmp.Height(), false, 0);
+newTexture->Load(bufferTexture->SurfaceTopLevel());
+        
+delete bufferTexture;
+*/

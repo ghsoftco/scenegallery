@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Config.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStudioDLL.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCamera.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="AppParameters.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Picker.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelDatabase.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelInstance.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="UndoStack.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="UIEventLogger.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="UIEvent.h">
+      <Filter>App</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DLLMain.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStudioDLL.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCamera.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="AppParameters.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="Picker.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelDatabase.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelInstance.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="UndoStack.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="UIEventLogger.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="UIEvent.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{c928787a-2d0a-40d8-9c91-930e53aad1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{e0bdb0f1-00f3-41f9-8c72-c27b4e6bb002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{4e2f8d06-ca85-4f09-811c-536ad0ad6aee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SceneStudioDLL.def">
+      <Filter>Base</Filter>
+    </None>
+    <None Include="TODO.txt" />
+    <None Include="Scrap.txt" />
+    <None Include="..\bin\shaders\model.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\model.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\pickingA.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\pickingA.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\pickingB.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\pickingB.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\solid.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\shaders\solid.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\bin\Parameters.txt" />
+    <None Include="..\bin\Console.txt" />
+  </ItemGroup>
+</Project>
