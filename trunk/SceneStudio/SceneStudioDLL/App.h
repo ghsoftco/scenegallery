@@ -106,6 +106,7 @@ struct AppState
     Matrix4 copiedSecondTransform;
 
     bool sceneDirty;
+    bool loadedCamera;
 };
 
 class App : public GraphicsDeviceCallbacks
@@ -159,6 +160,9 @@ private:
     UINT SaveScene(const String &filename);
     UINT LoadModelList(const String &filename);
     UINT NewScene(const String &scene);
+
+    void Screenshot(UINT width, UINT height, const String &filename);
+    void SaveSceneThumbnail(const String &filename);
 
     ModeType SetMode(ModeType m);
 

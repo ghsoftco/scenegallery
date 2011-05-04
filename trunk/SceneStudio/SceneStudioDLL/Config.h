@@ -55,7 +55,7 @@
 // Compression and PNG support
 //
 #define USE_ZLIB
-//#define USE_PNG
+#define USE_PNG
 
 //
 // Simple DirectMedia Layer support (used for images)

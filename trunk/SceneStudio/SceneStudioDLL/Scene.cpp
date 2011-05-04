@@ -114,6 +114,9 @@ UINT Scene::SaveSceneASCII(AppState &state, const String &filename)
     {
         file << "z " << _searchTerms[searchTermIndex].FindAndReplace(String(" "), String("_")) << '\n';
     }
+    
+    // Save Camera
+    file << "C " << state.camera.ToString() << endl;
 
     _root->SaveASCII(file);
     _uiEventLog.SaveASCII(file);
@@ -188,6 +191,14 @@ UINT Scene::LoadSceneASCII(AppState &state, const String &filename)
                 if(words.Length() >= 2)
                 {
                     _searchTerms.PushEnd(words[1]);
+                }
+            }
+            else if(c0 == 'C') // Parse saved SceneCamera
+            {
+                if(words.Length() >= 2)
+                {
+                    state.camera = SceneCamera(words[1]);
+                    state.loadedCamera = true;
                 }
             }
             else if(c0 == 'c')

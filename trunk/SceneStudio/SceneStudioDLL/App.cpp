@@ -47,6 +47,7 @@ void App::InitD3D(HWND window)
 
     _state.scene.Reset(_state, "room00");
 
+    _state.loadedCamera = false;
     ResetCamera();
     
     _state.globalAssets.PixelShaders.model.Init    (_state.GD, _state.parameters.shaderDirectory + String("model.ps"));
@@ -470,6 +471,11 @@ void App::KeyPress(int key, bool shift, bool ctrl)
     {
         Undo();
     }
+
+    if (ctrl && key == KEY_P)
+    {
+        Screenshot(screenshotWidth, screenshotHeight, screenshotFilename);
+    }
 }
 
 void App::ModelChosen(const char *model)
@@ -638,6 +644,14 @@ UINT App::ProcessCommand(const char *command)
 
 void App::ResetCamera()
 {
+    // If camera loaded from saved scene, update and return
+    if (_state.loadedCamera)
+    {
+        UpdateCamera();
+        _state.loadedCamera = false;
+        return;
+    }
+
     _state.scene.LogUIEvent(UIEventResetCamera, _state.camera.ToString());
     ArchitectureInfo *curArchitecture = _state.modelDatabase.GetArchitectureInfo(_state.scene.BaseModelName());
     if(curArchitecture == NULL)
@@ -921,4 +935,29 @@ ModeType App::SetMode(ModeType m)
     _state.scene.LogUIEvent(e, modifiers);
 
     return previousMode;
+}
+
+void App::Screenshot(UINT width, UINT height, const String &filename)
+{
+    ClearSelection();
+    RenderFrame();
+
+    Bitmap screenshot;
+    _state.GD.CaptureScreen(_state.window, screenshot);
+
+    Bitmap resized(width, height);
+    resized.Clear(RGBColor::White);
+
+    Rectangle2i sourceRect = Rectangle2i(0, 24, screenshot.Width(), screenshot.Height());
+    Rectangle2i targetRect = Rectangle2i(0, 0, width, height);
+    
+    screenshot.StretchBltTo(resized, targetRect, sourceRect, Bitmap::SamplingLinear);
+
+    resized.SavePNG(filename);
+}
+
+void App::SaveSceneThumbnail(const String &filename)
+{
+    LoadScene(filename);
+    Screenshot(screenshotWidth, screenshotHeight, filename + String(".png"));
 }
