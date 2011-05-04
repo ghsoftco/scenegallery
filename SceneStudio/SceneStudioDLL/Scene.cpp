@@ -558,6 +558,23 @@ bool Scene::RemoveSelectedModel(AppState &state, bool deleteModel)
     return true;
 }
 
+bool Scene::SetSelectedModelAsRoot(AppState &state)
+{
+    if(state.selectedModel == NULL) return false;
+    
+    ModelInstance *newRoot = GetSelectedModel(state);
+    _root = newRoot;
+    _root->parent = NULL;
+    _root->UpdateTransform();
+    _bbox = _root->model->BoundingBox();
+    UpdateModelIDs(state);
+
+    state.selectedModel = NULL;
+    state.sceneDirty = true;
+
+    return true;
+}
+
 ModelInstance* Scene::GetSelectedModel(AppState &state)
 {
     if(state.selectedGeometryIndex >= _modelFromGeometryIndex.Length())

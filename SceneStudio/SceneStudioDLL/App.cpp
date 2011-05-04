@@ -119,7 +119,7 @@ void App::RenderFrame()
 void App::RenderStatusText()
 {
     _consoleY = 2;
-    if(DebuggingMode)
+    if(DebuggingStatusText)
     {
         //Status(String("selected geometry: ") + String(_state.selectedGeometryIndex), RGBColor::Red);
         //Status(String("selected face: ") + String(_state.selectedFaceIndex), RGBColor::Red);
@@ -394,6 +394,24 @@ void App::ExportAllScenes()
     Console::WriteLine("Done");
 }
 
+void App::CreateSceneThumbnails(const String &sceneDirectory)
+{
+    _state.chosenModel = NULL;
+    _state.selectedModel = NULL;
+
+    Directory dir(sceneDirectory);
+    for(UINT fileIndex = 0; fileIndex < dir.Files().Length(); fileIndex++)
+    {
+        const String &curFile = dir.Files()[fileIndex];
+        if(curFile.EndsWith(".scs"))
+        {
+            _state.scene.FreeMemory();
+            _state.assets.FreeMemory();
+            SaveSceneThumbnail(dir.DirectoryPath() + curFile);
+        }
+    }
+}
+
 void App::KeyPress(int key, bool shift, bool ctrl)
 {
     if(DebuggingMode)
@@ -409,6 +427,18 @@ void App::KeyPress(int key, bool shift, bool ctrl)
         if(key == KEY_F)
         {
             _state.GD.ToggleWireframe();
+        }
+        if (key == KEY_P)
+        {
+            Screenshot(screenshotWidth, screenshotHeight, _state.scene.Filename().RemoveSuffix(".scs") + String(".png"));
+        }
+        if (key == KEY_T)
+        {
+            CreateSceneThumbnails(String("../../Scenes/exemplars/"));
+        }
+        if (key == KEY_R)
+        {
+            _state.scene.SetSelectedModelAsRoot(_state);
         }
     }
     
@@ -472,10 +502,6 @@ void App::KeyPress(int key, bool shift, bool ctrl)
         Undo();
     }
 
-    if (ctrl && key == KEY_P)
-    {
-        Screenshot(screenshotWidth, screenshotHeight, screenshotFilename);
-    }
 }
 
 void App::ModelChosen(const char *model)
@@ -959,5 +985,5 @@ void App::Screenshot(UINT width, UINT height, const String &filename)
 void App::SaveSceneThumbnail(const String &filename)
 {
     LoadScene(filename);
-    Screenshot(screenshotWidth, screenshotHeight, filename + String(".png"));
+    Screenshot(screenshotWidth, screenshotHeight, filename.RemoveSuffix(".scs") + String(".png"));
 }
