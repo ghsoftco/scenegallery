@@ -167,6 +167,7 @@ private:
     ModeType SetMode(ModeType m);
 
     void ExportAllScenes();
+    void CreateSceneThumbnails(const String &sceneDirectory);
     
     // Debugging
     void ReportString(const String& s);

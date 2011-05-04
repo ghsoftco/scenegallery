@@ -11,7 +11,8 @@ const bool SkipTextureLoading = false;
 
 const UINT screenshotWidth = 400;
 const UINT screenshotHeight = 400;
-const String screenshotFilename("screenshot.png");
+const String screenshotDirectory("../../Scenes/");
 
-const bool DebuggingMode = false;
+const bool DebuggingMode = true;
+const bool DebuggingStatusText = false;
 const UINT MaxUndoDepth = 128;

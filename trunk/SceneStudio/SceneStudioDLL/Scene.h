@@ -29,6 +29,7 @@ public:
     bool RelocateSelectedModel(AppState &state);
     bool InsertChosenModel(AppState &state, ModelInstance*& insertedModel);
     bool RemoveSelectedModel(AppState &state, bool deleteModel);
+    bool SetSelectedModelAsRoot(AppState &state);
     ModelInstance* GetSelectedModel(AppState &state);
 
     void RenderDebugBBox(AppState &state);
