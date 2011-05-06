@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace SceneStudioApp
 {
@@ -17,15 +18,29 @@ namespace SceneStudioApp
 
     public class SceneEntry
     {
-        public SceneEntry(String _hash, String _name)
+        public SceneEntry(string _hash, string _name)
         {
             hash = _hash;
             name = _name;
+            image = Constants.webSceneImagesDirectory + _hash + ".jpg";
             textures = null;
+            modelHashes = null;
+            isExemplar = false;
         }
-        public String hash;
-        public String name;
-        public List<String> textures;
+        public SceneEntry(string _filename, List<string> _modelHashes)
+        {
+            hash = Path.GetFullPath(_filename);
+            name = Path.GetFileNameWithoutExtension(_filename);
+            image = Path.ChangeExtension(hash, ".png");
+            modelHashes = _modelHashes;
+            isExemplar = true;
+        }
+        public string hash;
+        public string name;
+        public string image;
+        public List<string> textures;
+        public List<string> modelHashes;
+        public bool isExemplar;
     };
 
     public class ArchitectureEntry
