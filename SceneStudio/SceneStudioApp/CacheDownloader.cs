@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SceneStudioApp
 {
-    class CacheDownloader
+    public class CacheDownloader
     {
         public enum DownloadStatus
         {
