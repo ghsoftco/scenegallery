@@ -44,7 +44,7 @@ namespace SceneStudioApp
         public SceneEntry(string _filename, List<string> _modelHashes)
         {
             hash = Path.GetFileNameWithoutExtension(_filename);
-            name = Path.GetFileNameWithoutExtension(_filename);
+            name = Path.GetFullPath(_filename);
             image = Path.ChangeExtension(Path.GetFullPath(_filename), ".png");
             modelHashes = _modelHashes;
             isExemplar = true;

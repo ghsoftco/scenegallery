@@ -42,6 +42,7 @@
             this.webBrowser.Size = new System.Drawing.Size(1284, 862);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser_Navigating);
+            this.webBrowser.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowser_PreviewKeyDown);
             // 
             // SceneBrowser
             // 
