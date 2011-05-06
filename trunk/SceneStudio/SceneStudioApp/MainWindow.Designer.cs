@@ -32,6 +32,7 @@
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.saveAsStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.uploadToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -89,6 +90,7 @@
             this.newToolStripButton,
             this.openToolStripButton,
             this.saveToolStripButton,
+            this.saveAsStripButton,
             this.uploadToolStripButton,
             this.toolStripSeparator,
             this.clearToolStripButton,
@@ -144,6 +146,19 @@
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             this.openToolStripButton.MouseEnter += new System.EventHandler(this.toolStripButtons_MouseEnter);
             this.openToolStripButton.MouseLeave += new System.EventHandler(this.toolStripButtons_MouseLeave);
+            // 
+            // saveAsStripButton
+            // 
+            this.saveAsStripButton.AutoSize = false;
+            this.saveAsStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveAsStripButton.Image = global::SceneStudioApp.Properties.Resources.SaveAs;
+            this.saveAsStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveAsStripButton.ImageTransparentColor = System.Drawing.Color.White;
+            this.saveAsStripButton.Name = "saveAsStripButton";
+            this.saveAsStripButton.Size = new System.Drawing.Size(40, 40);
+            this.saveAsStripButton.Text = "&Save As";
+            this.saveAsStripButton.ToolTipText = "Save As (Shift+Ctrl+S)";
+            this.saveAsStripButton.Click += new System.EventHandler(this.saveAsStripButton_Click);
             // 
             // saveToolStripButton
             // 
@@ -691,5 +706,6 @@
         private System.Windows.Forms.ToolStripButton clearToolStripButton;
         private System.Windows.Forms.Button shapeSearchButton;
         private System.Windows.Forms.ToolStripButton webPageToolStripButton;
+        private System.Windows.Forms.ToolStripButton saveAsStripButton;
     }
 }

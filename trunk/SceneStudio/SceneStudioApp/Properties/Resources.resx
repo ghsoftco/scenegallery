@@ -118,46 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Camera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="clearToolStripButton_help" xml:space="preserve">
-    <value>Deselects any selected objects.</value>
-  </data>
-  <data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Copy.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="copyToolStripButton_help" xml:space="preserve">
-    <value>Copies the currently selected object. Insert these copies using 'Paste.'</value>
-  </data>
-  <data name="deleteToolStripButton_help" xml:space="preserve">
-    <value>Deletes the currently selected object.</value>
-  </data>
-  <data name="Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Down.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Erase.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Export.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="flipMToolStripButton_help" xml:space="preserve">
-    <value>Flips the currently selected object around so that a different side faces up.
-
-Use this to reorient objects that aren't facing the way they should.</value>
-  </data>
-  <data name="flipNToolStripButton_help" xml:space="preserve">
-    <value>Flips the currently selected object around so that a different side faces up.
-
-Use this to reorient objects that aren't facing the way they should. </value>
-  </data>
-  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Help.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="helpToolStripButton_help" xml:space="preserve">
-    <value>Opens this window.</value>
-  </data>
   <data name="Help_book" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Help book.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,127 +129,38 @@ Mouse Button 2 Click-Drag = Rotate
 Mouse Wheel = Zoom
 Shift + Mouse Button 1 Click-Drag = Zoom</value>
   </data>
+  <data name="insertObject_help" xml:space="preserve">
+    <value>You've selected an object to put into the scene. Click the left mouse button to place the object.</value>
+  </data>
+  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Arrow.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flipNToolStripButton_help" xml:space="preserve">
+    <value>Flips the currently selected object around so that a different side faces up.
+
+Use this to reorient objects that aren't facing the way they should. </value>
+  </data>
+  <data name="Target" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Target.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="webPageToolStripButton_help" xml:space="preserve">
+    <value>Launches the SceneStudio home page using your default web browswer.
+
+The home page contains information on the SceneStudio project, including a video tutorial.</value>
+  </data>
   <data name="Mouse_pointer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Mouse pointer.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Move" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Move.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="moveToolStripButton_help" xml:space="preserve">
-    <value>Move the currently selected object.
-
-Mouse Button 1 Click-Drag = Move on Surface
-Mouse Button 2 Click-Drag = Move Freely
-Shift +Mouse Button 2 Click-Drag = Levitate</value>
-  </data>
-  <data name="newToolStripButton_help" xml:space="preserve">
-    <value>Creates a new scene.</value>
-  </data>
-  <data name="New_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\New file.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="No" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\No.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Objects.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="openToolStripButton_help" xml:space="preserve">
-    <value>Opens a previously saved scene file.</value>
-  </data>
-  <data name="Open_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Open file.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Paste.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pasteToolStripButton_help" xml:space="preserve">
-    <value>Inserts a new instance of the last copied model into the scene.</value>
-  </data>
-  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Refresh.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="resetCameraToolStripButton_help" xml:space="preserve">
-    <value>Resets the camera to its original viewpoint.</value>
-  </data>
-  <data name="Revert" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Revert.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="revertObjectToolStripButton_help" xml:space="preserve">
-    <value>Resets all the rotations done to the currently selected object.</value>
   </data>
   <data name="rotateCCWToolStripButton_help" xml:space="preserve">
     <value>Rotates the currently selected object counter-clockwise.
 
 Hold 'Shift' to rotate by smaller increments.</value>
   </data>
-  <data name="rotateCWToolStripButton_help" xml:space="preserve">
-    <value>Rotates the currently selected object clockwise.
-
-Hold 'Shift' to rotate by smaller increments.</value>
-  </data>
-  <data name="Rotate_CCW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Rotate CCW.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rotate_CW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Rotate CW.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Rotate left.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rotate_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Rotate right.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Save.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="saveToolStripButton_help" xml:space="preserve">
-    <value>Saves the current scene to a file.</value>
-  </data>
-  <data name="scaleDownToolStripButton_help" xml:space="preserve">
-    <value>Decreases the size of the currently selected object.
-
-Hold 'Shift' to scale by smaller increments.</value>
-  </data>
-  <data name="scaleUpToolStripButton_help" xml:space="preserve">
-    <value>Increases the size of the currently selected object.
-
-Hold 'Shift' to scale by smaller increments.</value>
-  </data>
-  <data name="selectToolStripButton_help" xml:space="preserve">
-    <value>Select objects in the scene by clicking on them.</value>
+  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Refresh.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Show" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Show.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Target" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Target.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Transparency" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Transparency.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="undoToolStripButton_help" xml:space="preserve">
-    <value>Reverts recent actions.</value>
-  </data>
-  <data name="Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Up.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uploadToolStripButton_help" xml:space="preserve">
-    <value>Uploads the current scene to our server and helps support our research!
-
-This will save your current scene.  Feel free to upload the same scene multiple times; only the latest version will be used.</value>
-  </data>
-  <data name="Upload_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Upload image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\Arrow.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="insertObject_help" xml:space="preserve">
-    <value>You've selected an object to put into the scene. Click the left mouse button to place the object.</value>
   </data>
   <data name="normalMode_help" xml:space="preserve">
     <value>CONTROLLING THE CAMERA
@@ -303,13 +174,145 @@ Move on Surfaces  -  Right Mouse Button
 Move in Plane  -  Shift + Right Mouse Button
 Levitate  -  Control + Right Mouse Button</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="New_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\New file.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Undo.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pasteToolStripButton_help" xml:space="preserve">
+    <value>Inserts a new instance of the last copied model into the scene.</value>
+  </data>
+  <data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Copy.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Help.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Open_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Open file.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scaleDownToolStripButton_help" xml:space="preserve">
+    <value>Decreases the size of the currently selected object.
+
+Hold 'Shift' to scale by smaller increments.</value>
+  </data>
+  <data name="Rotate_CCW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Rotate CCW.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Up.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Move" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Move.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="revertObjectToolStripButton_help" xml:space="preserve">
+    <value>Resets all the rotations done to the currently selected object.</value>
+  </data>
+  <data name="resetCameraToolStripButton_help" xml:space="preserve">
+    <value>Resets the camera to its original viewpoint.</value>
+  </data>
+  <data name="deleteToolStripButton_help" xml:space="preserve">
+    <value>Deletes the currently selected object.</value>
+  </data>
+  <data name="Camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Camera.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="openToolStripButton_help" xml:space="preserve">
+    <value>Opens a previously saved scene file.</value>
+  </data>
+  <data name="newToolStripButton_help" xml:space="preserve">
+    <value>Creates a new scene.</value>
+  </data>
+  <data name="Paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Paste.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Erase.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Export.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rotate_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Rotate right.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Rotate_CW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Rotate CW.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Objects.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undoToolStripButton_help" xml:space="preserve">
+    <value>Reverts recent actions.</value>
+  </data>
+  <data name="rotateCWToolStripButton_help" xml:space="preserve">
+    <value>Rotates the currently selected object clockwise.
+
+Hold 'Shift' to rotate by smaller increments.</value>
+  </data>
+  <data name="scaleUpToolStripButton_help" xml:space="preserve">
+    <value>Increases the size of the currently selected object.
+
+Hold 'Shift' to scale by smaller increments.</value>
+  </data>
+  <data name="helpToolStripButton_help" xml:space="preserve">
+    <value>Opens this window.</value>
+  </data>
+  <data name="selectToolStripButton_help" xml:space="preserve">
+    <value>Select objects in the scene by clicking on them.</value>
+  </data>
+  <data name="saveToolStripButton_help" xml:space="preserve">
+    <value>Saves the current scene to a file.</value>
+  </data>
+  <data name="uploadToolStripButton_help" xml:space="preserve">
+    <value>Uploads the current scene to our server and helps support our research!
+
+This will save your current scene.  Feel free to upload the same scene multiple times; only the latest version will be used.</value>
+  </data>
+  <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Save.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Revert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Revert.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clearToolStripButton_help" xml:space="preserve">
+    <value>Deselects any selected objects.</value>
+  </data>
+  <data name="Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Down.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="No" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\No.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flipMToolStripButton_help" xml:space="preserve">
+    <value>Flips the currently selected object around so that a different side faces up.
+
+Use this to reorient objects that aren't facing the way they should.</value>
+  </data>
+  <data name="Rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Rotate left.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Upload_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Upload image.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="moveToolStripButton_help" xml:space="preserve">
+    <value>Move the currently selected object.
+
+Mouse Button 1 Click-Drag = Move on Surface
+Mouse Button 2 Click-Drag = Move Freely
+Shift +Mouse Button 2 Click-Drag = Levitate</value>
+  </data>
   <data name="Homepage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Homepage.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="webPageToolStripButton_help" xml:space="preserve">
-    <value>Launches the SceneStudio home page using your default web browswer.
-
-The home page contains information on the SceneStudio project, including a video tutorial.</value>
+  <data name="copyToolStripButton_help" xml:space="preserve">
+    <value>Copies the currently selected object. Insert these copies using 'Paste.'</value>
+  </data>
+  <data name="Transparency" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\Transparency.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SaveAs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\SaveAs.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

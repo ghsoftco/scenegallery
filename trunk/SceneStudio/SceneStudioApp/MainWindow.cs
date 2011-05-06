@@ -33,27 +33,14 @@ namespace SceneStudioApp
 
         IntPtr d3dContext = (IntPtr)0;
 
-        Dictionary<string, SceneEntry> sceneDatabase;
-        Dictionary<string, SceneEntry> exemplarDatabase;
-        List<ArchitectureEntry> architectureDatabase;
         WebClient webClient = new WebClient();
         CacheDownloader cacheDownloader = new CacheDownloader();
+        Database database = new Database();
 
         Int32 prevMouseX = Int32.MaxValue, prevMouseY = Int32.MaxValue;
         SceneEntry selectedSceneEntry;
 
         HelpScreen helpScreen = null;
-
-        private void ReportCriticalError(String s)
-        {
-            //
-            // Application.Exit() doesn't appear to actually exit the application.
-            //
-            //MessageBox.Show(s + "\nThe application will now exit.", "Fatal Error Encountered");
-            //Application.Exit();
-
-            MessageBox.Show(s, "Error");
-        }
 
         private bool isInsertMode()
         {
@@ -85,102 +72,6 @@ namespace SceneStudioApp
             updateModeUI(true);
         }
 
-        private void LoadSceneInfo()
-        {
-            sceneDatabase = new Dictionary<string, SceneEntry>();
-            string[] allLines = File.ReadAllLines(Constants.cacheSceneNamesFilename);
-            for (int lineIndex = 0; lineIndex < allLines.Length; lineIndex++)
-            {
-                String curLine = allLines[lineIndex];
-                String[] curWords = curLine.Split('\t');
-                if (curWords.Length == 2)
-                {
-                    sceneDatabase.Add(curWords[0], new SceneEntry(curWords[0], curWords[1]));
-                }
-            }
-
-            architectureDatabase = new List<ArchitectureEntry>();
-            allLines = File.ReadAllLines(Constants.cacheArchitectureListFilename);
-            for (int lineIndex = 0; lineIndex < allLines.Length; lineIndex++)
-            {
-                String curLine = allLines[lineIndex];
-                String[] curWords = curLine.Split('\t');
-                if (curWords.Length == 2)
-                {
-                    architectureDatabase.Add(new ArchitectureEntry(curWords[0]));
-                }
-            }
-
-            //
-            // Architecture does not have a name, but still needs a SceneEntry
-            //
-            foreach (ArchitectureEntry architecture in architectureDatabase)
-            {
-                sceneDatabase.Add(architecture.name, new SceneEntry(architecture.name, "Architecture"));
-            }
-
-            // Load textures into SceneEntries
-            allLines = File.ReadAllLines(Constants.cacheSceneTexturesFilename);
-            for (int lineIndex = 0; lineIndex < allLines.Length; lineIndex++)
-            {
-                String curLine = allLines[lineIndex];
-                String[] curWords = curLine.Split(' ');
-                if (curWords.Length >= 2 && sceneDatabase.ContainsKey(curWords[0]))
-                {
-                    SceneEntry curEntry = sceneDatabase[curWords[0]];
-                    curEntry.textures = new List<String>();
-                    for (int textureIndex = 1; textureIndex < curWords.Length; textureIndex++)
-                    {
-                        curEntry.textures.Add(curWords[textureIndex]);
-                    }
-                }
-            }
-        }
-
-        private void PopulateCache()
-        {
-            try
-            {
-                Directory.CreateDirectory(Constants.cacheBaseDirectory);
-                Directory.CreateDirectory(Constants.cacheBaseDirectory + "Models");
-                Directory.CreateDirectory(Constants.cacheBaseDirectory + "Geometry");
-                Directory.CreateDirectory(Constants.cacheBaseDirectory + "Textures_jpg");
-            }
-            catch(Exception e)
-            {
-                ReportCriticalError("Failed to create cache directories.\n" + e.ToString());
-                return;
-            }
-            try
-            {
-                webClient.DownloadFile(Constants.baseWebAddress + "Assets/SceneNames.txt", Constants.cacheBaseDirectory + "SceneNames.txt");
-                webClient.DownloadFile(Constants.baseWebAddress + "Assets/SceneTags.txt", Constants.cacheBaseDirectory + "SceneTags.txt");
-                webClient.DownloadFile(Constants.baseWebAddress + "Assets/SceneTextures.txt", Constants.cacheBaseDirectory + "SceneTextures.txt");
-                webClient.DownloadFile(Constants.baseWebAddress + "Assets/ArchitectureList.txt", Constants.cacheBaseDirectory + "ArchitectureList.txt");
-                webClient.DownloadFile(Constants.baseWebAddress + "Assets/DescriptorSet.dat", Constants.cacheBaseDirectory + "DescriptorSet.dat");
-            }
-            catch(Exception e)
-            {
-                ReportCriticalError("Failed to download scene information files. Make sure you have a working internet connection.\n" + e.ToString());
-            }
-        }
-
-        private void PopulateCacheArchitecture()
-        {
-            try
-            {
-                foreach (ArchitectureEntry architecture in architectureDatabase)
-                {
-                    cacheDownloader.NewScene(sceneDatabase[architecture.name]);
-                    cacheDownloader.DownloadFilesImmediate(webClient);
-                }
-            }
-            catch (Exception e)
-            {
-                ReportCriticalError("Failed to download scene architecture files. Make sure you have a working internet connection.\n" + e.ToString());
-            }
-        }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -191,12 +82,6 @@ namespace SceneStudioApp
             queryBox.MouseWheel += new MouseEventHandler(queryBox_MouseWheel);
 
             Constants.Init();
-            
-            PopulateCache();
-
-            LoadSceneInfo();
-
-            PopulateCacheArchitecture();
 
             if (d3dContext == (IntPtr)0)
             {
@@ -215,6 +100,7 @@ namespace SceneStudioApp
                 }
             }
 
+            database.Init(webClient, cacheDownloader);
             LoadExemplarInfo();
         }
 
@@ -377,8 +263,8 @@ namespace SceneStudioApp
             else
             {
                 List<string> hashes = new List<string>(searchResults.Split(' '));
-                List<SceneEntry> results = getScenesFromHashes(hashes);
-                searchBrowser.DocumentText = makeHTMLgallery(results, Constants.sceneImgWidth, Constants.sceneImgHeight);
+                List<SceneEntry> results = database.getScenesFromHashes(hashes);
+                searchBrowser.DocumentText = SceneBrowser.makeHTMLgallery(results, Constants.sceneImgDim);
             }
         }
 
@@ -418,18 +304,10 @@ namespace SceneStudioApp
             {
                 return;
             }
-            SceneEntry entry;
-            bool success = sceneDatabase.TryGetValue(sceneHash, out entry);
-            if (entry == null)
-            {
-                //modelNameLabel.Text = "<Model name not found>";
-            }
-            else
-            {
-                selectedSceneEntry = entry;
-                modelNameLabel.Text = entry.name;
-                selectedModelPicture.ImageLocation = entry.image;
-            }
+            SceneEntry entry = database.getScene(sceneHash);
+            selectedSceneEntry = entry;
+            modelNameLabel.Text = entry.name;
+            selectedModelPicture.ImageLocation = entry.image;
             Application.DoEvents();
         }
 
@@ -466,17 +344,14 @@ namespace SceneStudioApp
                 if (e.Url.AbsolutePath != "blank")
                 {
                     string sceneHash = e.Url.AbsolutePath;
+                    SceneEntry entry = database.getScene(sceneHash);
 
-                    SceneEntry entry;
-                    bool success = sceneDatabase.TryGetValue(sceneHash, out entry);
-                    if (success)
-                    {
-                        SSModelChosen(d3dContext, "");
-                        cacheDownloader.NewScene(entry);
-                        cacheDownloader.DownloadFiles(webClient);
-                        timerDownloadCheck.Enabled = true;
-                        newSelectedModel(sceneHash);
-                    }
+                    SSModelChosen(d3dContext, "");
+                    cacheDownloader.NewScene(entry);
+                    cacheDownloader.DownloadFiles(webClient);
+                    timerDownloadCheck.Enabled = true;
+                    newSelectedModel(sceneHash);
+                    
                     e.Cancel = true;
                 }
             }
@@ -591,19 +466,20 @@ namespace SceneStudioApp
 
         private void NewScene()
         {
-            //showExemplars();
+            SceneBrowser exemplarBrowserForm = new SceneBrowser(database);
+            exemplarBrowserForm.ShowDialog();
 
-            if (SaveIfDirty())
-            {
-                RoomSelection roomSelectionForm = new RoomSelection();
-                roomSelectionForm.ShowDialog();
-                if (roomSelectionForm.result != null && roomSelectionForm.result.Length > 0)
-                {
-                    SSProcessCommand(d3dContext, "new\t" + roomSelectionForm.result);
-                }
-                timerRender.Enabled = true;
-                this.Text = "Untitled - SceneStudio";
-            }
+            //if (SaveIfDirty())
+            //{
+            //    RoomSelection roomSelectionForm = new RoomSelection();
+            //    roomSelectionForm.ShowDialog();
+            //    if (roomSelectionForm.result != null && roomSelectionForm.result.Length > 0)
+            //    {
+            //        SSProcessCommand(d3dContext, "new\t" + roomSelectionForm.result);
+            //    }
+            //    timerRender.Enabled = true;
+            //    this.Text = "Untitled - SceneStudio";
+            //}
         }
 
         private void OpenScene(string filename)
@@ -623,7 +499,7 @@ namespace SceneStudioApp
             {
                 foreach (string curWord in words)
                 {
-                    cacheDownloader.NewScene(sceneDatabase[curWord]);
+                    cacheDownloader.NewScene(database.getScene(curWord));
                     cacheDownloader.DownloadFilesImmediate(webClient);
                     //
                     // Avoid running the message loop in here.  Users might be able to enter file loading functions twice then.
@@ -714,6 +590,11 @@ namespace SceneStudioApp
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
             SaveScene();
+        }
+
+        private void saveAsStripButton_Click(object sender, EventArgs e)
+        {
+            SaveSceneAs();
         }
 
         private void deleteToolStripButton_Click(object sender, EventArgs e)
@@ -887,7 +768,7 @@ namespace SceneStudioApp
             System.Diagnostics.Process.Start("http://graphics.stanford.edu/projects/SceneStudio");
         }
 
-        private List<string> ModelListFromSceneFile(string filename)
+        public List<string> ModelListFromSceneFile(string filename)
         {
             SSProcessCommand(d3dContext, "loadModelList\t" + filename);
             IntPtr modelListPtr = SSQueryString(d3dContext, QueryType.QueryModelList);
@@ -902,31 +783,8 @@ namespace SceneStudioApp
             return new List<string>(models);
         }
 
-        private string makeHTMLgallery(List<SceneEntry> entries, int width, int height)
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("<html><head></head><body>");
-
-            if (entries.Count == 0)
-            {
-                builder.AppendLine("<h1>No results found.</h1>");
-            }
-            else
-            {
-                foreach (SceneEntry e in entries)
-                {
-                    builder.AppendLine("<a href=\"" + e.hash + "\"><img width=" + width + " height=" + height + " src=\"" + e.image + "\" /></a>");
-                }
-            }
-
-            builder.AppendLine("</body></html>");
-            return builder.ToString();
-        }
-
         private void LoadExemplarInfo()
         {
-            exemplarDatabase = new Dictionary<string, SceneEntry>();
-
             string[] files = Directory.GetFiles(Constants.localExemplarsDirectory);
             foreach (string file in files)
             {
@@ -934,29 +792,9 @@ namespace SceneStudioApp
                 {
                     string fullpath = Path.GetFullPath(file);
                     List<string> modelHashes = ModelListFromSceneFile(fullpath);
-                    exemplarDatabase.Add(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes));
+                    database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes));
                 }
             }
-        }
-
-        private void showExemplars()
-        {
-            searchBrowser.DocumentText = makeHTMLgallery(new List<SceneEntry>(exemplarDatabase.Values),
-                Constants.exemplarImgWidth, Constants.exemplarImgWidth);
-        }
-
-        private List<SceneEntry> getScenesFromHashes(List<string> hashes)
-        {
-            List<SceneEntry> results = new List<SceneEntry>();
-            if (hashes.Count != 0) foreach (string hash in hashes)
-                {
-                    if (sceneDatabase.ContainsKey(hash)) results.Add(sceneDatabase[hash]);
-                    else
-                    {
-                        throw new Exception("Unknown hash from search results");
-                    }
-                }
-            return results;
         }
     }
 }
