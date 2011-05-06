@@ -16,9 +16,12 @@ namespace SceneStudioApp
             cacheArchitectureListFilename = cacheBaseDirectory + "ArchitectureList.txt";
         }
 
+        public const int sceneImgWidth = 168, sceneImgHeight = 126, exemplarImgWidth = 400, exemplarImgHeight = 400;
+
         public const string baseWebAddress = "http://graphics.stanford.edu/projects/SceneStudio/SceneModeling/";
         public const string localSceneImagesDirectory = "C:/SceneModeling/Database/SceneImagesB/";
         public const string webSceneImagesDirectory = baseWebAddress + "Database/SceneImagesB/";
+        public const string localExemplarsDirectory =  "../../Scenes/exemplars/";
 
         public const string localSceneNamesFilename = "C:/SceneModeling/Assets/SceneNames.txt";
         public const string localSceneTexturesFilename = "C:/SceneModeling/Assets/SceneTextures.txt";

@@ -13,6 +13,6 @@ const UINT screenshotWidth = 400;
 const UINT screenshotHeight = 400;
 const String screenshotDirectory("../../Scenes/");
 
-const bool DebuggingMode = true;
+const bool DebuggingMode = false;
 const bool DebuggingStatusText = false;
 const UINT MaxUndoDepth = 128;

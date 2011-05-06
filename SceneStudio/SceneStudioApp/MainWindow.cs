@@ -33,7 +33,8 @@ namespace SceneStudioApp
 
         IntPtr d3dContext = (IntPtr)0;
 
-        Dictionary<String, SceneEntry> sceneDatabase;
+        Dictionary<string, SceneEntry> sceneDatabase;
+        Dictionary<string, SceneEntry> exemplarDatabase;
         List<ArchitectureEntry> architectureDatabase;
         WebClient webClient = new WebClient();
         CacheDownloader cacheDownloader = new CacheDownloader();
@@ -83,7 +84,7 @@ namespace SceneStudioApp
             SSProcessCommand(d3dContext, "enterInsertMode");
             updateModeUI(true);
         }
-        
+
         private void LoadSceneInfo()
         {
             sceneDatabase = new Dictionary<string, SceneEntry>();
@@ -118,6 +119,7 @@ namespace SceneStudioApp
                 sceneDatabase.Add(architecture.name, new SceneEntry(architecture.name, "Architecture"));
             }
 
+            // Load textures into SceneEntries
             allLines = File.ReadAllLines(Constants.cacheSceneTexturesFilename);
             for (int lineIndex = 0; lineIndex < allLines.Length; lineIndex++)
             {
@@ -212,6 +214,8 @@ namespace SceneStudioApp
                     throw new SystemException(ex.ToString());
                 }
             }
+
+            LoadExemplarInfo();
         }
 
         private void splitContainer1_Panel1_MouseDown(object sender, MouseEventArgs e)
@@ -372,26 +376,9 @@ namespace SceneStudioApp
             }
             else
             {
-                StringBuilder builder = new StringBuilder();
-                builder.AppendLine("<html><head></head><body>");
-
-                if (searchResults.Length == 0)
-                {
-                    builder.AppendLine("<h1>No results found.</h1>");
-                }
-                else
-                {
-                    string[] results = searchResults.Split(' ');
-
-                    foreach (string curString in results)
-                    {
-                        string imageSrc = Constants.webSceneImagesDirectory + curString + ".jpg";
-                        builder.AppendLine("<a href=\"" + curString + "\"><img width=168 height=126 src=\"" + imageSrc + "\" /></a>");
-                    }
-                }
-
-                builder.AppendLine("</body></html>");
-                searchBrowser.DocumentText = builder.ToString();
+                List<string> hashes = new List<string>(searchResults.Split(' '));
+                List<SceneEntry> results = getScenesFromHashes(hashes);
+                searchBrowser.DocumentText = makeHTMLgallery(results, Constants.sceneImgWidth, Constants.sceneImgHeight);
             }
         }
 
@@ -441,14 +428,7 @@ namespace SceneStudioApp
             {
                 selectedSceneEntry = entry;
                 modelNameLabel.Text = entry.name;
-                try
-                {
-                    selectedModelPicture.ImageLocation = Constants.webSceneImagesDirectory + sceneHash + ".jpg";
-                }
-                catch
-                {
-
-                }
+                selectedModelPicture.ImageLocation = entry.image;
             }
             Application.DoEvents();
         }
@@ -611,6 +591,8 @@ namespace SceneStudioApp
 
         private void NewScene()
         {
+            //showExemplars();
+
             if (SaveIfDirty())
             {
                 RoomSelection roomSelectionForm = new RoomSelection();
@@ -624,6 +606,49 @@ namespace SceneStudioApp
             }
         }
 
+        private void OpenScene(string filename)
+        {
+            this.UseWaitCursor = true;
+            this.Text = Path.GetFileNameWithoutExtension(filename) + " - SceneStudio";
+
+            List<string> words = ModelListFromSceneFile(filename);
+            
+            this.statusText.Text = "Downloading models...";
+            this.toolStripProgressBar.Minimum = 0;
+            this.toolStripProgressBar.Maximum = 100;
+            this.toolStripProgressBar.Value = 33;
+            Application.DoEvents();
+
+            try
+            {
+                foreach (string curWord in words)
+                {
+                    cacheDownloader.NewScene(sceneDatabase[curWord]);
+                    cacheDownloader.DownloadFilesImmediate(webClient);
+                    //
+                    // Avoid running the message loop in here.  Users might be able to enter file loading functions twice then.
+                    //
+                    //Application.DoEvents();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error downloading the scene models.\n" + ex.ToString());
+                this.UseWaitCursor = false;
+                this.statusText.Text = "Ready";
+                return;
+            }
+
+            this.statusText.Text = "Loading models...";
+            this.toolStripProgressBar.Value = 66;
+            Application.DoEvents();
+            SSProcessCommand(d3dContext, "load\t" + filename);
+            this.toolStripProgressBar.Value = 100;
+            this.UseWaitCursor = false;
+            this.statusText.Text = "Ready";
+            timerRender.Enabled = true;
+        }
+
         private void OpenScene()
         {
             if (SaveIfDirty())
@@ -633,58 +658,7 @@ namespace SceneStudioApp
                 dialog.Title = "Open";
                 dialog.ShowDialog();
 
-                if (dialog.FileName.Length > 0)
-                {
-                    this.UseWaitCursor = true;
-
-                    string[] parts = dialog.FileName.Split('\\');
-                    this.Text = parts[parts.Length - 1] + " - SceneStudio";
-                    
-                    SSProcessCommand(d3dContext, "loadModelList\t" + dialog.FileName);
-                    IntPtr modelListPtr = SSQueryString(d3dContext, QueryType.QueryModelList);
-                    if (modelListPtr == (IntPtr)0)
-                    {
-                        MessageBox.Show("There was an error loading the scene.");
-                        return;
-                    }
-                    string modelList = Marshal.PtrToStringAnsi(modelListPtr);
-                    string[] words = modelList.Split(' ');
-
-                    this.statusText.Text = "Downloading models...";
-                    this.toolStripProgressBar.Minimum = 0;
-                    this.toolStripProgressBar.Maximum = 100;
-                    this.toolStripProgressBar.Value = 33;
-                    Application.DoEvents();
-
-                    try
-                    {
-                        foreach (string curWord in words)
-                        {
-                            cacheDownloader.NewScene(sceneDatabase[curWord]);
-                            cacheDownloader.DownloadFilesImmediate(webClient);
-                            //
-                            // Avoid running the message loop in here.  Users might be able to enter file loading functions twice then.
-                            //
-                            //Application.DoEvents();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("There was an error downloading the scene models.\n" + ex.ToString());
-                        this.UseWaitCursor = false;
-                        this.statusText.Text = "Ready";
-                        return;
-                    }
-
-                    this.statusText.Text = "Loading models...";
-                    this.toolStripProgressBar.Value = 66;
-                    Application.DoEvents();
-                    SSProcessCommand(d3dContext, "load\t" + dialog.FileName);
-                    this.toolStripProgressBar.Value = 100;
-                    this.UseWaitCursor = false;
-                    this.statusText.Text = "Ready";
-                    timerRender.Enabled = true;
-                }
+                if (dialog.FileName.Length > 0) OpenScene(dialog.FileName);
             }
         }
 
@@ -911,6 +885,78 @@ namespace SceneStudioApp
         private void webPageToolStripButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://graphics.stanford.edu/projects/SceneStudio");
+        }
+
+        private List<string> ModelListFromSceneFile(string filename)
+        {
+            SSProcessCommand(d3dContext, "loadModelList\t" + filename);
+            IntPtr modelListPtr = SSQueryString(d3dContext, QueryType.QueryModelList);
+            if (modelListPtr == (IntPtr)0)
+            {
+                MessageBox.Show("There was an error loading the scene.");
+                return null;
+            }
+            string modelList = Marshal.PtrToStringAnsi(modelListPtr);
+            string[] models = modelList.Split(' ');
+
+            return new List<string>(models);
+        }
+
+        private string makeHTMLgallery(List<SceneEntry> entries, int width, int height)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<html><head></head><body>");
+
+            if (entries.Count == 0)
+            {
+                builder.AppendLine("<h1>No results found.</h1>");
+            }
+            else
+            {
+                foreach (SceneEntry e in entries)
+                {
+                    builder.AppendLine("<a href=\"" + e.hash + "\"><img width=" + width + " height=" + height + " src=\"" + e.image + "\" /></a>");
+                }
+            }
+
+            builder.AppendLine("</body></html>");
+            return builder.ToString();
+        }
+
+        private void LoadExemplarInfo()
+        {
+            exemplarDatabase = new Dictionary<string, SceneEntry>();
+
+            string[] files = Directory.GetFiles(Constants.localExemplarsDirectory);
+            foreach (string file in files)
+            {
+                if (Path.GetExtension(file) == ".scs")
+                {
+                    string fullpath = Path.GetFullPath(file);
+                    List<string> modelHashes = ModelListFromSceneFile(fullpath);
+                    exemplarDatabase.Add(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes));
+                }
+            }
+        }
+
+        private void showExemplars()
+        {
+            searchBrowser.DocumentText = makeHTMLgallery(new List<SceneEntry>(exemplarDatabase.Values),
+                Constants.exemplarImgWidth, Constants.exemplarImgWidth);
+        }
+
+        private List<SceneEntry> getScenesFromHashes(List<string> hashes)
+        {
+            List<SceneEntry> results = new List<SceneEntry>();
+            if (hashes.Count != 0) foreach (string hash in hashes)
+                {
+                    if (sceneDatabase.ContainsKey(hash)) results.Add(sceneDatabase[hash]);
+                    else
+                    {
+                        throw new Exception("Unknown hash from search results");
+                    }
+                }
+            return results;
         }
     }
 }
