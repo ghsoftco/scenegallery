@@ -466,7 +466,7 @@ namespace SceneStudioApp
 
         private void NewScene()
         {
-            SceneBrowser exemplarBrowserForm = new SceneBrowser(database);
+            SceneBrowser exemplarBrowserForm = new SceneBrowser(this, database);
             exemplarBrowserForm.ShowDialog();
 
             //if (SaveIfDirty())
@@ -482,7 +482,7 @@ namespace SceneStudioApp
             //}
         }
 
-        private void OpenScene(string filename)
+        public void OpenScene(string filename)
         {
             this.UseWaitCursor = true;
             this.Text = Path.GetFileNameWithoutExtension(filename) + " - SceneStudio";

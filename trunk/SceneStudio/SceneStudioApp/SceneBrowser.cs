@@ -17,11 +17,14 @@ namespace SceneStudioApp
     public partial class SceneBrowser : Form
     {
         private Database database = null;
+        private MainWindow main = null;
         private BrowserMode mode;
         private List<SceneEntry> pickedModels;
+        private SceneEntry clickedExemplar = null;
 
-        public SceneBrowser(Database _database)
+        public SceneBrowser(MainWindow _main, Database _database)
         {
+            main = _main;
             database = _database;
             pickedModels = new List<SceneEntry>();
             InitializeComponent();
@@ -82,14 +85,34 @@ namespace SceneStudioApp
 
         private void exemplarClicked(string tag)
         {
-            showThumbnails(database.getScenesFromHashes(database.getExemplar(tag).modelHashes), Constants.sceneImgDim);
+            SceneEntry exemplar = database.getExemplar(tag);
+            clickedExemplar = exemplar;
+            showThumbnails(database.getScenesFromHashes(exemplar.modelHashes), Constants.sceneImgDim);
             mode = BrowserMode.ModelBrowsing;
         }
         private void modelClicked(string tag)
         {
             SceneEntry model = database.getScene(tag);
-            showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
-            mode = BrowserMode.ExemplarBrowsing;
+            pickedModels.Add(model);
+            //showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
+        }
+
+        private void webBrowser_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
+                mode = BrowserMode.ExemplarBrowsing;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                showThumbnails(pickedModels, Constants.sceneImgDim);
+                mode = BrowserMode.ModelBrowsing;
+            }
+            if (e.KeyCode == Keys.O && mode == BrowserMode.ExemplarBrowsing)
+            {
+                main.OpenScene(clickedExemplar.name);
+            }
         }
     }
 }
