@@ -82,6 +82,7 @@ namespace SceneStudioApp
             queryBox.MouseWheel += new MouseEventHandler(queryBox_MouseWheel);
 
             Constants.Init();
+            database.Init(webClient, cacheDownloader);
 
             if (d3dContext == (IntPtr)0)
             {
@@ -100,7 +101,6 @@ namespace SceneStudioApp
                 }
             }
 
-            database.Init(webClient, cacheDownloader);
             LoadExemplarInfo();
         }
 
