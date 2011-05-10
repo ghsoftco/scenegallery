@@ -792,7 +792,13 @@ namespace SceneStudioApp
                 {
                     string fullpath = Path.GetFullPath(file);
                     List<string> modelHashes = ModelListFromSceneFile(fullpath);
-                    database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes));
+                    List<SceneEntry> models = database.getScenesFromHashes(modelHashes);
+                    string tags = "";
+                    foreach (SceneEntry model in models)
+                    {
+                        tags += "," + model.name.Trim();
+                    }
+                    database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes, tags));
                 }
             }
         }
