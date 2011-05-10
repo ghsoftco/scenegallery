@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Net;
+using System.Web.UI;
 
 namespace SceneStudioApp
 {
@@ -41,19 +42,46 @@ namespace SceneStudioApp
             modelHashes = null;
             isExemplar = false;
         }
-        public SceneEntry(string _filename, List<string> _modelHashes)
+        public SceneEntry(string _filename, List<string> _modelHashes, string _tags)
         {
             hash = Path.GetFileNameWithoutExtension(_filename);
             name = Path.GetFullPath(_filename);
             image = Path.ChangeExtension(Path.GetFullPath(_filename), ".png");
             modelHashes = _modelHashes;
+            tags = _tags;
             isExemplar = true;
         }
+        public void Render(HtmlTextWriter writer, Dim dim)
+        {
+            writer.AddAttribute(HtmlTextWriterAttribute.Class, "box");
+            writer.RenderBeginTag(HtmlTextWriterTag.Div);   // Begin Div
+
+            writer.AddAttribute(HtmlTextWriterAttribute.Href, hash);
+            writer.RenderBeginTag(HtmlTextWriterTag.A);     // Begin A
+
+            writer.AddAttribute(HtmlTextWriterAttribute.Src, image);
+            writer.AddAttribute(HtmlTextWriterAttribute.Width, dim.w.ToString());
+            writer.AddAttribute(HtmlTextWriterAttribute.Height, dim.h.ToString());
+            writer.AddAttribute(HtmlTextWriterAttribute.Alt, "");
+
+            writer.RenderBeginTag(HtmlTextWriterTag.Img);   // Begin Img
+            writer.RenderEndTag(); // End Img
+
+            //writer.AddAttribute(HtmlTextWriterAttribute.Id, "clickPosition");
+            //writer.RenderBeginTag(HtmlTextWriterTag.P); // Begin P
+            //writer.RenderEndTag(); // End P
+
+            writer.RenderEndTag(); // End A
+
+            writer.RenderEndTag(); // End Div
+        }
+
         public string hash;
         public string name;
         public string image;
         public List<string> textures;
         public List<string> modelHashes;
+        public string tags; // comma separated list of tags of all models in scene
         public bool isExemplar;
     };
     public class ArchitectureEntry
@@ -140,6 +168,15 @@ namespace SceneStudioApp
         public List<SceneEntry> getExemplars()
         {
             return new List<SceneEntry>(exemplars.Values);
+        }
+        public List<SceneEntry> filterExemplarsByKeyword(string keyword)
+        {
+            List<SceneEntry> matching = new List<SceneEntry>();
+            foreach (SceneEntry scene in exemplars.Values)
+            {
+                if (scene.tags.Contains(keyword)) matching.Add(scene);
+            }
+            return matching;
         }
         public void addExemplar(string filename, SceneEntry exemplar)
         {

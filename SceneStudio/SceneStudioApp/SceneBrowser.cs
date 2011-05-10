@@ -1,10 +1,13 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Web.UI;
+using System.Drawing.Imaging;
 
 namespace SceneStudioApp
 {
@@ -14,6 +17,7 @@ namespace SceneStudioApp
         ModelBrowsing       = 1,
     };
 
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SceneBrowser : Form
     {
         private Database database = null;
@@ -32,26 +36,27 @@ namespace SceneStudioApp
 
         public static string makeHTMLgallery(List<SceneEntry> entries, Dim dim)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("<html><head></head><body>");
+            StringWriter sw = new StringWriter();
+            sw.Write(Constants.HtmlHeaderExemplarBrowser);
 
             if (entries.Count == 0)
             {
-                builder.AppendLine("<h1>No results found.</h1>");
+                sw.WriteLine("<h1>No results found.</h1>");
             }
             else
             {
-                foreach (SceneEntry e in entries)
+                using (HtmlTextWriter writer = new HtmlTextWriter(sw))
                 {
-                    //builder.AppendLine("<div id=\"content\" align=\"center\" >");
-                    builder.AppendLine("<a href=\"" + e.hash + "\"><img width=" + dim.w + " height=" + dim.h + " src=\"" + e.image + "\" /></a>");
-                    //builder.AppendLine("<p><button type=\"button\">Click Me!</button></p>");
-                    //builder.AppendLine("</div>");
+                    foreach (SceneEntry e in entries)
+                    {
+                        e.Render(writer, dim);
+                    }
+
                 }
             }
 
-            builder.AppendLine("</body></html>");
-            return builder.ToString();
+            sw.WriteLine("</body></html>");
+            return sw.ToString();
         }
 
         public void showThumbnails(List<SceneEntry> scenes, Dim dim)
@@ -59,10 +64,30 @@ namespace SceneStudioApp
             webBrowser.DocumentText = makeHTMLgallery(scenes, dim);
         }
 
+        public void ReportClick(string hash, int x, int y)
+        {
+            string msg = hash.ToString() + "," + x.ToString() + "," + y.ToString();
+            //MessageBox.Show(msg, "client code");
+        }
+
         private void browser_Load(object sender, EventArgs e)
         {
+            webBrowser.ObjectForScripting = this;
             mode = BrowserMode.ExemplarBrowsing;
             showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
+        }
+
+        private Image CaptureWindow()
+        {
+            Rectangle bounds = this.Bounds;
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                }
+                return bitmap;
+            }
         }
 
         private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -113,6 +138,18 @@ namespace SceneStudioApp
             {
                 main.OpenScene(clickedExemplar.name);
             }
+        }
+
+        private void keywordSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = keywordSearchTextBox.Text;
+            showThumbnails(database.filterExemplarsByKeyword(keyword), Constants.exemplarImgDim);
+        }
+
+        private void keywordSearchTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            keywordSearchTextBox.SelectionStart = 0;
+            keywordSearchTextBox.SelectionLength = keywordSearchTextBox.Text.Length;
         }
     }
 }
