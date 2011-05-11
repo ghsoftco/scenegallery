@@ -108,43 +108,78 @@ void Picker::PickTriangle(AppState &state, UINT x, UINT y)
     capturedSurfaceUV->UnlockRect();
 }
 
-/*void Picker::SaveDebugBitmaps()
+void Picker::SaveModelNameGrid(AppState &state, String filename)
 {
-    const UINT width = _geometryIDGrid.Cols();
-    const UINT height = _geometryIDGrid.Rows();
-    
-    Bitmap bmpA(width, height);
-    Bitmap bmpB(width, height);
-    Bitmap bmpC(width, height);
+    D3D9ProtectRenderTarget protector(state.device, true, true);
+    //D3D9RenderTargetSurface &surface = state.globalAssets.pickingSurfaceRGB;
+    //surface.ReSizeToBackBuffer(state.GD, D3DFMT_A8R8G8B8);
+    //surface.SetAsRenderTarget(state.GD);
+    //state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
+    //state.scene.RenderPickingA(state);
+    //surface.CopySurfaceToOffScreen(state.GD);
+    //auto capturedSurface = surface.OffScreenPlainSurface();
 
-    bmpC.Clear(RGBColor::Black);
+    D3D9RenderTargetSurface &surfaceScreenshotSize = state.globalAssets.pickingSurfaceUV;
+    surfaceScreenshotSize.Init(state.GD, D3DFMT_A8R8G8B8, screenshotWidth, screenshotHeight);
     
-    map<UINT, RGBColor> colorMapA;
-    map<UINT, RGBColor> colorMapB;
+    surfaceScreenshotSize.SetAsRenderTarget(state.GD);
+    state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
+    state.scene.RenderPickingA(state);
+    surfaceScreenshotSize.CopySurfaceToOffScreen(state.GD);
+
+    auto capturedSurface2 = surfaceScreenshotSize.OffScreenPlainSurface();
+    D3DTEXTUREFILTERTYPE filterPoint = D3DTEXF_POINT;
+    //state.GD.GetDevice()->StretchRect(capturedSurface, NULL, capturedSurface2, NULL, filterPoint);
+    //D3DXLoadSurfaceFromSurface(capturedSurface2, NULL, NULL, capturedSurface, NULL, NULL, filterPoint, 0);
+    
+    D3DSURFACE_DESC desc;
+    capturedSurface2->GetDesc(&desc);
+    
+    _geometryIDGrid.Allocate(desc.Height, desc.Width);
+    
+    D3DLOCKED_RECT rect;
+    capturedSurface2->LockRect(&rect, NULL, 0);
+    for(UINT row = 0; row < desc.Height; row++)
+    {
+        memcpy(&_geometryIDGrid(row, 0), ((BYTE *)rect.pBits) + rect.Pitch * row, sizeof(RGBColor) * desc.Width);
+    }
+    capturedSurface2->UnlockRect();
+
+    _modelNameGrid.Allocate(desc.Height, desc.Width);
+
+    for(UINT y = 0; y < desc.Height; y++)
+    {
+        for(UINT x = 0; x < desc.Width; x++)
+        {
+            UINT geometryID = _geometryIDGrid(y, x);
+            String modelName = state.scene.GetModelNameFromGeometryIndex(geometryID);
+            _modelNameGrid(y, x) = modelName;
+        }
+    }
+    _modelNameGrid.SaveToASCIIFile(filename);
+    SaveModelNameGridAsBitmap(filename + String(".png"));
+}
+
+void Picker::SaveModelNameGridAsBitmap(String filename)
+{
+    const UINT width = _modelNameGrid.Cols();
+    const UINT height = _modelNameGrid.Rows();
+    
+    Bitmap bmp(width, height);
+    map<UINT, RGBColor> colorMap;
+
     for(UINT y = 0; y < height; y++)
     {
         for(UINT x = 0; x < width; x++)
         {
-            UINT geometryID = _geometryIDGrid.Cell(y, x);
-            if(colorMapA.find(geometryID) == colorMapA.end())
+            String id = _modelNameGrid(y, x);
+            if(colorMap.find(id.Hash32()) == colorMap.end())
             {
-                colorMapA[geometryID] = RGBColor::RandomColor();
+                colorMap[id.Hash32()] = RGBColor::RandomColor();
             }
-            bmpA[y][x] = colorMapA[geometryID];
-            
-            UINT triangleID = _faceIDGrid.Cell(y, x);
-            if(colorMapB.find(triangleID) == colorMapB.end())
-            {
-                colorMapB[triangleID] = RGBColor::RandomColor();
-            }
-            bmpB[y][x] = colorMapB[triangleID];
-
-            Vec2f UV = _uvGrid.Cell(y, x);
-            bmpC[y][x] = RGBColor(Vec3f(UV, 0.0f));
+            bmp[y][x] = colorMap[id.Hash32()];
         }
     }
-
-    bmpA.SavePNG("GeometryIDs.png");
-    bmpB.SavePNG("TriangleIDs.png");
-    bmpC.SavePNG("UVs.png");
-}*/
+    bmp.FlipVertical();
+    bmp.SavePNG(filename);
+}

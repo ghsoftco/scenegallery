@@ -53,7 +53,9 @@
             this.keywordSearchTextBox.TabIndex = 1;
             this.keywordSearchTextBox.Text = "Search by keyword";
             this.keywordSearchTextBox.TextChanged += new System.EventHandler(this.keywordSearchTextBox_TextChanged);
-            this.keywordSearchTextBox.DoubleClick += new System.EventHandler(this.keywordSearchTextBox_DoubleClick);
+            this.keywordSearchTextBox.Enter += new System.EventHandler(this.keywordSearchTextBox_Enter);
+            this.keywordSearchTextBox.Leave += new System.EventHandler(this.keywordSearchTextBox_Leave);
+            this.keywordSearchTextBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.keywordSearchTextBox_MouseUp);
             // 
             // SceneBrowser
             // 

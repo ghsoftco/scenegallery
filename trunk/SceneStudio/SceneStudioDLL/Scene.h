@@ -31,6 +31,7 @@ public:
     bool RemoveSelectedModel(AppState &state, bool deleteModel);
     bool SetSelectedModelAsRoot(AppState &state);
     ModelInstance* GetSelectedModel(AppState &state);
+    String GetModelNameFromGeometryIndex(UINT geometryIndex);
 
     void RenderDebugBBox(AppState &state);
     

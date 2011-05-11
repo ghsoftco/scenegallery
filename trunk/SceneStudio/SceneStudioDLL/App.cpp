@@ -501,7 +501,10 @@ void App::KeyPress(int key, bool shift, bool ctrl)
     {
         Undo();
     }
-
+    if (ctrl && key == KEY_D)
+    {
+        _state.picker.SaveModelNameGrid(_state, _state.scene.Filename().RemoveSuffix(".scs") + String(".txt"));
+    }
 }
 
 void App::ModelChosen(const char *model)
