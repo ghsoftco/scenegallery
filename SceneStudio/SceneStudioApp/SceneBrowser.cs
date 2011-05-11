@@ -25,6 +25,7 @@ namespace SceneStudioApp
         private BrowserMode mode;
         private List<SceneEntry> pickedModels;
         private SceneEntry clickedExemplar = null;
+        private bool keywordSearchTextBoxFocused = false;
 
         public SceneBrowser(MainWindow _main, Database _database)
         {
@@ -90,6 +91,12 @@ namespace SceneStudioApp
             }
         }
 
+        private void webBrowser_Focus(object sender, EventArgs e)
+        {
+            webBrowser.Focus();
+            webBrowser.Select();
+        }
+
         private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.AbsolutePath == "blank") return;
@@ -145,11 +152,25 @@ namespace SceneStudioApp
             string keyword = keywordSearchTextBox.Text;
             showThumbnails(database.filterExemplarsByKeyword(keyword), Constants.exemplarImgDim);
         }
-
-        private void keywordSearchTextBox_DoubleClick(object sender, EventArgs e)
+        private void keywordSearchTextBox_MouseUp(object sender, MouseEventArgs e)
         {
-            keywordSearchTextBox.SelectionStart = 0;
-            keywordSearchTextBox.SelectionLength = keywordSearchTextBox.Text.Length;
+            if (!keywordSearchTextBoxFocused && keywordSearchTextBox.SelectionLength == 0)
+            {
+                keywordSearchTextBoxFocused = true;
+                keywordSearchTextBox.SelectAll();
+            }
+        }
+        private void keywordSearchTextBox_Leave(object sender, EventArgs e)
+        {
+            keywordSearchTextBoxFocused = false;
+        }
+        private void keywordSearchTextBox_Enter(object sender, EventArgs e)
+        {
+            if (MouseButtons == MouseButtons.None)
+            {
+                keywordSearchTextBox.SelectAll();
+                keywordSearchTextBoxFocused = true;
+            }
         }
     }
 }

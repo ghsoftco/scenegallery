@@ -584,6 +584,19 @@ ModelInstance* Scene::GetSelectedModel(AppState &state)
     return _modelFromGeometryIndex[state.selectedGeometryIndex];
 }
 
+String Scene::GetModelNameFromGeometryIndex(UINT geometryIndex)
+{
+    if(geometryIndex >= _modelFromGeometryIndex.Length())
+    {
+        SignalError("Invalid geometryIndex");
+        return NULL;
+    }
+    else
+    {
+        return _modelFromGeometryIndex[geometryIndex]->model->name();
+    }
+}
+
 Matrix4 Scene::MakeFirstTransform(AppState &state, const Model &model, UINT face, const Vec3f &pos, const Vec3f &normal)
 {
     const Rectangle3f &bbox = model.BoundingBox();
