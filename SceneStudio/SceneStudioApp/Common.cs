@@ -42,13 +42,14 @@ namespace SceneStudioApp
             modelHashes = null;
             isExemplar = false;
         }
-        public SceneEntry(string _filename, List<string> _modelHashes, string _tags)
+        public SceneEntry(string _filename, List<string> _modelHashes, string _tags, SceneHashMap _hashMap)
         {
             hash = Path.GetFileNameWithoutExtension(_filename);
             name = Path.GetFullPath(_filename);
             image = Path.ChangeExtension(Path.GetFullPath(_filename), ".png");
             modelHashes = _modelHashes;
             tags = _tags;
+            hashMap = _hashMap;
             isExemplar = true;
         }
         public void Render(HtmlTextWriter writer, Dim dim)
@@ -82,6 +83,7 @@ namespace SceneStudioApp
         public List<string> textures;
         public List<string> modelHashes;
         public string tags; // comma separated list of tags of all models in scene
+        public SceneHashMap hashMap;
         public bool isExemplar;
     };
     public class ArchitectureEntry
@@ -261,7 +263,67 @@ namespace SceneStudioApp
             }
         }
     };
+    public class SceneHashMap
+    {
+        public SceneHashMap(string filename, Database database)
+        {
+            _sceneMap = LoadSceneHashMap(filename, database);
+        }
 
+        public int GetLength(int dimension)
+        {
+            return _sceneMap.GetLength(dimension);
+        }
+
+        public SceneEntry this[int iRow, int iCol]
+        {
+            get
+            {
+                return _sceneMap[iRow, iCol];
+            }
+            set
+            {
+                _sceneMap[iRow, iCol] = value;
+            }
+        }
+
+        private static SceneEntry[,] LoadSceneHashMap(string filename, Database database)
+        {
+            SceneEntry[,] map;
+
+            using (TextReader rdr = new StreamReader(filename))
+            {
+                string line;
+                line = rdr.ReadLine();
+                string[] dim = line.Split('\t');
+                uint rows = uint.Parse(dim[0]);
+                uint cols = uint.Parse(dim[1]);
+                map = new SceneEntry[rows, cols];
+
+                for (int iRow = 0; iRow < rows; iRow++)
+                {
+                    line = rdr.ReadLine().Trim();
+                    if (line == null && iRow < rows-1) throw new Exception("Number of rows less than stated.");
+
+                    string[] row = line.Split('\t');
+                    if (row.Length != cols) throw new Exception("Row length does not match number of columns.");
+                    for (int iCol = 0; iCol < cols; iCol++)
+                    {
+                        string hash = row[iCol];
+                        if (database.containsSceneHash(hash))
+                        {
+                            map[iRow,iCol] = database.getScene(hash);
+                        }
+                    }
+                }
+
+            }
+
+            return map;
+        }
+
+        private SceneEntry[,] _sceneMap;
+    }
     //
     // This must always match the QueryType enum in App.h
     //

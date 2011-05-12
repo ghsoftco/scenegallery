@@ -68,6 +68,9 @@ namespace SceneStudioApp
         public void ReportClick(string hash, int x, int y)
         {
             string msg = hash.ToString() + "," + x.ToString() + "," + y.ToString();
+            SceneEntry exemplar = database.getExemplar(hash);
+            SceneEntry clickedModel = exemplar.hashMap[y, x];
+            pickedModels.Add(clickedModel);
             //MessageBox.Show(msg, "client code");
         }
 
