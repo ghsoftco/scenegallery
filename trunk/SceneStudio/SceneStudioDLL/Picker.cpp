@@ -110,52 +110,45 @@ void Picker::PickTriangle(AppState &state, UINT x, UINT y)
 
 void Picker::SaveModelNameGrid(AppState &state, String filename)
 {
+    // Render geometry IDs to surface
     D3D9ProtectRenderTarget protector(state.device, true, true);
-    //D3D9RenderTargetSurface &surface = state.globalAssets.pickingSurfaceRGB;
-    //surface.ReSizeToBackBuffer(state.GD, D3DFMT_A8R8G8B8);
-    //surface.SetAsRenderTarget(state.GD);
-    //state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
-    //state.scene.RenderPickingA(state);
-    //surface.CopySurfaceToOffScreen(state.GD);
-    //auto capturedSurface = surface.OffScreenPlainSurface();
-
-    D3D9RenderTargetSurface &surfaceScreenshotSize = state.globalAssets.pickingSurfaceUV;
-    surfaceScreenshotSize.Init(state.GD, D3DFMT_A8R8G8B8, screenshotWidth, screenshotHeight);
-    
-    surfaceScreenshotSize.SetAsRenderTarget(state.GD);
+    D3D9RenderTargetSurface &surface = state.globalAssets.scratchSurface;
+    surface.Init(state.GD, D3DFMT_A8R8G8B8, screenshotDim.x, screenshotDim.y);
+    surface.SetAsRenderTarget(state.GD);
     state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
     state.scene.RenderPickingA(state);
-    surfaceScreenshotSize.CopySurfaceToOffScreen(state.GD);
+    surface.CopySurfaceToOffScreen(state.GD);
+    auto capturedSurface = surface.OffScreenPlainSurface();
 
-    auto capturedSurface2 = surfaceScreenshotSize.OffScreenPlainSurface();
-    D3DTEXTUREFILTERTYPE filterPoint = D3DTEXF_POINT;
-    //state.GD.GetDevice()->StretchRect(capturedSurface, NULL, capturedSurface2, NULL, filterPoint);
-    //D3DXLoadSurfaceFromSurface(capturedSurface2, NULL, NULL, capturedSurface, NULL, NULL, filterPoint, 0);
-    
     D3DSURFACE_DESC desc;
-    capturedSurface2->GetDesc(&desc);
-    
+    capturedSurface->GetDesc(&desc);
     _geometryIDGrid.Allocate(desc.Height, desc.Width);
     
+    // Memcpy geometryIDs to Grid
     D3DLOCKED_RECT rect;
-    capturedSurface2->LockRect(&rect, NULL, 0);
+    capturedSurface->LockRect(&rect, NULL, 0);
     for(UINT row = 0; row < desc.Height; row++)
     {
         memcpy(&_geometryIDGrid(row, 0), ((BYTE *)rect.pBits) + rect.Pitch * row, sizeof(RGBColor) * desc.Width);
     }
-    capturedSurface2->UnlockRect();
+    capturedSurface->UnlockRect();
 
+    // Get corresponding model hashes and save in Grid
     _modelNameGrid.Allocate(desc.Height, desc.Width);
-
     for(UINT y = 0; y < desc.Height; y++)
     {
         for(UINT x = 0; x < desc.Width; x++)
         {
             UINT geometryID = _geometryIDGrid(y, x);
-            String modelName = state.scene.GetModelNameFromGeometryIndex(geometryID);
+            String modelName = noModelHash;
+            if (geometryID != 0xFFFFFFFF)
+            {
+                modelName = state.scene.GetModelNameFromGeometryIndex(geometryID);
+            }
             _modelNameGrid(y, x) = modelName;
         }
     }
+    
     _modelNameGrid.SaveToASCIIFile(filename);
     SaveModelNameGridAsBitmap(filename + String(".png"));
 }

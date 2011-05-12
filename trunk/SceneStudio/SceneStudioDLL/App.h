@@ -31,6 +31,7 @@ struct GlobalAssets
     //
     D3D9RenderTargetSurface pickingSurfaceRGB;
     D3D9RenderTargetSurface pickingSurfaceUV;
+    D3D9RenderTargetSurface scratchSurface;
 
     //
     // Meshes
@@ -161,13 +162,13 @@ private:
     UINT LoadModelList(const String &filename);
     UINT NewScene(const String &scene);
 
-    void Screenshot(UINT width, UINT height, const String &filename);
-    void SaveSceneThumbnail(const String &filename);
+    void Screenshot(const String &filename, const Vec2i &dim);
+    void SaveSceneThumbnail(const String &filename, const Vec2i &dim);
 
     ModeType SetMode(ModeType m);
 
     void ExportAllScenes();
-    void CreateSceneThumbnails(const String &sceneDirectory);
+    void CreateSceneThumbnails(const String &sceneDirectory, const Vec2i &dim);
     
     // Debugging
     void ReportString(const String& s);

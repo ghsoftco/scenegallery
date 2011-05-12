@@ -9,9 +9,9 @@ const float wheelScale = 0.1f;
 const bool runningLocalDirectoryTasks = false;
 const bool SkipTextureLoading = false;
 
-const UINT screenshotWidth = 400;
-const UINT screenshotHeight = 400;
+const Vec2i screenshotDim(400, 400);
 const String screenshotDirectory("../../Scenes/");
+const String noModelHash("*");
 
 const bool DebuggingMode = false;
 const bool DebuggingStatusText = false;

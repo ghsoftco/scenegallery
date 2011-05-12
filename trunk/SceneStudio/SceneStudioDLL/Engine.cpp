@@ -75,6 +75,7 @@ See Engine.h for a defintion of all files included here.
 #include "Engine\Utility\Directory.cpp"
 #include "Engine\Utility\MenuInterface.cpp"
 #include "Engine\Utility\Console.cpp"
+#include "Engine\Utility\ColorGenerator.cpp"
 
 #include "Engine\Windows Controller\ApplicationWindow.cpp"
 #include "Engine\Windows Controller\InputManager.cpp"
