@@ -493,29 +493,35 @@ void App::KeyPress(int key, bool shift, bool ctrl)
     }
     if (ctrl)
     {
+        String filename;
+        if (!_state.scene.Filename().EndsWith(".scs"))
+        {
+            filename = String("screenshot");
+        }
+        else
+        {
+            filename = _state.scene.Filename().RemoveSuffix(".scs");
+        }
+
+        // Save model hash map
         if (key == KEY_D)
         {
-            //_state.scene.UpdateModelIDs(_state);
-            //_state.scene.Validate();
-            _state.picker.SaveModelNameGrid(_state, _state.scene.Filename().RemoveSuffix(".scs") + String(".txt"));
+            _state.picker.SaveModelNameGrid(_state, filename + String(".txt"), screenshotDim);
         }
+
+        // Screenshot
         if (key == KEY_P)
         {
-            String filename;
-            if (!_state.scene.Filename().EndsWith(".scs"))
-            {
-                filename = String("screenshot");
-            }
-            else
-            {
-                filename = _state.scene.Filename().RemoveSuffix(".scs");
-            }
             Screenshot(filename + String(".png"), screenshotDim);
         }
+
+        // Create Thumbnails
         if (key == KEY_T)
         {
-            CreateSceneThumbnails(String("../../Scenes/exemplars/"), screenshotDim);
+            CreateSceneThumbnails(exemplarsDirectory, screenshotDim);
         }
+
+        // Re-Root
         if (key == KEY_R)
         {
             _state.scene.SetSelectedModelAsRoot(_state);
@@ -1014,5 +1020,7 @@ void App::Screenshot(const String &filename, const Vec2i &dim)
 void App::SaveSceneThumbnail(const String &filename, const Vec2i &dim)
 {
     LoadScene(filename);
-    Screenshot(filename.RemoveSuffix(".scs") + String(".png"), dim);
+    String basename = filename.RemoveSuffix(".scs");
+    Screenshot(basename + String(".png"), dim);
+    _state.picker.SaveModelNameGrid(_state, basename + String(".txt"), dim);
 }

@@ -108,12 +108,12 @@ void Picker::PickTriangle(AppState &state, UINT x, UINT y)
     capturedSurfaceUV->UnlockRect();
 }
 
-void Picker::SaveModelNameGrid(AppState &state, String filename)
+void Picker::SaveModelNameGrid(AppState &state, String filename, const Vec2i &dim)
 {
     // Render geometry IDs to surface
     D3D9ProtectRenderTarget protector(state.device, true, true);
     D3D9RenderTargetSurface &surface = state.globalAssets.scratchSurface;
-    surface.Init(state.GD, D3DFMT_A8R8G8B8, screenshotDim.x, screenshotDim.y);
+    surface.Init(state.GD, D3DFMT_A8R8G8B8, dim.x, dim.y);
     surface.SetAsRenderTarget(state.GD);
     state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
     state.scene.RenderPickingA(state);
@@ -150,10 +150,10 @@ void Picker::SaveModelNameGrid(AppState &state, String filename)
     }
     
     _modelNameGrid.SaveToASCIIFile(filename);
-    SaveModelNameGridAsBitmap(filename + String(".png"));
+    SaveModelNameGridAsBitmap(filename + String(".png"), dim);
 }
 
-void Picker::SaveModelNameGridAsBitmap(String filename)
+void Picker::SaveModelNameGridAsBitmap(String filename, const Vec2i &dim)
 {
     const UINT width = _modelNameGrid.Cols();
     const UINT height = _modelNameGrid.Rows();

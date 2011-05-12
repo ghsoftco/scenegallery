@@ -798,7 +798,15 @@ namespace SceneStudioApp
                     {
                         tags += "," + model.name.Trim();
                     }
-                    database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes, tags));
+
+                    string hashMapFile = Path.ChangeExtension(fullpath, ".txt");
+                    SceneHashMap hashMap = null;
+                    if (File.Exists(hashMapFile))
+                    {
+                        hashMap = new SceneHashMap(hashMapFile, database);
+                    }
+
+                    database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes, tags, hashMap));
                 }
             }
         }

@@ -11,6 +11,7 @@ const bool SkipTextureLoading = false;
 
 const Vec2i screenshotDim(400, 400);
 const String screenshotDirectory("../../Scenes/");
+const String exemplarsDirectory("../../Scenes/exemplars/");
 const String noModelHash("*");
 
 const bool DebuggingMode = false;
