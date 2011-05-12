@@ -284,6 +284,9 @@ thus avoids as many external dependencies as possible.)
 //The Console namespace controls all access to the console
 #include "Engine\Utility\Console.h"
 
+//ColorGenerator generates colors
+#include "Engine\Utility\ColorGenerator.h"
+
 /****************************/
 /*    Windows Controllers   */
 /****************************/

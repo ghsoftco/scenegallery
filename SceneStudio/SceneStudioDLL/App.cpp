@@ -4,6 +4,7 @@ void App::ReleaseAssets()
 {
     _state.globalAssets.pickingSurfaceRGB.ReleaseMemory();
     _state.globalAssets.pickingSurfaceUV.ReleaseMemory();
+    _state.globalAssets.scratchSurface.ReleaseMemory();
     _state.globalAssets.debugFont.ReleaseMemory();
 }
 
@@ -11,6 +12,7 @@ void App::ResetAssets()
 {
     _state.globalAssets.pickingSurfaceRGB.Reset(_state.GD);
     _state.globalAssets.pickingSurfaceUV.Reset(_state.GD);
+    _state.globalAssets.scratchSurface.Reset(_state.GD);
     _state.globalAssets.debugFont.Reset(_state.GD);
 }
 
@@ -394,7 +396,7 @@ void App::ExportAllScenes()
     Console::WriteLine("Done");
 }
 
-void App::CreateSceneThumbnails(const String &sceneDirectory)
+void App::CreateSceneThumbnails(const String &sceneDirectory, const Vec2i &dim)
 {
     _state.chosenModel = NULL;
     _state.selectedModel = NULL;
@@ -407,7 +409,7 @@ void App::CreateSceneThumbnails(const String &sceneDirectory)
         {
             _state.scene.FreeMemory();
             _state.assets.FreeMemory();
-            SaveSceneThumbnail(dir.DirectoryPath() + curFile);
+            SaveSceneThumbnail(dir.DirectoryPath() + curFile, dim);
         }
     }
 }
@@ -427,18 +429,6 @@ void App::KeyPress(int key, bool shift, bool ctrl)
         if(key == KEY_F)
         {
             _state.GD.ToggleWireframe();
-        }
-        if (key == KEY_P)
-        {
-            Screenshot(screenshotWidth, screenshotHeight, _state.scene.Filename().RemoveSuffix(".scs") + String(".png"));
-        }
-        if (key == KEY_T)
-        {
-            CreateSceneThumbnails(String("../../Scenes/exemplars/"));
-        }
-        if (key == KEY_R)
-        {
-            _state.scene.SetSelectedModelAsRoot(_state);
         }
     }
     
@@ -501,9 +491,35 @@ void App::KeyPress(int key, bool shift, bool ctrl)
     {
         Undo();
     }
-    if (ctrl && key == KEY_D)
+    if (ctrl)
     {
-        _state.picker.SaveModelNameGrid(_state, _state.scene.Filename().RemoveSuffix(".scs") + String(".txt"));
+        if (key == KEY_D)
+        {
+            //_state.scene.UpdateModelIDs(_state);
+            //_state.scene.Validate();
+            _state.picker.SaveModelNameGrid(_state, _state.scene.Filename().RemoveSuffix(".scs") + String(".txt"));
+        }
+        if (key == KEY_P)
+        {
+            String filename;
+            if (!_state.scene.Filename().EndsWith(".scs"))
+            {
+                filename = String("screenshot");
+            }
+            else
+            {
+                filename = _state.scene.Filename().RemoveSuffix(".scs");
+            }
+            Screenshot(filename + String(".png"), screenshotDim);
+        }
+        if (key == KEY_T)
+        {
+            CreateSceneThumbnails(String("../../Scenes/exemplars/"), screenshotDim);
+        }
+        if (key == KEY_R)
+        {
+            _state.scene.SetSelectedModelAsRoot(_state);
+        }
     }
 }
 
@@ -966,27 +982,37 @@ ModeType App::SetMode(ModeType m)
     return previousMode;
 }
 
-void App::Screenshot(UINT width, UINT height, const String &filename)
+void App::Screenshot(const String &filename, const Vec2i &dim)
 {
+    UINT upscaleMult = 4;
+    UINT width = dim.x;
+    UINT height = dim.y;
+
     ClearSelection();
-    RenderFrame();
-
-    Bitmap screenshot;
-    _state.GD.CaptureScreen(_state.window, screenshot);
-
-    Bitmap resized(width, height);
-    resized.Clear(RGBColor::White);
-
-    Rectangle2i sourceRect = Rectangle2i(0, 24, screenshot.Width(), screenshot.Height());
-    Rectangle2i targetRect = Rectangle2i(0, 0, width, height);
     
-    screenshot.StretchBltTo(resized, targetRect, sourceRect, Bitmap::SamplingLinear);
+    D3D9ProtectRenderTarget protector(_state.device, true, true);
+    D3D9RenderTargetSurface &surface = _state.globalAssets.scratchSurface;
+    surface.Init(_state.GD, D3DFMT_A8R8G8B8, upscaleMult*width, upscaleMult*height);
+    surface.SetAsRenderTarget(_state.GD);
+    _state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, RGBColor(255, 255, 255, 255), 1.0f, 0 );
+    _state.scene.RenderNormal(_state,false);
+    surface.CopySurfaceToOffScreen(_state.GD);
+    auto capturedSurface = surface.OffScreenPlainSurface();
 
-    resized.SavePNG(filename);
+    Bitmap highRes;
+    highRes.LoadFromSurface(capturedSurface);
+    highRes.FlipBlueAndRed();
+
+    Bitmap out(width, height);
+    Rectangle2i sourceRect = Rectangle2i(0, 0, highRes.Width(), highRes.Height());
+    Rectangle2i targetRect = Rectangle2i(0, 0, out.Width(), out.Height());
+    highRes.StretchBltTo(out, targetRect, sourceRect, Bitmap::SamplingLinear);
+
+    out.SavePNG(filename);
 }
 
-void App::SaveSceneThumbnail(const String &filename)
+void App::SaveSceneThumbnail(const String &filename, const Vec2i &dim)
 {
     LoadScene(filename);
-    Screenshot(screenshotWidth, screenshotHeight, filename.RemoveSuffix(".scs") + String(".png"));
+    Screenshot(filename.RemoveSuffix(".scs") + String(".png"), dim);
 }
