@@ -522,7 +522,7 @@
             this.searchBrowser.Location = new System.Drawing.Point(3, 373);
             this.searchBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.searchBrowser.Name = "searchBrowser";
-            this.searchBrowser.Size = new System.Drawing.Size(400, 555);
+            this.searchBrowser.Size = new System.Drawing.Size(400, 524);
             this.searchBrowser.TabIndex = 4;
             this.searchBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.searchBrowser_Navigating);
             // 
@@ -575,7 +575,7 @@
             this.toolStripSeparator2,
             this.MenuExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // MenuNew
