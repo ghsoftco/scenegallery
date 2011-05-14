@@ -754,6 +754,28 @@ void Scene::RenderSphere(AppState &state, const Vec3f &pos, float radius)
     state.globalAssets.selectionSphere.Render();
 }
 
+void Scene::RenderSamplingSpheres(AppState &state)
+{
+    auto device = state.GD.GetDevice();
+
+    device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+    device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+
+    state.globalAssets.VertexShaders.solid.Set();
+    state.globalAssets.PixelShaders.solid.Set();
+    state.globalAssets.PixelShaders.solid.SetVec4("Color", Vec4f(0.5f, 0.0f, 0.0f, 1.0f));
+    
+    for (auto pair = state.globalAssets.samplingSpheres.Begin(); pair < state.globalAssets.samplingSpheres.End(); pair++)
+    {
+        auto sphere = &(pair->first);
+        auto pos = &(pair->second);
+        Matrix4 sphereTransform = Matrix4::Scaling(sphere->Radius()) * Matrix4::Translation(*pos);
+        state.globalAssets.VertexShaders.solid.SetMatrix("WorldViewProj", sphereTransform * state.viewProjection);
+        sphere->Render();
+    }
+    
+}
+
 void Scene::RenderSelectionSphere(AppState &state)
 {
     Vec3f pos, normal;

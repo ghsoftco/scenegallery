@@ -22,6 +22,7 @@ public:
     void RenderPickingA(AppState &state);
     void RenderPickingB(AppState &state);
     void RenderSphere(AppState &state, const Vec3f &pos, float radius);
+    void RenderSamplingSpheres(AppState &state);
     void RenderSelectionSphere(AppState &state);
     
     Matrix4 MakeFirstTransform(AppState &state, const Model &model, UINT face, const Vec3f &pos, const Vec3f &normal);

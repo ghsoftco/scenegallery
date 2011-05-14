@@ -145,6 +145,9 @@ thus avoids as many external dependencies as possible.)
 //Rendering functions for lines and polygons in software
 #include "Engine\Graphics Objects\PrimitiveRender.h"
 
+//Mesh intersection and distance functions
+#include "Engine\Graphics Objects\MeshDistance.h"
+
 /****************************/
 /*     Machine Learning     */
 /****************************/
