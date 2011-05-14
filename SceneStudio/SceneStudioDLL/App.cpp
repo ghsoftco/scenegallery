@@ -82,6 +82,15 @@ void App::InitD3D(HWND window)
     _state.copiedModel = NULL;
 
     _state.sceneDirty = false;
+
+    // Initialize sampling spheres
+    _state.showSurfaceSamples = false;
+    _state.globalAssets.samplingSpheres.Allocate(samplingSpheresToRender);
+    for (UINT samplingSphereIndex = 0; samplingSphereIndex < _state.globalAssets.samplingSpheres.Length(); samplingSphereIndex++)
+    {
+        _state.globalAssets.samplingSpheres[samplingSphereIndex].first.SetGD(_state.GD);
+        _state.globalAssets.samplingSpheres[samplingSphereIndex].first.CreateSphere(1.0f, 0);
+    }
 }
 
 void App::RenderFrame()
@@ -109,6 +118,11 @@ void App::RenderFrame()
     if(_state.mode != ModeInsert)
     {
         _state.scene.RenderSelectionSphere(_state);
+    }
+
+    if(_state.showSurfaceSamples)
+    {
+        _state.scene.RenderSamplingSpheres(_state);
     }
 
     RenderStatusText();
@@ -216,17 +230,20 @@ void App::MouseDown(UINT button, int x, int y)
     // Object insertion
     else if (_state.mode == ModeInsert && button == 1 && !alt)
     {
-        ModelInstance* insertedModel;
-        if(_state.scene.InsertChosenModel(_state, insertedModel))
-        {
-            _state.selectedModel = insertedModel;
-            SetMode(ModeNormal);
-            _state.selectedFaceIndex = 0xFFFFFFFF;
-            _state.selectedGeometryIndex = 0xFFFFFFFF;
-        }
+        InsertModel();
     }
+}
 
-    //ReportMode();
+void App::InsertModel()
+{
+    ModelInstance* insertedModel;
+    if(_state.scene.InsertChosenModel(_state, insertedModel))
+    {
+        _state.selectedModel = insertedModel;
+        SetMode(ModeNormal);
+        _state.selectedFaceIndex = 0xFFFFFFFF;
+        _state.selectedGeometryIndex = 0xFFFFFFFF;
+    }
 }
 
 void App::MouseUp(UINT button)
@@ -526,6 +543,27 @@ void App::KeyPress(int key, bool shift, bool ctrl)
         {
             _state.scene.SetSelectedModelAsRoot(_state);
         }
+
+        // Test MeshSampler
+        if (key == KEY_Q)
+        {
+            if (!_state.showSurfaceSamples)
+                CreateSurfaceSamplingSpheres();
+            _state.showSurfaceSamples = !_state.showSurfaceSamples;
+        }
+    }
+}
+
+void App::CreateSurfaceSamplingSpheres()
+{
+    Vector<MeshSample> samples;
+    ModelInstance *m = _state.selectedModel;
+    if (m == NULL) return;
+    MeshSampler::Sample(m->model->geometry(), samplingSpheresToRender, samples);
+    for (UINT i = 0; i < samples.Length(); i++)
+    {
+        if (samples[i].normal.z > minZforSampledNormal)
+            _state.globalAssets.samplingSpheres[i].second = m->transform.TransformPoint(samples[i].pos);
     }
 }
 

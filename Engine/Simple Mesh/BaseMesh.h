@@ -221,7 +221,7 @@ public:
     //
     UINT32 Hash32() const;
     UINT64 Hash64() const;
-    float SurfaceArea();
+    float SurfaceArea() const;
     float SidedSurfaceArea(const Plane &P);
 
     //

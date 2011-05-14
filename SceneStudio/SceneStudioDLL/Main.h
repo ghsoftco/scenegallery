@@ -31,6 +31,7 @@ Main.h is included by all source files and includes every header file in the cor
 #include "SceneCamera.h"
 #include "Picker.h"
 #include "UndoStack.h"
+#include "MeshSampler.h"
 
 #include "AppParameters.h"
 #include "App.h"

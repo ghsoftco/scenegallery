@@ -52,6 +52,9 @@
     <ClInclude Include="UIEvent.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="MeshSampler.h">
+      <Filter>App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DLLMain.cpp">
@@ -100,6 +103,9 @@
       <Filter>App</Filter>
     </ClCompile>
     <ClCompile Include="UIEvent.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshSampler.cpp">
       <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>

@@ -26,6 +26,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MeshSampler.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelDatabase.h" />
     <ClInclude Include="ModelInstance.h" />
@@ -47,6 +48,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MeshSampler.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelDatabase.cpp" />
     <ClCompile Include="ModelInstance.cpp" />

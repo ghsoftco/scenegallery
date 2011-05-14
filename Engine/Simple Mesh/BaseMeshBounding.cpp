@@ -51,11 +51,11 @@ Rectangle3f BaseMesh::BoundingBox(const Matrix4 &transform) const
     return Rectangle3f(Min, Max);
 }
 
-float BaseMesh::SurfaceArea()
+float BaseMesh::SurfaceArea() const
 {
     UINT TriangleCount = FaceCount();
-    DWORD *MyIndices = Indices();
-    MeshVertex *MyVertices = Vertices();
+    const DWORD *MyIndices = Indices();
+    const MeshVertex *MyVertices = Vertices();
     float Result = 0.0f;
     for(UINT TriangleIndex = 0; TriangleIndex < TriangleCount; TriangleIndex++)
     {

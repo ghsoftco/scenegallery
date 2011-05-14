@@ -17,3 +17,6 @@ const String noModelHash("*");
 const bool DebuggingMode = false;
 const bool DebuggingStatusText = false;
 const UINT MaxUndoDepth = 128;
+
+const UINT samplingSpheresToRender = 1000;
+const float minZforSampledNormal = 0.95f;

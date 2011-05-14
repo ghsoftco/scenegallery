@@ -36,7 +36,8 @@ struct GlobalAssets
     //
     // Meshes
     //
-    D3D9Mesh                selectionSphere;
+    D3D9Mesh                        selectionSphere;
+    Vector<pair<D3D9Mesh, Vec3f> >  samplingSpheres;
 
     //
     // Shaders
@@ -108,6 +109,7 @@ struct AppState
 
     bool sceneDirty;
     bool loadedCamera;
+    bool showSurfaceSamples;
 };
 
 class App : public GraphicsDeviceCallbacks
@@ -153,6 +155,7 @@ private:
     void Paste();
     void Undo();
     void DeleteSelectedModel();
+    void InsertModel();
 
     void TextSearch(const String &query);
     void ShapeSearch(const String &query);
@@ -173,6 +176,7 @@ private:
     // Debugging
     void ReportString(const String& s);
     void ReportMode();
+    void CreateSurfaceSamplingSpheres();
 
     Mutex _mutex;
     AppState _state;
