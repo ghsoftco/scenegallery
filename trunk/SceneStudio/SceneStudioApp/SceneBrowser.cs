@@ -11,12 +11,6 @@ using System.Drawing.Imaging;
 
 namespace SceneStudioApp
 {
-    public enum BrowserMode
-    {
-        ExemplarBrowsing    = 0,
-        ModelBrowsing       = 1,
-    };
-
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class SceneBrowser : Form
     {
@@ -35,36 +29,6 @@ namespace SceneStudioApp
             InitializeComponent();
         }
 
-        public static string makeHTMLgallery(List<SceneEntry> entries, Dim dim)
-        {
-            StringWriter sw = new StringWriter();
-            sw.Write(Constants.HtmlHeaderExemplarBrowser);
-
-            if (entries.Count == 0)
-            {
-                sw.WriteLine("<h1>No results found.</h1>");
-            }
-            else
-            {
-                using (HtmlTextWriter writer = new HtmlTextWriter(sw))
-                {
-                    foreach (SceneEntry e in entries)
-                    {
-                        e.Render(writer, dim);
-                    }
-
-                }
-            }
-
-            sw.WriteLine("</body></html>");
-            return sw.ToString();
-        }
-
-        public void showThumbnails(List<SceneEntry> scenes, Dim dim)
-        {
-            webBrowser.DocumentText = makeHTMLgallery(scenes, dim);
-        }
-
         public void ReportClick(string hash, int x, int y)
         {
             string msg = hash.ToString() + "," + x.ToString() + "," + y.ToString();
@@ -77,21 +41,8 @@ namespace SceneStudioApp
         private void browser_Load(object sender, EventArgs e)
         {
             webBrowser.ObjectForScripting = this;
-            mode = BrowserMode.ExemplarBrowsing;
-            showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
-        }
-
-        private Image CaptureWindow()
-        {
-            Rectangle bounds = this.Bounds;
-            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
-                }
-                return bitmap;
-            }
+            mode = BrowserMode.ExemplarsAvailable;
+            Utility.showThumbnails(webBrowser, database.getExemplars(), Constants.exemplarImgDim);
         }
 
         private void webBrowser_Focus(object sender, EventArgs e)
@@ -106,11 +57,11 @@ namespace SceneStudioApp
 
             string tag = e.Url.AbsolutePath;
 
-            if (mode == BrowserMode.ExemplarBrowsing)
+            if (mode == BrowserMode.ExemplarsAvailable)
             {
                 exemplarClicked(tag);
             }
-            else if (mode == BrowserMode.ModelBrowsing)
+            else if (mode == BrowserMode.ExemplarsNotAvailable)
             {
                 modelClicked(tag);
             }
@@ -122,8 +73,8 @@ namespace SceneStudioApp
         {
             SceneEntry exemplar = database.getExemplar(tag);
             clickedExemplar = exemplar;
-            showThumbnails(database.getScenesFromHashes(exemplar.modelHashes), Constants.sceneImgDim);
-            mode = BrowserMode.ModelBrowsing;
+            Utility.showThumbnails(webBrowser, database.getScenesFromHashes(exemplar.modelHashes), Constants.sceneImgDim);
+            mode = BrowserMode.ExemplarsNotAvailable;
         }
         private void modelClicked(string tag)
         {
@@ -136,15 +87,15 @@ namespace SceneStudioApp
         {
             if (e.KeyCode == Keys.Back)
             {
-                showThumbnails(database.getExemplars(), Constants.exemplarImgDim);
-                mode = BrowserMode.ExemplarBrowsing;
+                Utility.showThumbnails(webBrowser, database.getExemplars(), Constants.exemplarImgDim);
+                mode = BrowserMode.ExemplarsAvailable;
             }
             if (e.KeyCode == Keys.Enter)
             {
-                showThumbnails(pickedModels, Constants.sceneImgDim);
-                mode = BrowserMode.ModelBrowsing;
+                Utility.showThumbnails(webBrowser, pickedModels, Constants.sceneImgDim);
+                mode = BrowserMode.ExemplarsNotAvailable;
             }
-            if (e.KeyCode == Keys.O && mode == BrowserMode.ExemplarBrowsing)
+            if (e.KeyCode == Keys.O && mode == BrowserMode.ExemplarsAvailable)
             {
                 main.OpenScene(clickedExemplar.name);
             }
@@ -153,7 +104,7 @@ namespace SceneStudioApp
         private void keywordSearchTextBox_TextChanged(object sender, EventArgs e)
         {
             string keyword = keywordSearchTextBox.Text;
-            showThumbnails(database.filterExemplarsByKeyword(keyword), Constants.exemplarImgDim);
+            Utility.showThumbnails(webBrowser, database.filterExemplarsByKeyword(keyword), Constants.exemplarImgDim);
         }
         private void keywordSearchTextBox_MouseUp(object sender, MouseEventArgs e)
         {

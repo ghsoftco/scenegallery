@@ -16,6 +16,7 @@ using System.Net;
 
 namespace SceneStudioApp
 {
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainWindow : Form
     {
         const string SceneStudioDLL = "SceneStudio.dll";
@@ -41,6 +42,11 @@ namespace SceneStudioApp
         SceneEntry selectedSceneEntry;
 
         HelpScreen helpScreen = null;
+
+        BrowserMode mode;
+        List<SceneEntry> pickedModels = new List<SceneEntry>();
+        SceneEntry clickedExemplar = null;
+        bool keywordSearchTextBoxFocused = false;
 
         private bool isInsertMode()
         {
@@ -72,14 +78,22 @@ namespace SceneStudioApp
             updateModeUI(true);
         }
 
+        private void InitializeWebBrowsers()
+        {
+            modelBrowser.ObjectForScripting = this;
+            exemplarBrowser.ObjectForScripting = this;
+            Utility.showThumbnails(exemplarBrowser, database.getExemplars(), Constants.exemplarImgDim);
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            
             splitContainer1.Panel1MinSize = 250;
-            splitContainer1.Panel2MinSize = 415;
-            splitContainer1.SplitterDistance = 875;
+            splitContainer1.Panel2MinSize = 405;
+            splitContainer1.SplitterDistance = 1000;
 
-            queryBox.MouseWheel += new MouseEventHandler(queryBox_MouseWheel);
+            modelSearchBox.MouseWheel += new MouseEventHandler(modelSearchTextBox_MouseWheel);
 
             Constants.Init();
             database.Init(webClient, cacheDownloader);
@@ -102,6 +116,8 @@ namespace SceneStudioApp
             }
 
             LoadExemplarInfo();
+
+            InitializeWebBrowsers();
         }
 
         private void splitContainer1_Panel1_MouseDown(object sender, MouseEventArgs e)
@@ -191,7 +207,7 @@ namespace SceneStudioApp
             //
             prevMouseX = Int32.MaxValue;
             prevMouseY = Int32.MaxValue;
-            if (!queryBox.Focused)
+            if (!modelSearchBox.Focused)
             {
                 this.splitContainer1.Panel1.Focus();
             }
@@ -201,7 +217,7 @@ namespace SceneStudioApp
         {
             if (splitContainer1.Focused)
             {
-                //queryBox.Focus();
+                //exemplarSearchBox.Focus();
             }
         }
 
@@ -239,17 +255,49 @@ namespace SceneStudioApp
 
         private void splitContainer1_Panel2_Resize(object sender, EventArgs e)
         {
-            queryButton.Left = splitContainer1.Panel2.Width - queryButton.Width - 10;
-            queryBox.Left = 7;
-            queryBox.Width = queryButton.Left - 14;
+            UpdatePanel2Components();
+        }
 
-            int browserHeight = splitContainer1.Panel2.Height - modelNameLabel.Bottom - 9;
-            if (browserHeight > 9)
+        private void UpdatePanel2Components()
+        {
+            int panelW = splitContainer1.Panel2.Width;
+            int panelH = splitContainer1.Panel2.Height;
+
+            modelSearchBox.Left = 5;
+            modelSearchBox.Top = 5;
+            modelSearchBox.Height = 30;
+            modelSearchButton.Left = modelSearchBox.Right + 5;
+            modelSearchButton.Width = modelSearchButton.PreferredSize.Width;
+            modelNameLabel.Left = modelSearchButton.Right + 5;
+
+            modelBrowser.Left = 5;
+            modelBrowser.Top = modelSearchBox.Bottom;
+            modelBrowser.Height = 300;
+            modelBrowser.Width = panelW - 5;
+
+            exemplarSearchBox.Left = 5;
+            exemplarSearchBox.Top = modelBrowser.Bottom + 5;
+            exemplarSearchButton.Left = exemplarSearchBox.Right + 5;
+            exemplarSearchButton.Top = exemplarSearchBox.Top;
+
+            exemplarBrowser.Left = 5;
+            exemplarBrowser.Top = exemplarSearchBox.Bottom + 5;
+            exemplarBrowser.Height = panelH - exemplarSearchBox.Bottom - 5;
+            exemplarBrowser.Width = panelW - 5;
+
+            if (mode == BrowserMode.ExemplarsNotAvailable)
             {
-                this.searchBrowser.Height = browserHeight;
+                exemplarSearchBox.Visible = false;
+                exemplarSearchButton.Visible = false;
+                exemplarBrowser.Visible = false;
+                modelBrowser.Height = panelH - modelSearchBox.Height - 5;
             }
-            this.searchBrowser.Left = 0;
-            this.searchBrowser.Width = splitContainer1.Panel2.Width - 5;
+            else if (mode == BrowserMode.ExemplarsAvailable)
+            {
+                exemplarSearchBox.Visible = true;
+                exemplarSearchButton.Visible = true;
+                exemplarBrowser.Visible = true;
+            }
         }
 
         private void processQueryResults(IntPtr result)
@@ -264,19 +312,27 @@ namespace SceneStudioApp
             {
                 List<string> hashes = new List<string>(searchResults.Split(' '));
                 List<SceneEntry> results = database.getScenesFromHashes(hashes);
-                searchBrowser.DocumentText = SceneBrowser.makeHTMLgallery(results, Constants.sceneImgDim);
+                Utility.showThumbnails(modelBrowser, results, Constants.sceneImgDim);
             }
         }
 
         private void issueTextQuery()
         {
-            uint success = SSProcessCommand(d3dContext, "textSearch\t" + queryBox.Text);
-            IntPtr result = (IntPtr)0;
-            if (success == 0)
+            if (Constants.restrictModelSearchToExemplarContents)
             {
-                result = SSQueryString(d3dContext, QueryType.QuerySearchResults);
+                List<SceneEntry> results = database.filterExemplarModelsByKeyword(modelSearchBox.Text);
+                Utility.showThumbnails(modelBrowser, results, Constants.sceneImgDim);
             }
-            processQueryResults(result);
+            else
+            {
+                uint success = SSProcessCommand(d3dContext, "textSearch\t" + modelSearchBox.Text);
+                IntPtr result = (IntPtr)0;
+                if (success == 0)
+                {
+                    result = SSQueryString(d3dContext, QueryType.QuerySearchResults);
+                }
+                processQueryResults(result);
+            }
         }
 
         private void issueShapeQuery()
@@ -293,7 +349,7 @@ namespace SceneStudioApp
             }
         }
 
-        private void queryButton_Click(object sender, EventArgs e)
+        private void modelSearchButton_Click(object sender, EventArgs e)
         {
             issueTextQuery();
         }
@@ -307,7 +363,6 @@ namespace SceneStudioApp
             SceneEntry entry = database.getScene(sceneHash);
             selectedSceneEntry = entry;
             modelNameLabel.Text = entry.name;
-            selectedModelPicture.ImageLocation = entry.image;
             Application.DoEvents();
         }
 
@@ -337,7 +392,7 @@ namespace SceneStudioApp
             }
         }
 
-        private void searchBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void modelBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             try
             {
@@ -361,7 +416,7 @@ namespace SceneStudioApp
             }
         }
 
-        private void queryBox_KeyDown(object sender, KeyEventArgs e)
+        private void modelSearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -371,7 +426,13 @@ namespace SceneStudioApp
             }
         }
 
-        void queryBox_MouseWheel(object sender, MouseEventArgs e)
+        private void modelSearchTextBox_DoubleClick(object sender, EventArgs e)
+        {
+                modelSearchBox.SelectionStart = 0;
+                modelSearchBox.SelectionLength = modelSearchBox.Text.Length;
+        }
+
+        void modelSearchTextBox_MouseWheel(object sender, MouseEventArgs e)
         {
             //
             // Neither of these have the desired effect
@@ -380,9 +441,9 @@ namespace SceneStudioApp
             //this.searchBrowser.Select();
 
             //searchBrowser.Document.Window.ScrollTo(0, y);
-            if (searchBrowser.Document != null)
+            if (modelBrowser.Document != null)
             {
-                searchBrowser.Document.Focus();
+                modelBrowser.Document.Focus();
             }
         }
         
@@ -394,16 +455,7 @@ namespace SceneStudioApp
                 System.Diagnostics.Process.Start(modelURL);
             }
         }
-
-        private void queryBox_DoubleClick(object sender, EventArgs e)
-        {
-            //if (queryBox.SelectedText.Length == 0)
-            {
-                queryBox.SelectionStart = 0;
-                queryBox.SelectionLength = queryBox.Text.Length;
-            }
-        }
-
+        
         private bool OnAppExit()
         {
             return SaveIfDirty();
@@ -466,8 +518,16 @@ namespace SceneStudioApp
 
         private void NewScene()
         {
-            SceneBrowser exemplarBrowserForm = new SceneBrowser(this, database);
-            exemplarBrowserForm.ShowDialog();
+            if (mode == BrowserMode.ExemplarsAvailable)
+            {
+                mode = BrowserMode.ExemplarsNotAvailable;
+            }
+            else mode = BrowserMode.ExemplarsAvailable;
+            
+            UpdatePanel2Components();
+
+            //SceneBrowser exemplarBrowserForm = new SceneBrowser(this, database);
+            //exemplarBrowserForm.ShowDialog();
 
             //if (SaveIfDirty())
             //{
@@ -758,11 +818,6 @@ namespace SceneStudioApp
             updateHelp();
         }
 
-        private void shapeSearchButton_Click(object sender, EventArgs e)
-        {
-            issueShapeQuery();
-        }
-
         private void webPageToolStripButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://graphics.stanford.edu/projects/SceneStudio");
@@ -808,6 +863,79 @@ namespace SceneStudioApp
 
                     database.addExemplar(Path.GetFileNameWithoutExtension(file), new SceneEntry(file, modelHashes, tags, hashMap));
                 }
+            }
+        }
+
+        public void ReportClick(string hash, int x, int y)
+        {
+            if (modelBrowser.Focused)
+            {
+                return;
+            }
+            if (x < 0 || x > Constants.exemplarImgDim.w || y < 0 || y > Constants.exemplarImgDim.h)
+            {
+                return;
+            }
+            string msg = hash.ToString() + "," + x.ToString() + "," + y.ToString();
+            clickedExemplar= database.getExemplar(hash);
+            SceneEntry clickedModel = clickedExemplar.hashMap[y, x];
+            
+            if (clickedModel.name == Constants.architectureNameTag)
+            {
+                return;
+            }
+
+            pickedModels.Add(clickedModel);
+            List<SceneEntry> models = database.getScenesFromHashes(clickedExemplar.modelHashes);
+            models.Remove(clickedModel);
+            models.Insert(0, clickedModel);
+            Utility.showThumbnails(modelBrowser, models, Constants.sceneImgDim);
+
+            SSModelChosen(d3dContext, clickedModel.hash);
+            newSelectedModel(clickedModel.hash);
+            enterInsertMode();
+            //MessageBox.Show(msg, "client code");
+        }
+
+        private void filterExemplars()
+        {
+            string keyword = exemplarSearchBox.Text;
+            Utility.showThumbnails(exemplarBrowser, database.filterExemplarsByKeyword(keyword), Constants.exemplarImgDim);
+        }
+
+        private void exemplarSearchButton_Click(object sender, EventArgs e)
+        {
+            filterExemplars();
+        }
+
+        private void exemplarSearchBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            exemplarSearchBox.SelectionStart = 0;
+            exemplarSearchBox.SelectionLength = exemplarSearchBox.Text.Length;
+        }
+
+        private void exemplarSearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                filterExemplars();
+            }
+        }
+
+        private void exemplarBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            try
+            {
+                if (e.Url.AbsolutePath != "blank")
+                {
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.ToString());
             }
         }
     }
