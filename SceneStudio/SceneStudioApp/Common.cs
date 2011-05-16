@@ -5,11 +5,48 @@ using System.IO;
 using System.Windows.Forms;
 using System.Net;
 using System.Web.UI;
+using System.Drawing;
 
 namespace SceneStudioApp
 {
     public static class Utility
     {
+        public static void showThumbnails(WebBrowser webBrowser, List<SceneEntry> entries, Dim dim)
+        {
+            StringWriter sw = new StringWriter();
+            sw.Write(Constants.HtmlHeaderExemplarBrowser);
+
+            if (entries.Count == 0)
+            {
+                sw.WriteLine("<h1>No results found.</h1>");
+            }
+            else
+            {
+                using (HtmlTextWriter writer = new HtmlTextWriter(sw))
+                {
+                    foreach (SceneEntry e in entries)
+                    {
+                        e.Render(writer, dim);
+                    }
+
+                }
+            }
+
+            sw.WriteLine("</body></html>");
+            webBrowser.DocumentText = sw.ToString();
+        }
+        public static Image CaptureWindow(Form form)
+        {
+            Rectangle bounds = form.Bounds;
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                }
+                return bitmap;
+            }
+        }
         public static void ReportCriticalError(String s)
         {
             //
@@ -96,11 +133,12 @@ namespace SceneStudioApp
     };
     public class Database
     {
-        private Dictionary<string, SceneEntry> scenes;
-        private Dictionary<string, SceneEntry> exemplars;
-        private List<ArchitectureEntry> architectures;
-        private WebClient webClient;
-        private CacheDownloader cacheDownloader;
+        Dictionary<string, SceneEntry> scenes;
+        Dictionary<string, SceneEntry> exemplars;
+        Dictionary<string, SceneEntry> exemplarModels;
+        List<ArchitectureEntry> architectures;
+        WebClient webClient;
+        CacheDownloader cacheDownloader;
 
         public Database()
         {
@@ -111,6 +149,7 @@ namespace SceneStudioApp
             cacheDownloader = _cacheDownloader;
             scenes = new Dictionary<string, SceneEntry>();
             exemplars = new Dictionary<string, SceneEntry>();
+            exemplarModels = new Dictionary<string, SceneEntry>();
             architectures = new List<ArchitectureEntry>();
 
             PopulateCache();
@@ -148,7 +187,11 @@ namespace SceneStudioApp
             List<SceneEntry> results = new List<SceneEntry>();
             if (hashes.Count != 0) foreach (string hash in hashes)
             {
-                    results.Add(getScene(hash));
+                SceneEntry scene = getScene(hash);
+                if (!(scene.name == Constants.architectureNameTag))
+                {
+                    results.Add(scene);
+                }
             }
             return results;
         }
@@ -156,7 +199,7 @@ namespace SceneStudioApp
         {
             architectures.Add(new ArchitectureEntry(name));
             // Architecture does not have a name, but still needs a SceneEntry
-            scenes.Add(name, new SceneEntry(name, "Architecture"));
+            scenes.Add(name, new SceneEntry(name, Constants.architectureNameTag));
         }
         public SceneEntry getExemplar(string filename)
         {
@@ -171,6 +214,19 @@ namespace SceneStudioApp
         {
             return new List<SceneEntry>(exemplars.Values);
         }
+        public List<SceneEntry> getExemplarModels()
+        {
+            return new List<SceneEntry>(exemplarModels.Values);
+        }
+        public List<SceneEntry> filterExemplarModelsByKeyword(string keyword)
+        {
+            List<SceneEntry> matching = new List<SceneEntry>();
+            foreach (SceneEntry scene in exemplarModels.Values)
+            {
+                if (scene.name.Contains(keyword)) matching.Add(scene);
+            }
+            return matching;
+        }
         public List<SceneEntry> filterExemplarsByKeyword(string keyword)
         {
             List<SceneEntry> matching = new List<SceneEntry>();
@@ -183,6 +239,12 @@ namespace SceneStudioApp
         public void addExemplar(string filename, SceneEntry exemplar)
         {
             exemplars.Add(filename, exemplar);
+            List<SceneEntry> models = getScenesFromHashes(exemplar.modelHashes);
+            foreach (SceneEntry model in models)
+            {
+                if (model.name != Constants.architectureNameTag && !exemplarModels.ContainsKey(model.hash))
+                    exemplarModels.Add(model.hash, model);
+            }
         }
 
         private void LoadSceneInfo()
@@ -335,5 +397,10 @@ namespace SceneStudioApp
         QuerySceneFilename      = 3,
         QueryModelList          = 4,
         QuerySearchResults      = 5,
+    };
+    public enum BrowserMode
+    {
+        ExemplarsAvailable = 0,
+        ExemplarsNotAvailable = 1,
     };
 }
