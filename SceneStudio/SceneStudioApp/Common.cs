@@ -136,6 +136,7 @@ namespace SceneStudioApp
         Dictionary<string, SceneEntry> scenes;
         Dictionary<string, SceneEntry> exemplars;
         Dictionary<string, SceneEntry> exemplarModels;
+        Dictionary<string, List<SceneEntry>> exemplarModelToInstanceScene;
         List<ArchitectureEntry> architectures;
         WebClient webClient;
         CacheDownloader cacheDownloader;
@@ -150,6 +151,7 @@ namespace SceneStudioApp
             scenes = new Dictionary<string, SceneEntry>();
             exemplars = new Dictionary<string, SceneEntry>();
             exemplarModels = new Dictionary<string, SceneEntry>();
+            exemplarModelToInstanceScene = new Dictionary<string, List<SceneEntry>>();
             architectures = new List<ArchitectureEntry>();
 
             PopulateCache();
@@ -218,6 +220,10 @@ namespace SceneStudioApp
         {
             return new List<SceneEntry>(exemplarModels.Values);
         }
+        public List<SceneEntry> getInstanceScenesOfModel(string hash)
+        {
+            return exemplarModelToInstanceScene[hash];
+        }
         public List<SceneEntry> filterExemplarModelsByKeyword(string keyword)
         {
             List<SceneEntry> matching = new List<SceneEntry>();
@@ -243,7 +249,19 @@ namespace SceneStudioApp
             foreach (SceneEntry model in models)
             {
                 if (model.name != Constants.architectureNameTag && !exemplarModels.ContainsKey(model.hash))
+                {
                     exemplarModels.Add(model.hash, model);
+                    if (exemplarModelToInstanceScene.ContainsKey(model.hash))
+                    {
+                        exemplarModelToInstanceScene[model.hash].Add(exemplar);
+                    }
+                    else
+                    {
+                        List<SceneEntry> list = new List<SceneEntry>();
+                        list.Add(exemplar);
+                        exemplarModelToInstanceScene.Add(model.hash, list);
+                    }
+                }
             }
         }
 

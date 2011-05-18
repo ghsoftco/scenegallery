@@ -150,6 +150,7 @@ private:
     void FlipFace(int faceDelta);
     void Rotate(float rotate);
     void Scale(float scale);
+    void SetChosenModelScale(float scale);
     void ResetRotation();
     void Copy();
     void Paste();
@@ -164,6 +165,7 @@ private:
     UINT SaveScene(const String &filename);
     UINT LoadModelList(const String &filename);
     UINT NewScene(const String &scene);
+    UINT SetChosenModelTransformFromFile(const String &filename);
 
     void Screenshot(const String &filename, const Vec2i &dim);
     void SaveSceneThumbnail(const String &filename, const Vec2i &dim);
