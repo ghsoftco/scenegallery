@@ -112,7 +112,7 @@
             this.webPageToolStripButton});
             this.toolBar.Location = new System.Drawing.Point(0, 0);
             this.toolBar.Name = "toolBar";
-            this.toolBar.Size = new System.Drawing.Size(1901, 43);
+            this.toolBar.Size = new System.Drawing.Size(1426, 43);
             this.toolBar.TabIndex = 0;
             this.toolBar.Text = "toolStrip1";
             // 
@@ -430,7 +430,6 @@
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 43);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -456,9 +455,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.modelSearchBox);
             this.splitContainer1.Panel2.MouseEnter += new System.EventHandler(this.splitContainer1_Panel2_MouseEnter);
             this.splitContainer1.Panel2.Resize += new System.EventHandler(this.splitContainer1_Panel2_Resize);
-            this.splitContainer1.Size = new System.Drawing.Size(1901, 1131);
-            this.splitContainer1.SplitterDistance = 1269;
-            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.Size = new System.Drawing.Size(1426, 911);
+            this.splitContainer1.SplitterDistance = 951;
             this.splitContainer1.TabIndex = 1;
             // 
             // statusBar
@@ -466,10 +464,9 @@
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar,
             this.statusText});
-            this.statusBar.Location = new System.Drawing.Point(0, 1093);
+            this.statusBar.Location = new System.Drawing.Point(0, 878);
             this.statusBar.Name = "statusBar";
-            this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(1265, 34);
+            this.statusBar.Size = new System.Drawing.Size(947, 29);
             this.statusBar.SizingGrip = false;
             this.statusBar.TabIndex = 0;
             this.statusBar.Text = "statusStrip";
@@ -477,23 +474,22 @@
             // toolStripProgressBar
             // 
             this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(133, 28);
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 23);
             this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // statusText
             // 
             this.statusText.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusText.Name = "statusText";
-            this.statusText.Size = new System.Drawing.Size(61, 29);
+            this.statusText.Size = new System.Drawing.Size(51, 24);
             this.statusText.Text = "Ready";
             // 
             // exemplarSearchButton
             // 
             this.exemplarSearchButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exemplarSearchButton.Location = new System.Drawing.Point(212, 346);
-            this.exemplarSearchButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exemplarSearchButton.Location = new System.Drawing.Point(159, 281);
             this.exemplarSearchButton.Name = "exemplarSearchButton";
-            this.exemplarSearchButton.Size = new System.Drawing.Size(100, 30);
+            this.exemplarSearchButton.Size = new System.Drawing.Size(75, 24);
             this.exemplarSearchButton.TabIndex = 8;
             this.exemplarSearchButton.Text = "Search";
             this.exemplarSearchButton.UseVisualStyleBackColor = true;
@@ -503,11 +499,10 @@
             // 
             this.exemplarBrowser.AllowWebBrowserDrop = false;
             this.exemplarBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.exemplarBrowser.Location = new System.Drawing.Point(4, 386);
-            this.exemplarBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.exemplarBrowser.MinimumSize = new System.Drawing.Size(27, 25);
+            this.exemplarBrowser.Location = new System.Drawing.Point(3, 314);
+            this.exemplarBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.exemplarBrowser.Name = "exemplarBrowser";
-            this.exemplarBrowser.Size = new System.Drawing.Size(615, 737);
+            this.exemplarBrowser.Size = new System.Drawing.Size(461, 599);
             this.exemplarBrowser.TabIndex = 9;
             this.exemplarBrowser.WebBrowserShortcutsEnabled = false;
             this.exemplarBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.exemplarBrowser_Navigating);
@@ -515,11 +510,10 @@
             // exemplarSearchBox
             // 
             this.exemplarSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exemplarSearchBox.Location = new System.Drawing.Point(4, 346);
-            this.exemplarSearchBox.Margin = new System.Windows.Forms.Padding(4);
-            this.exemplarSearchBox.MinimumSize = new System.Drawing.Size(200, 30);
+            this.exemplarSearchBox.Location = new System.Drawing.Point(3, 281);
+            this.exemplarSearchBox.MinimumSize = new System.Drawing.Size(151, 30);
             this.exemplarSearchBox.Name = "exemplarSearchBox";
-            this.exemplarSearchBox.Size = new System.Drawing.Size(200, 30);
+            this.exemplarSearchBox.Size = new System.Drawing.Size(151, 26);
             this.exemplarSearchBox.TabIndex = 7;
             this.exemplarSearchBox.Text = "Search exemplar scenes";
             this.exemplarSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.exemplarSearchBox_KeyDown);
@@ -531,10 +525,9 @@
             this.modelNameLabel.AutoSize = true;
             this.modelNameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.modelNameLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelNameLabel.Location = new System.Drawing.Point(494, 7);
-            this.modelNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.modelNameLabel.Location = new System.Drawing.Point(370, 6);
             this.modelNameLabel.Name = "modelNameLabel";
-            this.modelNameLabel.Size = new System.Drawing.Size(118, 24);
+            this.modelNameLabel.Size = new System.Drawing.Size(97, 19);
             this.modelNameLabel.TabIndex = 6;
             this.modelNameLabel.Text = "Model Name";
             this.modelNameLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.modelNameLabel_MouseDoubleClick);
@@ -543,11 +536,10 @@
             // 
             this.modelBrowser.AllowWebBrowserDrop = false;
             this.modelBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.modelBrowser.Location = new System.Drawing.Point(4, 38);
-            this.modelBrowser.Margin = new System.Windows.Forms.Padding(4);
-            this.modelBrowser.MinimumSize = new System.Drawing.Size(27, 25);
+            this.modelBrowser.Location = new System.Drawing.Point(3, 31);
+            this.modelBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.modelBrowser.Name = "modelBrowser";
-            this.modelBrowser.Size = new System.Drawing.Size(615, 300);
+            this.modelBrowser.Size = new System.Drawing.Size(461, 244);
             this.modelBrowser.TabIndex = 4;
             this.modelBrowser.WebBrowserShortcutsEnabled = false;
             this.modelBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.modelBrowser_Navigating);
@@ -555,10 +547,9 @@
             // modelSearchButton
             // 
             this.modelSearchButton.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelSearchButton.Location = new System.Drawing.Point(212, 4);
-            this.modelSearchButton.Margin = new System.Windows.Forms.Padding(4);
+            this.modelSearchButton.Location = new System.Drawing.Point(159, 3);
             this.modelSearchButton.Name = "modelSearchButton";
-            this.modelSearchButton.Size = new System.Drawing.Size(100, 30);
+            this.modelSearchButton.Size = new System.Drawing.Size(75, 24);
             this.modelSearchButton.TabIndex = 3;
             this.modelSearchButton.Text = "Search";
             this.modelSearchButton.UseVisualStyleBackColor = true;
@@ -567,11 +558,10 @@
             // modelSearchBox
             // 
             this.modelSearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelSearchBox.Location = new System.Drawing.Point(4, 4);
-            this.modelSearchBox.Margin = new System.Windows.Forms.Padding(4);
-            this.modelSearchBox.MinimumSize = new System.Drawing.Size(200, 30);
+            this.modelSearchBox.Location = new System.Drawing.Point(3, 3);
+            this.modelSearchBox.MinimumSize = new System.Drawing.Size(151, 30);
             this.modelSearchBox.Name = "modelSearchBox";
-            this.modelSearchBox.Size = new System.Drawing.Size(200, 30);
+            this.modelSearchBox.Size = new System.Drawing.Size(151, 26);
             this.modelSearchBox.TabIndex = 2;
             this.modelSearchBox.Text = "To insert new models, enter a keyword search here.";
             this.modelSearchBox.DoubleClick += new System.EventHandler(this.modelSearchTextBox_DoubleClick);
@@ -588,8 +578,7 @@
             this.fileToolStripMenuItem});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
-            this.menuBar.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuBar.Size = new System.Drawing.Size(1901, 30);
+            this.menuBar.Size = new System.Drawing.Size(1426, 24);
             this.menuBar.TabIndex = 2;
             this.menuBar.Text = "menuStrip1";
             this.menuBar.Visible = false;
@@ -605,7 +594,7 @@
             this.toolStripSeparator2,
             this.MenuExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // MenuNew
@@ -613,7 +602,7 @@
             this.MenuNew.Name = "MenuNew";
             this.MenuNew.ShortcutKeyDisplayString = "Ctrl+N";
             this.MenuNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.MenuNew.Size = new System.Drawing.Size(176, 24);
+            this.MenuNew.Size = new System.Drawing.Size(155, 22);
             this.MenuNew.Text = "New";
             this.MenuNew.Click += new System.EventHandler(this.MenuNew_Click);
             // 
@@ -621,39 +610,39 @@
             // 
             this.MenuOpen.Name = "MenuOpen";
             this.MenuOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.MenuOpen.Size = new System.Drawing.Size(176, 24);
+            this.MenuOpen.Size = new System.Drawing.Size(155, 22);
             this.MenuOpen.Text = "Open...";
             this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(152, 6);
             // 
             // MenuSave
             // 
             this.MenuSave.Name = "MenuSave";
             this.MenuSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.MenuSave.Size = new System.Drawing.Size(176, 24);
+            this.MenuSave.Size = new System.Drawing.Size(155, 22);
             this.MenuSave.Text = "Save";
             this.MenuSave.Click += new System.EventHandler(this.MenuSave_Click);
             // 
             // MenuSaveAs
             // 
             this.MenuSaveAs.Name = "MenuSaveAs";
-            this.MenuSaveAs.Size = new System.Drawing.Size(176, 24);
+            this.MenuSaveAs.Size = new System.Drawing.Size(155, 22);
             this.MenuSaveAs.Text = "Save As...";
             this.MenuSaveAs.Click += new System.EventHandler(this.MenuSaveAs_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
             // 
             // MenuExit
             // 
             this.MenuExit.Name = "MenuExit";
-            this.MenuExit.Size = new System.Drawing.Size(176, 24);
+            this.MenuExit.Size = new System.Drawing.Size(155, 22);
             this.MenuExit.Text = "Exit";
             this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -664,13 +653,12 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1901, 1174);
+            this.ClientSize = new System.Drawing.Size(1426, 954);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolBar);
             this.Controls.Add(this.menuBar);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWindow";
             this.Text = "SceneStudio";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);

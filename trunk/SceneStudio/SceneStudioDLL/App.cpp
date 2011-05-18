@@ -31,9 +31,9 @@ void App::InitD3D(HWND window)
     parameters.MultisampleCount = _state.parameters.multisampleCount;
     _state.GD.Init(parameters, window, _state.dimensions.x, _state.dimensions.y);
     _state.device = _state.GD.GetDevice();
-    
+
     _state.device->Clear( 0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_TARGET, D3DCOLOR_ARGB(parameters.ScreenColor.a, parameters.ScreenColor.r, parameters.ScreenColor.g, parameters.ScreenColor.b), 1.0f, 0 );
-    
+
     _state.device->BeginScene();
     _state.device->EndScene();
 
@@ -42,7 +42,7 @@ void App::InitD3D(HWND window)
     _state.device->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
     _state.device->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
     _state.device->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
-    
+
     _state.modelDatabase.Init(_state);
 
     _state.assets.Init(_state);
@@ -51,7 +51,7 @@ void App::InitD3D(HWND window)
 
     _state.loadedCamera = false;
     ResetCamera();
-    
+
     _state.globalAssets.PixelShaders.model.Init    (_state.GD, _state.parameters.shaderDirectory + String("model.ps"));
     _state.globalAssets.VertexShaders.model.Init   (_state.GD, _state.parameters.shaderDirectory + String("model.vs"));
     _state.globalAssets.PixelShaders.solid.Init    (_state.GD, _state.parameters.shaderDirectory + String("solid.ps"));
@@ -448,7 +448,7 @@ void App::KeyPress(int key, bool shift, bool ctrl)
             _state.GD.ToggleWireframe();
         }
     }
-    
+
     if(key == KEY_ESCAPE)
     {
         ClearSelection();
@@ -570,7 +570,6 @@ void App::CreateSurfaceSamplingSpheres()
 void App::ModelChosen(const char *model)
 {
     String modelName = String(model);
-    _state.scene.LogUIEvent(UIEventModelChosen, modelName);
 
     if(modelName.Length() == 0)
     {
@@ -579,11 +578,12 @@ void App::ModelChosen(const char *model)
     else
     {
         _state.chosenModel = _state.assets.GetModel(modelName);
+        _state.scene.LogUIEvent(UIEventModelChosen, modelName);
     }
     if(_state.chosenModel != NULL)
     {
         const Rectangle3f &bbox = _state.chosenModel->BoundingBox();
-        
+
         const float sceneBBoxLength = (_state.scene.BoundingBox().Dimensions().x + _state.scene.BoundingBox().Dimensions().y + _state.scene.BoundingBox().Dimensions().z) / 3.0f;
         const float modelBBoxLength = Math::Max(bbox.Dimensions().x, bbox.Dimensions().y, bbox.Dimensions().z);
 
@@ -596,7 +596,7 @@ void App::ModelChosen(const char *model)
         {
             scaleFactor = 0.3f * sceneBBoxLength / modelBBoxLength;
         }
-        
+
         //Vec3f bboxBottom = Vec3f(bbox.Center().x, bbox.Center().y, bbox.Min.z);
 
         _state.chosenFace = 0;
@@ -686,7 +686,7 @@ UINT App::ProcessCommand(const char *command)
     }
     else if(words[0] == "loadModelList")
     {
-        
+
         if(words.Length() != 2)
         {
             Utility::MessageBox("Improperly formatted loadModelList command");
@@ -723,6 +723,25 @@ UINT App::ProcessCommand(const char *command)
         }
         TextSearch(words[1]);
         return 0;
+    }
+    else if(words[0] == "setChosenModelScale")
+    {
+        if(words.Length() != 2)
+        {
+            Utility::MessageBox("Improperly formatted set chosen model scale command");
+            return 1;
+        }
+        SetChosenModelScale(words[1].ConvertToFloat());
+        return 0;
+    }
+    else if(words[0] == "SetChosenModelTransform")
+    {
+        if(words.Length() != 2)
+        {
+            Utility::MessageBox("Improperly formatted set chosen model transform from file command");
+            return 1;
+        }
+        return SetChosenModelTransformFromFile(words[1]);
     }
     else
     {
@@ -838,7 +857,7 @@ void App::Paste()
 
 void App::Undo()
 {    _state.scene.LogUIEvent(UIEventUndo, "");
-    _state.undoStack.Undo(_state);
+_state.undoStack.Undo(_state);
 }
 
 void App::DeleteSelectedModel()
@@ -910,6 +929,70 @@ void App::Scale(float scale)
         _state.sceneDirty = true;
         _state.selectedModel->UpdateTransform();
     }
+}
+
+void App::SetChosenModelScale(float scale)
+{
+    if(_state.mode == ModeInsert)
+    {
+        _state.chosenScale = scale;
+    }
+}
+
+UINT App::SetChosenModelTransformFromFile(const String &filename)
+{
+    if (_state.chosenModel == NULL) return -1;
+
+    ifstream file(filename.CString());
+    if(file.fail())
+    {
+        String s = "Failed to open " + filename;
+        MessageBox(NULL, s.CString(), "SceneStudio", MB_OK);
+        return 1;
+    }
+
+    Vector<String> lines;
+    Utility::GetFileLines(filename, lines);
+    if(lines.Length() < 4 || lines[0] != "SceneStudio A" || lines[1] != "v 1")
+    {
+        return 2;
+    }
+    
+    Vector<String> words;
+    bool foundModel = false;
+
+    UINT lineIndex = 3;
+    for(; lineIndex < lines.Length(); lineIndex++)
+    {
+        const String &curLine = lines[lineIndex];
+        if(curLine.Length() >= 2)
+        {
+            curLine.Partition(' ', words);
+            const char c0 = curLine[0];
+            const char c1 = curLine[1];
+            if(c0 == 'n')
+            {
+                if (!foundModel && (words[1] == _state.chosenModel->name()))
+                {
+                    foundModel = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (foundModel)
+    {
+        // Stupidly assume f and s immediately follow n
+        const String &fLine = lines[lineIndex+1];
+        const String &sLine = lines[lineIndex+2];
+        fLine.Partition(' ', words);
+        _state.chosenFace = words[1].ConvertToUnsignedInteger();
+        sLine.Partition(' ', words);
+        String::HexStringToByteStream(words[1], (BYTE *)&(_state.chosenScale));
+    }
+
+    return 0;
 }
 
 UINT App::LoadScene(const String &filename)
@@ -1015,12 +1098,12 @@ ModeType App::SetMode(ModeType m)
         modifiers = _state.selectedModel->model->name();
     }
     else if ((e == UIEventEnterMoveSurfacesMode || e == UIEventEnterMovePlaneMode || e == UIEventEnterMoveLevitateMode)
-             && _state.selectedModel != NULL)
+        && _state.selectedModel != NULL)
     {
         modifiers = _state.selectedModel->model->name();
         // TODO: Obtain position and pass as modifier
     }
-    
+
     _state.scene.LogUIEvent(e, modifiers);
 
     return previousMode;
@@ -1033,7 +1116,7 @@ void App::Screenshot(const String &filename, const Vec2i &dim)
     UINT height = dim.y;
 
     ClearSelection();
-    
+
     D3D9ProtectRenderTarget protector(_state.device, true, true);
     D3D9RenderTargetSurface &surface = _state.globalAssets.scratchSurface;
     surface.Init(_state.GD, D3DFMT_A8R8G8B8, upscaleMult*width, upscaleMult*height);

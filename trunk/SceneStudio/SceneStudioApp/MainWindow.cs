@@ -46,6 +46,7 @@ namespace SceneStudioApp
         BrowserMode mode;
         List<SceneEntry> pickedModels = new List<SceneEntry>();
         SceneEntry clickedExemplar = null;
+        SceneEntry clickedModelOriginatingExemplar = null;
         bool keywordSearchTextBoxFocused = false;
 
         private bool isInsertMode()
@@ -76,6 +77,11 @@ namespace SceneStudioApp
         {
             SSProcessCommand(d3dContext, "enterInsertMode");
             updateModeUI(true);
+        }
+
+        private void setChosenModelScale(float scale)
+        {
+            SSProcessCommand(d3dContext, "setChosenModelScale\t" + scale);
         }
 
         private void InitializeWebBrowsers()
@@ -382,6 +388,10 @@ namespace SceneStudioApp
                 SSModelChosen(d3dContext, cacheDownloader.scene.hash);
                 newSelectedModel(cacheDownloader.scene.hash);
                 enterInsertMode();
+                if (Constants.restrictModelSearchToExemplarContents && clickedModelOriginatingExemplar != null)
+                {
+                    SSProcessCommand(d3dContext, "SetChosenModelTransform\t" + clickedModelOriginatingExemplar.name);
+                }
             }
             else
             {
@@ -400,14 +410,16 @@ namespace SceneStudioApp
                 {
                     string sceneHash = e.Url.AbsolutePath;
                     SceneEntry entry = database.getScene(sceneHash);
-
                     SSModelChosen(d3dContext, "");
                     cacheDownloader.NewScene(entry);
                     cacheDownloader.DownloadFiles(webClient);
                     timerDownloadCheck.Enabled = true;
                     newSelectedModel(sceneHash);
-                    
                     e.Cancel = true;
+                    if (Constants.restrictModelSearchToExemplarContents)
+                    {
+                        clickedModelOriginatingExemplar = database.getInstanceScenesOfModel(sceneHash)[0];
+                    }
                 }
             }
             catch(Exception ex)
@@ -877,7 +889,7 @@ namespace SceneStudioApp
                 return;
             }
             string msg = hash.ToString() + "," + x.ToString() + "," + y.ToString();
-            clickedExemplar= database.getExemplar(hash);
+            clickedExemplar = database.getExemplar(hash);
             SceneEntry clickedModel = clickedExemplar.hashMap[y, x];
             
             if (clickedModel.name == Constants.architectureNameTag)
@@ -894,6 +906,7 @@ namespace SceneStudioApp
             SSModelChosen(d3dContext, clickedModel.hash);
             newSelectedModel(clickedModel.hash);
             enterInsertMode();
+            SSProcessCommand(d3dContext, "SetChosenModelTransform\t" + clickedExemplar.name);
             //MessageBox.Show(msg, "client code");
         }
 
