@@ -101,6 +101,9 @@ namespace SceneStudioApp
             splitContainer1.SplitterDistance = 1000;
 
             modelSearchBox.MouseWheel += new MouseEventHandler(modelSearchTextBox_MouseWheel);
+            exemplarSearchBox.MouseWheel += new MouseEventHandler(exemplarSearchTextBox_MouseWheel);
+            splitContainer1.Panel2.MouseWheel += new MouseEventHandler(splitContainer1_Panel2_MouseMove);
+            splitContainer1.Panel2.MouseMove += new MouseEventHandler(splitContainer1_Panel2_MouseMove);
 
             Constants.Init();
             database.Init(webClient, cacheDownloader);
@@ -214,28 +217,23 @@ namespace SceneStudioApp
             //
             prevMouseX = Int32.MaxValue;
             prevMouseY = Int32.MaxValue;
-            if (!modelSearchBox.Focused)
+            if (!modelSearchBox.Focused || !exemplarSearchBox.Focused)
             {
                 this.splitContainer1.Panel1.Focus();
             }
         }
 
-        private void splitContainer1_Panel2_MouseEnter(object sender, EventArgs e)
+        private void splitContainer1_Panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            //TODO
-            if (modelBrowser.Bounds.Contains(Cursor.Position))
+            Control ctrl = splitContainer1.Panel2.GetChildAtPoint(Cursor.Position);
+            if (ctrl != null)
             {
-                modelBrowser.Focus();
+                if (ctrl.GetType() == modelBrowser.GetType())
+                {
+                    WebBrowser browser = (WebBrowser)ctrl;
+                    if (browser.Document != null) browser.Document.Focus();
+                }
             }
-            else if (exemplarBrowser.Bounds.Contains(Cursor.Position))
-            {
-                exemplarBrowser.Focus();
-            }
-
-            //if (splitContainer1.Focused)
-            //{
-            //    //exemplarSearchBox.Focus();
-            //}
         }
 
         private void splitContainer1_Panel1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -449,21 +447,6 @@ namespace SceneStudioApp
             }
         }
 
-        void modelSearchTextBox_MouseWheel(object sender, MouseEventArgs e)
-        {
-            //
-            // Neither of these have the desired effect
-            //
-            //this.searchBrowser.Focus();
-            //this.searchBrowser.Select();
-
-            //searchBrowser.Document.Window.ScrollTo(0, y);
-            if (modelBrowser.Document != null)
-            {
-                modelBrowser.Document.Focus();
-            }
-        }
-        
         private void modelNameLabel_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (selectedSceneEntry != null)
@@ -1027,17 +1010,34 @@ namespace SceneStudioApp
             }
         }
 
+        void modelSearchTextBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //
+            // Neither of these have the desired effect
+            //
+            //this.searchBrowser.Focus();
+            //this.searchBrowser.Select();
+
+            //searchBrowser.Document.Window.ScrollTo(0, y);
+            if (modelBrowser.Document != null)
+            {
+                modelBrowser.Document.Focus();
+            }
+        }
+        void exemplarSearchTextBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (exemplarBrowser.Document != null)
+            {
+                exemplarBrowser.Document.Focus();
+            }
+        }
+
         private void LogUIEvent(UIEventType e, string data)
         {
             if (SSProcessCommand(d3dContext, "LogUIEvent\t" + Utility.UIEventTypeToString(e) + "\t" + data) != 0)
             {
                 throw new Exception("LogUIEvent failed.");
             }
-        }
-
-        private void splitContainer1_Panel2_MouseHover(object sender, EventArgs e)
-        {
-
         }
     }
 }
