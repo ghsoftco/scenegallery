@@ -57,10 +57,10 @@
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.modelNameLabel = new System.Windows.Forms.Label();
             this.exemplarSearchButton = new System.Windows.Forms.Button();
             this.exemplarBrowser = new System.Windows.Forms.WebBrowser();
             this.exemplarSearchBox = new System.Windows.Forms.TextBox();
-            this.modelNameLabel = new System.Windows.Forms.Label();
             this.modelBrowser = new System.Windows.Forms.WebBrowser();
             this.modelSearchButton = new System.Windows.Forms.Button();
             this.modelSearchBox = new System.Windows.Forms.TextBox();
@@ -446,14 +446,15 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.modelNameLabel);
             this.splitContainer1.Panel2.Controls.Add(this.exemplarSearchButton);
             this.splitContainer1.Panel2.Controls.Add(this.exemplarBrowser);
             this.splitContainer1.Panel2.Controls.Add(this.exemplarSearchBox);
-            this.splitContainer1.Panel2.Controls.Add(this.modelNameLabel);
             this.splitContainer1.Panel2.Controls.Add(this.modelBrowser);
             this.splitContainer1.Panel2.Controls.Add(this.modelSearchButton);
             this.splitContainer1.Panel2.Controls.Add(this.modelSearchBox);
             this.splitContainer1.Panel2.MouseEnter += new System.EventHandler(this.splitContainer1_Panel2_MouseEnter);
+            this.splitContainer1.Panel2.MouseHover += new System.EventHandler(this.splitContainer1_Panel2_MouseHover);
             this.splitContainer1.Panel2.Resize += new System.EventHandler(this.splitContainer1_Panel2_Resize);
             this.splitContainer1.Size = new System.Drawing.Size(1426, 911);
             this.splitContainer1.SplitterDistance = 951;
@@ -483,6 +484,19 @@
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(51, 24);
             this.statusText.Text = "Ready";
+            // 
+            // modelNameLabel
+            // 
+            this.modelNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.modelNameLabel.AutoSize = true;
+            this.modelNameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.modelNameLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modelNameLabel.Location = new System.Drawing.Point(367, 6);
+            this.modelNameLabel.Name = "modelNameLabel";
+            this.modelNameLabel.Size = new System.Drawing.Size(97, 19);
+            this.modelNameLabel.TabIndex = 6;
+            this.modelNameLabel.Text = "Model Name";
+            this.modelNameLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.modelNameLabel_MouseDoubleClick);
             // 
             // exemplarSearchButton
             // 
@@ -518,19 +532,9 @@
             this.exemplarSearchBox.Text = "Search exemplar scenes";
             this.exemplarSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.exemplarSearchBox_KeyDown);
             this.exemplarSearchBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.exemplarSearchBox_MouseDoubleClick);
-            // 
-            // modelNameLabel
-            // 
-            this.modelNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.modelNameLabel.AutoSize = true;
-            this.modelNameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.modelNameLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelNameLabel.Location = new System.Drawing.Point(370, 6);
-            this.modelNameLabel.Name = "modelNameLabel";
-            this.modelNameLabel.Size = new System.Drawing.Size(97, 19);
-            this.modelNameLabel.TabIndex = 6;
-            this.modelNameLabel.Text = "Model Name";
-            this.modelNameLabel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.modelNameLabel_MouseDoubleClick);
+            this.exemplarSearchBox.MouseEnter += new System.EventHandler(this.exemplarSearchBox_MouseEnter);
+            this.exemplarSearchBox.MouseLeave += new System.EventHandler(this.exemplarSearchBox_MouseLeave);
+            this.exemplarSearchBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.exemplarSearchBox_MouseUp);
             // 
             // modelBrowser
             // 
@@ -564,8 +568,11 @@
             this.modelSearchBox.Size = new System.Drawing.Size(151, 26);
             this.modelSearchBox.TabIndex = 2;
             this.modelSearchBox.Text = "To insert new models, enter a keyword search here.";
-            this.modelSearchBox.DoubleClick += new System.EventHandler(this.modelSearchTextBox_DoubleClick);
+            this.modelSearchBox.DoubleClick += new System.EventHandler(this.modelSearchBox_DoubleClick);
             this.modelSearchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.modelSearchTextBox_KeyDown);
+            this.modelSearchBox.MouseEnter += new System.EventHandler(this.modelSearchBox_MouseEnter);
+            this.modelSearchBox.MouseLeave += new System.EventHandler(this.modelSearchBox_MouseLeave);
+            this.modelSearchBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.modelSearchBox_MouseUp);
             // 
             // timerRender
             // 
@@ -594,7 +601,7 @@
             this.toolStripSeparator2,
             this.MenuExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // MenuNew
