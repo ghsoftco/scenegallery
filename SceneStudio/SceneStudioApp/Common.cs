@@ -203,6 +203,21 @@ namespace SceneStudioApp
             }
             return matching;
         }
+        public List<SceneEntry> filterScenesByKeyword(string keyword, char separator)
+        {
+            List<SceneEntry> matching = new List<SceneEntry>();
+            if (keyword == null) return matching;
+            foreach (string token in keyword.Split(separator))
+            {
+                if (Constants.stopwordList.Contains(token)) continue;
+                foreach (SceneEntry scene in scenes.Values)
+                {
+                    if (!matching.Contains(scene) && scene.tags.Contains(token))
+                        matching.Add(scene);
+                }
+            }
+            return matching;
+        }
         public void addScene(string hash, SceneEntry scene)
         {
             scenes.Add(hash, scene);
@@ -257,6 +272,21 @@ namespace SceneStudioApp
             foreach (SceneEntry scene in exemplarModels.Values)
             {
                 if (scene.name.Contains(keyword)) matching.Add(scene);
+            }
+            return matching;
+        }
+        public List<SceneEntry> filterExemplarModelsByKeyword(string keyword, char separator)
+        {
+            List<SceneEntry> matching = new List<SceneEntry>();
+            if (keyword == null) return matching;
+
+            foreach (string token in keyword.Split(separator))
+            {
+                if (Constants.stopwordList.Contains(token)) continue;
+                foreach (SceneEntry scene in exemplarModels.Values)
+                {
+                    if (!matching.Contains(scene) && scene.name.Contains(keyword)) matching.Add(scene);
+                }
             }
             return matching;
         }

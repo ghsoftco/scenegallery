@@ -238,6 +238,11 @@ namespace SceneStudioApp
 
         private void splitContainer1_Panel1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            if (Constants.debugMode && e.Control && e.KeyCode == Keys.D1)
+                SwitchExemplarVisibility();
+            else if (Constants.debugMode && e.Control && e.KeyCode == Keys.D2)
+                SwitchRestrictModelSearchToExemplars();
+
             //
             // Only re-render the display on actual keys
             //
@@ -271,48 +276,6 @@ namespace SceneStudioApp
         private void splitContainer1_Panel2_Resize(object sender, EventArgs e)
         {
             UpdatePanel2Components();
-        }
-
-        private void UpdatePanel2Components()
-        {
-            int panelW = splitContainer1.Panel2.Width;
-            int panelH = splitContainer1.Panel2.Height;
-
-            modelSearchBox.Left = 5;
-            modelSearchBox.Top = 5;
-            modelSearchBox.Height = 30;
-            modelSearchButton.Left = modelSearchBox.Right + 5;
-            modelSearchButton.Width = modelSearchButton.PreferredSize.Width;
-            modelNameLabel.Left = modelSearchButton.Right + 5;
-
-            modelBrowser.Left = 5;
-            modelBrowser.Top = modelSearchBox.Bottom;
-            modelBrowser.Height = 300;
-            modelBrowser.Width = panelW - 5;
-
-            exemplarSearchBox.Left = 5;
-            exemplarSearchBox.Top = modelBrowser.Bottom + 5;
-            exemplarSearchButton.Left = exemplarSearchBox.Right + 5;
-            exemplarSearchButton.Top = exemplarSearchBox.Top;
-
-            exemplarBrowser.Left = 5;
-            exemplarBrowser.Top = exemplarSearchBox.Bottom + 5;
-            exemplarBrowser.Height = panelH - exemplarSearchBox.Bottom - 5;
-            exemplarBrowser.Width = panelW - 5;
-
-            if (mode == BrowserMode.ExemplarsNotAvailable)
-            {
-                exemplarSearchBox.Visible = false;
-                exemplarSearchButton.Visible = false;
-                exemplarBrowser.Visible = false;
-                modelBrowser.Height = panelH - modelSearchBox.Height - 5;
-            }
-            else if (mode == BrowserMode.ExemplarsAvailable)
-            {
-                exemplarSearchBox.Visible = true;
-                exemplarSearchButton.Visible = true;
-                exemplarBrowser.Visible = true;
-            }
         }
 
         private void processQueryResults(IntPtr result)
@@ -429,6 +392,10 @@ namespace SceneStudioApp
                     {
                         clickedModelOriginatingExemplar = database.getInstanceScenesOfModel(sceneHash)[0];
                     }
+                    else
+                    {
+                        clickedModelOriginatingExemplar = null;
+                    }
                 }
             }
             catch(Exception ex)
@@ -514,17 +481,6 @@ namespace SceneStudioApp
                 SSProcessCommand(d3dContext, "save\t" + dialog.FileName);
                 timerRender.Enabled = true;
             }
-        }
-
-        private void SwitchExemplarVisibility()
-        {
-            if (mode == BrowserMode.ExemplarsAvailable)
-            {
-                mode = BrowserMode.ExemplarsNotAvailable;
-            }
-            else mode = BrowserMode.ExemplarsAvailable;
-
-            UpdatePanel2Components();
         }
 
         private void NewScene()
@@ -881,6 +837,7 @@ namespace SceneStudioApp
             }
 
             clickedExemplar = database.getExemplar(hash);
+            clickedModelOriginatingExemplar = clickedExemplar;
             SceneEntry clickedModel = clickedExemplar.hashMap[y, x];
 
             msg = hash + "," + ((float)x / Constants.exemplarImgDim.w).ToString() + "," + ((float)y / Constants.exemplarImgDim.h).ToString() + "," + index.ToString();
@@ -896,23 +853,30 @@ namespace SceneStudioApp
             List<SceneEntry> models;
             if (Constants.restrictModelSearchToExemplarContents)
             {
-                models = database.filterExemplarModelsByKeyword(clickedModel.name);
+                models = database.filterExemplarModelsByKeyword(clickedModel.name, ' ');
             }
             else
             {
-                models = database.filterScenesByKeyword(clickedModel.name);
+                models = database.filterScenesByKeyword(clickedModel.name, ' ');
             }
-             
-            //List<SceneEntry> models2 = database.getScenesFromHashes(clickedExemplar.modelHashes);
-            //models.AddRange(models2);
-            models.Remove(clickedModel);
-            models.Insert(0, clickedModel);
+            if (models.Remove(clickedModel))
+            {
+                models.Insert(0, clickedModel);
+            }
             Utility.showThumbnails(modelBrowser, models, Constants.sceneImgDim);
 
-            SSModelChosen(d3dContext, clickedModel.hash);
+            string clickedHash = clickedModel.hash;
+
+            SSModelChosen(d3dContext, "");
+            cacheDownloader.NewScene(clickedModel);
+            cacheDownloader.DownloadFiles(webClient);
+            timerDownloadCheck.Enabled = true;
             newSelectedModel(clickedModel.hash);
-            enterInsertMode();
-            SSProcessCommand(d3dContext, "SetChosenModelTransform\t" + clickedExemplar.name);
+
+            //SSModelChosen(d3dContext, clickedModel.hash);
+            //enterInsertMode();
+
+            //SSProcessCommand(d3dContext, "SetChosenModelTransform\t" + clickedExemplar.name);
         }
 
         private void filterExemplars()
@@ -1032,12 +996,74 @@ namespace SceneStudioApp
             }
         }
 
+        private void UpdatePanel2Components()
+        {
+            splitContainer1.SplitterDistance = 995;
+            int panelW = splitContainer1.Panel2.Width;
+            int panelH = splitContainer1.Panel2.Height;
+
+            modelSearchBox.Left = 5;
+            modelSearchBox.Top = 0;
+            modelSearchButton.Left = modelSearchBox.Right + 5;
+            modelSearchButton.Width = modelSearchButton.PreferredSize.Width;
+            modelNameLabel.Left = modelSearchButton.Right + 5;
+
+            modelBrowser.Left = 5;
+            modelBrowser.Top = modelSearchBox.Bottom;
+            modelBrowser.Height = 300;
+            modelBrowser.Width = panelW - 5;
+
+            exemplarSearchBox.Left = 5;
+            exemplarSearchBox.Top = modelBrowser.Bottom + 5;
+            exemplarSearchButton.Left = exemplarSearchBox.Right + 5;
+            exemplarSearchButton.Top = exemplarSearchBox.Top;
+
+            exemplarBrowser.Left = 5;
+            exemplarBrowser.Top = exemplarSearchBox.Bottom;
+            exemplarBrowser.Height = panelH - exemplarSearchBox.Bottom - 5;
+            exemplarBrowser.Width = panelW - 5;
+
+            if (mode == BrowserMode.ExemplarsNotAvailable)
+            {
+                exemplarSearchBox.Visible = false;
+                exemplarSearchButton.Visible = false;
+                exemplarBrowser.Visible = false;
+                modelSearchBox.Visible = true;
+                modelSearchButton.Visible = true;
+                modelBrowser.Height = panelH - modelSearchBox.Height - 5;
+            }
+            else if (mode == BrowserMode.ExemplarsAvailable)
+            {
+                exemplarSearchBox.Visible = true;
+                exemplarSearchButton.Visible = true;
+                exemplarBrowser.Visible = true;
+                modelSearchBox.Visible = false;
+                modelSearchButton.Visible = false;
+            }
+        }
+
         private void LogUIEvent(UIEventType e, string data)
         {
             if (SSProcessCommand(d3dContext, "LogUIEvent\t" + Utility.UIEventTypeToString(e) + "\t" + data) != 0)
             {
                 throw new Exception("LogUIEvent failed.");
             }
+        }
+
+        private void SwitchExemplarVisibility()
+        {
+            if (mode == BrowserMode.ExemplarsAvailable)
+            {
+                mode = BrowserMode.ExemplarsNotAvailable;
+            }
+            else mode = BrowserMode.ExemplarsAvailable;
+
+            UpdatePanel2Components();
+        }
+
+        private void SwitchRestrictModelSearchToExemplars()
+        {
+            Constants.restrictModelSearchToExemplarContents = !Constants.restrictModelSearchToExemplarContents;
         }
     }
 }

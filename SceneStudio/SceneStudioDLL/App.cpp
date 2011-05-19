@@ -47,7 +47,7 @@ void App::InitD3D(HWND window)
 
     _state.assets.Init(_state);
 
-    _state.scene.Reset(_state, "room00");
+    _state.scene.Reset(_state, "room01");
 
     _state.loadedCamera = false;
     ResetCamera();
