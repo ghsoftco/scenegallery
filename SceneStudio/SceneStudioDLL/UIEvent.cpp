@@ -32,6 +32,11 @@ map<UIEventType, String> UIEvent::fillTagMap()
     m[UIEventMouseDown]                 = String("Md");
     m[UIEventMouseUp]                   = String("Mu");
     m[UIEventMouseMove]                 = String("Mm");
+    // Interface side events (need to match definition in Common.cs)
+    m[UIEventKeywordSearchExemplar]     = String("Se"); 
+    m[UIEventKeywordSearchModel]        = String("Sm");
+    m[UIEventClickExemplar]             = String("Ce"); 
+    m[UIEventClickModel]                = String("Cm");
 
     return m;
 }

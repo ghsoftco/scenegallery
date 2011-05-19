@@ -57,6 +57,22 @@ namespace SceneStudioApp
 
             MessageBox.Show(s, "Error");
         }
+        public static string UIEventTypeToString(UIEventType input)
+        {
+            switch (input)
+            {
+                case UIEventType.UIEventClickExemplar:
+                    return "Ce";
+                case UIEventType.UIEventClickModel:
+                    return "Cm";
+                case UIEventType.UIEventKeywordSearchExemplar:
+                    return "Se";
+                case UIEventType.UIEventKeywordSearchModel:
+                    return "Sm";
+                default:
+                    return "Unknown";
+            }
+        }
     }
     public struct Dim
     {
@@ -77,6 +93,8 @@ namespace SceneStudioApp
             image = Constants.webSceneImagesDirectory + _hash + ".jpg";
             textures = null;
             modelHashes = null;
+            tags = _name;
+            hashMap = null;
             isExemplar = false;
         }
         public SceneEntry(string _filename, List<string> _modelHashes, string _tags, SceneHashMap _hashMap)
@@ -175,6 +193,15 @@ namespace SceneStudioApp
         public List<SceneEntry> getScenes()
         {
             return new List<SceneEntry>(scenes.Values);
+        }
+        public List<SceneEntry> filterScenesByKeyword(string keyword)
+        {
+            List<SceneEntry> matching = new List<SceneEntry>();
+            foreach (SceneEntry scene in scenes.Values)
+            {
+                if (scene.tags.Contains(keyword)) matching.Add(scene);
+            }
+            return matching;
         }
         public void addScene(string hash, SceneEntry scene)
         {
@@ -420,5 +447,14 @@ namespace SceneStudioApp
     {
         ExemplarsAvailable = 0,
         ExemplarsNotAvailable = 1,
+    };
+
+    // Must match the definitions in UIEvent.h
+    public enum UIEventType
+    {
+        UIEventKeywordSearchExemplar = 0,
+        UIEventKeywordSearchModel = 1,
+        UIEventClickModel = 2,
+        UIEventClickExemplar = 3,
     };
 }

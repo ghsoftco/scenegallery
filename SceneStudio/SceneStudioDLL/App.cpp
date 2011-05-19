@@ -743,6 +743,16 @@ UINT App::ProcessCommand(const char *command)
         }
         return SetChosenModelTransformFromFile(words[1]);
     }
+    else if(words[0] == "LogUIEvent")
+    {
+        if(words.Length() != 3)
+        {
+            Utility::MessageBox("Improperly formatted log event command");
+            return 1;
+        }
+        _state.scene.LogUIEvent(UIEvent::tagToType(words[1]), words[2]);
+        return 0;
+    }
     else
     {
         Utility::MessageBox("Unrecognized command");

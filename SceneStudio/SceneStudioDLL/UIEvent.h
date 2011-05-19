@@ -5,7 +5,9 @@ enum UIEventType
     UIEventHomepage, UIEventTextSearch, UIEventShapeSearch, UIEventModelChosen, UIEventEnterInsertMode,
     UIEventEnterNormalMode, UIEventEnterSelectingMode, UIEventEnterLookingMode, UIEventDollyCamera,
     UIEventEnterMoveSurfacesMode, UIEventEnterMovePlaneMode, UIEventEnterMoveLevitateMode, 
-    UIEventMouseDown, UIEventMouseUp, UIEventMouseMove, UIEventNULL,
+    UIEventMouseDown, UIEventMouseUp, UIEventMouseMove,
+    UIEventKeywordSearchExemplar, UIEventKeywordSearchModel, UIEventClickModel, UIEventClickExemplar,
+    UIEventNULL,
 };
 
 class UIEvent

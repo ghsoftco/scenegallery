@@ -50,7 +50,8 @@ $(document).ready(function() {
     var x = (e.pageX - offset.left);
     var y = (e.pageY - offset.top);
     var hash = $(this).find('a').attr('href');
-    window.external.ReportClick(hash, x, y);
+    var index = $(this).index();
+    window.external.ReportClick(hash, x, y, index);
   });
 });
 </script>
