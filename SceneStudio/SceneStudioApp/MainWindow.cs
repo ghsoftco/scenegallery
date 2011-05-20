@@ -281,7 +281,10 @@ namespace SceneStudioApp
             queryResults.Clear();
 
             string searchResults = Marshal.PtrToStringAnsi(result);
-
+            if (searchResults == null || searchResults.Length == 0)
+            {
+                return queryResults;
+            }
             if (result == (IntPtr)0)
             {
                 modelNameLabel.Text = "Search Failed";
@@ -308,6 +311,11 @@ namespace SceneStudioApp
 
         private List<SceneEntry> issueTextQuery(string keyword)
         {
+            // Return no scenes for empty query
+            if (keyword == null || keyword.Length == 0)
+            {
+                return new List<SceneEntry>();
+            }
             uint success = SSProcessCommand(d3dContext, "textSearch\t" + keyword);
             IntPtr result = (IntPtr)0;
             if (success == 0)

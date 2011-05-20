@@ -123,10 +123,6 @@ namespace SceneStudioApp
             writer.RenderBeginTag(HtmlTextWriterTag.Img);   // Begin Img
             writer.RenderEndTag(); // End Img
 
-            //writer.AddAttribute(HtmlTextWriterAttribute.Id, "clickPosition");
-            //writer.RenderBeginTag(HtmlTextWriterTag.P); // Begin P
-            //writer.RenderEndTag(); // End P
-
             writer.RenderEndTag(); // End A
 
             writer.RenderEndTag(); // End Div
