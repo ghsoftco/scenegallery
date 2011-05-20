@@ -95,10 +95,7 @@ namespace SceneStudioApp
         public MainWindow()
         {
             InitializeComponent();
-            
-            splitContainer1.Panel1MinSize = 250;
-            splitContainer1.Panel2MinSize = 405;
-            splitContainer1.SplitterDistance = 1000;
+            UpdatePanel2Components();
 
             modelSearchBox.MouseWheel += new MouseEventHandler(modelSearchTextBox_MouseWheel);
             exemplarSearchBox.MouseWheel += new MouseEventHandler(exemplarSearchTextBox_MouseWheel);
@@ -278,8 +275,11 @@ namespace SceneStudioApp
             UpdatePanel2Components();
         }
 
-        private void processQueryResults(IntPtr result)
+        private List<SceneEntry> processQueryResults(IntPtr result)
         {
+            List<SceneEntry> queryResults = new List<SceneEntry>();
+            queryResults.Clear();
+
             string searchResults = Marshal.PtrToStringAnsi(result);
 
             if (result == (IntPtr)0)
@@ -289,31 +289,35 @@ namespace SceneStudioApp
             else
             {
                 List<string> hashes = new List<string>(searchResults.Split(' '));
-                List<SceneEntry> results = database.getScenesFromHashes(hashes);
-                Utility.showThumbnails(modelBrowser, results, Constants.sceneImgDim);
-            }
-        }
-
-        private void issueTextQuery()
-        {
-            if (Constants.restrictModelSearchToExemplarContents)
-            {
-                List<SceneEntry> results = database.filterExemplarModelsByKeyword(modelSearchBox.Text);
-                Utility.showThumbnails(modelBrowser, results, Constants.sceneImgDim);
-            }
-            else
-            {
-                uint success = SSProcessCommand(d3dContext, "textSearch\t" + modelSearchBox.Text);
-                IntPtr result = (IntPtr)0;
-                if (success == 0)
+                queryResults = database.getScenesFromHashes(hashes);
+                if (Constants.restrictModelSearchToExemplarContents)
                 {
-                    result = SSQueryString(d3dContext, QueryType.QuerySearchResults);
+                    List<SceneEntry> filteredResults = new List<SceneEntry>();
+                    foreach (SceneEntry scene in queryResults)
+                    {
+                        if (database.getExemplarModels().Contains(scene))
+                        {
+                            filteredResults.Add(scene);
+                        }
+                    }
+                    queryResults = filteredResults;
                 }
-                processQueryResults(result);
             }
+            return queryResults;
         }
 
-        private void issueShapeQuery()
+        private List<SceneEntry> issueTextQuery(string keyword)
+        {
+            uint success = SSProcessCommand(d3dContext, "textSearch\t" + keyword);
+            IntPtr result = (IntPtr)0;
+            if (success == 0)
+            {
+                result = SSQueryString(d3dContext, QueryType.QuerySearchResults);
+            }
+            return processQueryResults(result);
+        }
+
+        private List<SceneEntry> issueShapeQuery()
         {
             if (selectedSceneEntry != null)
             {
@@ -323,13 +327,14 @@ namespace SceneStudioApp
                 {
                     result = SSQueryString(d3dContext, QueryType.QuerySearchResults);
                 }
-                processQueryResults(result);
+                return processQueryResults(result);
             }
+            return null;
         }
 
         private void modelSearchButton_Click(object sender, EventArgs e)
         {
-            issueTextQuery();
+            Utility.showThumbnails(modelBrowser, issueTextQuery(modelSearchBox.Text), Constants.sceneImgDim);
         }
 
         private void newSelectedModel(string sceneHash)
@@ -410,7 +415,7 @@ namespace SceneStudioApp
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                issueTextQuery();
+                Utility.showThumbnails(modelBrowser, issueTextQuery(modelSearchBox.Text), Constants.sceneImgDim);
             }
         }
 
@@ -848,21 +853,10 @@ namespace SceneStudioApp
                 return;
             }
 
-            // Form model list
+            // Form and show model list
             pickedModels.Add(clickedModel);
-            List<SceneEntry> models;
-            if (Constants.restrictModelSearchToExemplarContents)
-            {
-                models = database.filterExemplarModelsByKeyword(clickedModel.name, ' ');
-            }
-            else
-            {
-                models = database.filterScenesByKeyword(clickedModel.name, ' ');
-            }
-            if (models.Remove(clickedModel))
-            {
-                models.Insert(0, clickedModel);
-            }
+            List<SceneEntry> models = issueTextQuery(clickedModel.name);
+            if (models.Remove(clickedModel)) models.Insert(0, clickedModel);
             Utility.showThumbnails(modelBrowser, models, Constants.sceneImgDim);
 
             string clickedHash = clickedModel.hash;
@@ -872,11 +866,6 @@ namespace SceneStudioApp
             cacheDownloader.DownloadFiles(webClient);
             timerDownloadCheck.Enabled = true;
             newSelectedModel(clickedModel.hash);
-
-            //SSModelChosen(d3dContext, clickedModel.hash);
-            //enterInsertMode();
-
-            //SSProcessCommand(d3dContext, "SetChosenModelTransform\t" + clickedExemplar.name);
         }
 
         private void filterExemplars()
@@ -998,7 +987,10 @@ namespace SceneStudioApp
 
         private void UpdatePanel2Components()
         {
+            splitContainer1.Panel1MinSize = 250;
+            splitContainer1.Panel2MinSize = 405;
             splitContainer1.SplitterDistance = 995;
+
             int panelW = splitContainer1.Panel2.Width;
             int panelH = splitContainer1.Panel2.Height;
 
@@ -1044,6 +1036,7 @@ namespace SceneStudioApp
 
         private void LogUIEvent(UIEventType e, string data)
         {
+            if (data == "") data = "_";
             if (SSProcessCommand(d3dContext, "LogUIEvent\t" + Utility.UIEventTypeToString(e) + "\t" + data) != 0)
             {
                 throw new Exception("LogUIEvent failed.");
