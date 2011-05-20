@@ -989,7 +989,7 @@ namespace SceneStudioApp
         {
             splitContainer1.Panel1MinSize = 250;
             splitContainer1.Panel2MinSize = 405;
-            splitContainer1.SplitterDistance = 995;
+            splitContainer1.SplitterDistance = splitContainer1.Width - 870;
 
             int panelW = splitContainer1.Panel2.Width;
             int panelH = splitContainer1.Panel2.Height;
