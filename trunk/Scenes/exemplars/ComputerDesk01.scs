@@ -1,6 +1,246 @@
 SceneStudio A
 v 1
-modelCount 20
+modelCount 24
+z dresser
+z bottle
+z apple_23_cinema_hd_display
+z bed
+z shelf
+z book
+z books
+z rubi
+z plush
+z teddy
+z cow
+z pad
+z books
+z toy
+z plane
+z desk
+z dresser
+z bin
+z trash
+z mains
+z socket
+z plug
+z extension
+z chair
+z laptop
+z keyboard
+z mouse
+z box
+z tissue
+z books
+z pad
+z desk_lamp
+z headphones
+z usb
+z computer
+z enclosure
+z hard_drive
+z power
+z cell_phone
+z droid
+z keys
+z wallet
+z glasses
+z ball
+z crystal
+z globe
+z bottle
+z shell
+z nightstand
+z socket
+z plug
+z switch
+z thermostat
+z painting
+z scroll
+z picture
+z poster
+z game
+z frame
+z glass
+z clock
+z bag
+z backpack
+z book
+z pill
+z clothes
+z shoes
+z poster
+z notepad
+z can
+z blinds
+z shirt
+z pants
+z book
+z bed
+z shelf
+z book
+z books
+z rubi
+z plush
+z teddy
+z cow
+z pad
+z books
+z toy
+z plane
+z desk
+z dresser
+z bin
+z trash
+z mains
+z socket
+z plug
+z extension
+z chair
+z laptop
+z keyboard
+z mouse
+z box
+z tissue
+z books
+z pad
+z desk_lamp
+z headphones
+z usb
+z computer
+z enclosure
+z hard_drive
+z power
+z cell_phone
+z droid
+z keys
+z wallet
+z glasses
+z ball
+z crystal
+z globe
+z bottle
+z shell
+z nightstand
+z socket
+z plug
+z switch
+z thermostat
+z painting
+z scroll
+z picture
+z poster
+z game
+z frame
+z glass
+z clock
+z bag
+z backpack
+z book
+z pill
+z clothes
+z shoes
+z poster
+z notepad
+z can
+z blinds
+z shirt
+z pants
+z book
+z desk
+z copier
+z monitor
+z keyboard
+z chair
+z office_chair
+z computer
+z mouse
+z router
+z pad
+z cup
+z mug
+z book
+z newspaper
+z new
+z news
+z paper
+z pencil
+z notepad
+z sketch
+z cs
+z usb
+z phone
+z fax
+z speaker
+z glass
+z painting
+z pad
+z note_pad
+z book
+z desk_lamp
+z hard_disk
+z tape
+z cd
+z stapler
+z notepad
+z book
+z mug
+z trophy
+z plaque
+z frame
+z picture
+z camera
+z calculator
+z bookss
+z books
+z nameplate
+z name_plate
+z chair
+z light
+z floor_light
+z floor_lamp
+z plug
+z switch
+z book_shelf
+z plug
+z socket
+z electric
+z picture
+z books
+z frame
+z office
+z suitcase
+z bag
+z trophy
+z file
+z folder
+z notepad
+z books
+z light
+z toy
+z architect
+z projector
+z clock
+z table
+z conference
+z corner_table
+z monitor
+z laptop
+z keyboard
+z mouse
+z mouse_pad
+z books
+z oaoer
+z paper
+z punch
+z map
+z paper
+z pencil
+z decoration
+z toy
+z desk
+z flower
+z coat
+z couch
 z bed
 z desk
 z dildo
@@ -46,9 +286,608 @@ z keyboard
 z mouse
 z CD
 z speaker
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z desk
+z computer_desk
+z desk_chair
+z standing_lamp
+z trash_can
+z computer
+z calendar
+z keyboard
+z mouse_pad
+z mouse
+z monitor
+z power_strip
+z speakers
+z printer
+z briefcase
+z desk
+z computer_desk
+z desk_chair
+z power_strip
+z outlet
+z computer
+z laptop
+z mouse
+z speakers
+z desk
+z computer_desk
+z white_board
+z sofa
+z couch
+z pillow
+z exercise_ball
+z bean_bag
+z coffee_table
+z painting
+z rug
+z desk_chair
+z clock
+z trash
+z outlet
+z computer
+z monitor
+z mac
+z mac
+z apple
+z power_strip
+z coaster
+z mug
+z magazine
+z plate
+z bagel
+z donut
+z bagel
+z donut
+z pillow
+z jacket
+z coat
+z scarf
+z hat
+z cd
+z dvd
+z notebook
+z paper
+z pen
+z headphones
+z book
+z picture_frane
+z picture_frame
+z desk_stuff
+z desk_lamp
+z lamp
+z wallet
+z keys
+z iphone
+z android
+z phone
+z android
+z stapler
+z white_out
+z staple
+z books
+z book
+z trophy
+z book
+z headphones
+z paper
+z pencil
+z cup
+z router
+z note
+z book
+z soda
+z book
+z paperweight
+z snow_globe
+z rug
+z picture_frame
+z pencil_holder
+z watch
+z glasses
+z globe
+z tv
+z dresser
+z couch
+z speakers
+z refridgerator
+z ceiling_light
+z light_switch
+z recliner
+z ez_chair
+z xbox
+z power_outlet
+z xbox_controller
+z desk
+z computer_desk
+z monitor
+z keyboard
+z computer
+z computer_chair
+z couch
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z desk
+z computer_desk
+z desk_chair
+z standing_lamp
+z trash_can
+z computer
+z calendar
+z keyboard
+z mouse_pad
+z mouse
+z monitor
+z power_strip
+z speakers
+z printer
+z briefcase
+z desk
+z computer_desk
+z desk_chair
+z power_strip
+z outlet
+z computer
+z laptop
+z mouse
+z speakers
+z desk
+z computer_desk
+z white_board
+z sofa
+z couch
+z pillow
+z exercise_ball
+z bean_bag
+z coffee_table
+z painting
+z rug
+z desk_chair
+z clock
+z trash
+z outlet
+z computer
+z monitor
+z mac
+z mac
+z apple
+z power_strip
+z coaster
+z mug
+z magazine
+z plate
+z bagel
+z donut
+z bagel
+z donut
+z pillow
+z jacket
+z coat
+z scarf
+z hat
+z cd
+z dvd
+z notebook
+z paper
+z pen
+z headphones
+z book
+z picture_frane
+z picture_frame
+z desk_stuff
+z desk_lamp
+z lamp
+z wallet
+z keys
+z iphone
+z android
+z phone
+z android
+z stapler
+z white_out
+z staple
+z books
+z book
+z trophy
+z book
+z headphones
+z paper
+z pencil
+z cup
+z router
+z note
+z book
+z soda
+z book
+z paperweight
+z snow_globe
+z rug
+z picture_frame
+z pencil_holder
+z watch
+z glasses
+z globe
+z tv
+z dresser
+z couch
+z speakers
+z refridgerator
+z ceiling_light
+z light_switch
+z recliner
+z ez_chair
+z xbox
+z power_outlet
+z xbox_controller
+z desk
+z computer_desk
+z monitor
+z keyboard
+z computer
+z computer_chair
+z couch
+z coffee
+z plate
+z book
+z plant
+z pac
+z phone
+z notepad
+z box
+z shoes
+z book
+z books
+z map
+z books
+z poster
+z painting
+z toy
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z desk
+z computer_desk
+z desk_chair
+z standing_lamp
+z trash_can
+z computer
+z calendar
+z keyboard
+z mouse_pad
+z mouse
+z monitor
+z power_strip
+z speakers
+z printer
+z briefcase
+z desk
+z computer_desk
+z desk_chair
+z power_strip
+z outlet
+z computer
+z laptop
+z mouse
+z speakers
+z desk
+z computer_desk
+z white_board
+z sofa
+z couch
+z pillow
+z exercise_ball
+z bean_bag
+z coffee_table
+z painting
+z rug
+z desk_chair
+z clock
+z trash
+z outlet
+z computer
+z monitor
+z mac
+z mac
+z apple
+z power_strip
+z coaster
+z mug
+z magazine
+z plate
+z bagel
+z donut
+z bagel
+z donut
+z pillow
+z jacket
+z coat
+z scarf
+z hat
+z cd
+z dvd
+z notebook
+z paper
+z pen
+z headphones
+z book
+z picture_frane
+z picture_frame
+z desk_stuff
+z desk_lamp
+z lamp
+z wallet
+z keys
+z iphone
+z android
+z phone
+z android
+z stapler
+z white_out
+z staple
+z books
+z book
+z trophy
+z book
+z headphones
+z paper
+z pencil
+z cup
+z router
+z note
+z book
+z soda
+z book
+z paperweight
+z snow_globe
+z rug
+z picture_frame
+z pencil_holder
+z watch
+z glasses
+z globe
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z poster
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z chair
+z note
+z computer
 C 49.7589,96.4101,83.2746,0.000244583,-0.890411,0.455157,0.00682635,0.455062,0.890433,-0.999887,0.0149993,-1.84223e-009,0,0,1
 m 0
-c 1 
+c 1 22 23 
 n room01
 f 0
 s 000008f3
@@ -59,7 +898,7 @@ po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 1 0
-c 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+c 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 
 n 7d3fc73ccd968863e40d907aaaf9adfd
 f 0
 s ba8acff3
@@ -249,7 +1088,47 @@ pu 6859fde3da9185e3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000008fbb21ff00c00000000000008f3
 tb 2f4053f32f4053f300000000000000002f4053fb2f4053f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
-qs 4231
+m 20 1
+n 610a9f79a2f2faacc43c9f60fcc79b4c
+f 0
+s 97defdf3
+pg 45
+pt 0
+pu 5d26d1f3d47569e3
+po 000000000000000000000000
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3000000000093c2c300000000402018b3000008f3
+tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+m 21 1
+n b183d45de540d39592305e37247dd64a
+f 4
+s 68cd3cf3
+pg 45
+pt 0
+pu dd3393f30a27c1e3
+po 000000000000000000000000
+ta 0000000000000000000008fb0000000000000000000008f30000000000000000000008f3000000000000000000000000e098d42c90000124783c1ae3000008f3
+tb e964a5f3a72c50fb0000000000000000a72c50f3e964a5f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+m 22 0
+n c4cb6693ee1f34d03f7f3ed2c3c690fe
+f 5
+s a8d98bf3
+pg 4
+pt 6
+pu 64c3aee3aed505e3
+po 000000000000000000000000
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3000000006be5761c58241adb6c66131c000008f3
+tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+m 23 0
+n f814eb2a6234540aa35a7666f0cfa5bb
+f 0
+s 41ea7cf3
+pg 0
+pt 21
+pu 916b22f3fe7a68d3
+po 000000000000000000000000
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f30000000010008f0c6bb14f0400000872000008f3
+tb ca8eaaeb6f0517fb00000000000000006f0517f3ca8eaaeb00000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+qs 4438
 q 6.19987e-005	rc	124.461,-219.61,66.739,0.0136147,-1,0,0,0,1,-1,0,0,0,0,1
 q 1.67102	do	-12
 q 1.68701	do	-12
@@ -4481,4 +5360,211 @@ q 3392.32	--
 q 3392.69	lo	
 q 3397.01	--	
 q 3425.8	sa	C:\code\scenegallery\Scenes\exemplars\2\ComputerDesk01.scs
-qe 3426.01
+q 3435.56	Cm	b0a06a387f13e8a77d20eb6f7b084522,0.545,0.4466667,20
+q 3435.87	cm	b0a06a387f13e8a77d20eb6f7b084522
+q 3435.87	in	
+q 3437.83	cs	
+q 3437.83	--	
+q 3438.84	Cm	b4407e5d4d18ed49cbef8b6c710135cb,0.58,0.6666667,18
+q 3439.13	cm	b4407e5d4d18ed49cbef8b6c710135cb
+q 3439.13	in	
+q 3440.87	ff	-1
+q 3441.92	sc	0.961538
+q 3442.43	sc	0.961538
+q 3442.46	sc	0.961538
+q 3442.49	sc	0.961538
+q 3442.52	sc	0.961538
+q 3442.55	sc	0.961538
+q 3442.58	sc	0.961538
+q 3442.67	sc	0.961538
+q 3442.73	sc	0.961538
+q 3442.78	sc	0.961538
+q 3442.84	sc	0.961538
+q 3442.89	sc	0.961538
+q 3442.95	sc	0.961538
+q 3443	sc	0.961538
+q 3443.05	sc	0.961538
+q 3443.11	sc	0.961538
+q 3443.16	sc	0.961538
+q 3443.22	sc	0.961538
+q 3443.27	sc	0.961538
+q 3443.33	sc	0.961538
+q 3443.38	sc	0.961538
+q 3443.43	sc	0.961538
+q 3443.49	sc	0.961538
+q 3443.54	sc	0.961538
+q 3443.59	sc	0.961538
+q 3443.61	sc	0.961538
+q 3443.63	sc	0.961538
+q 3443.66	sc	0.961538
+q 3443.69	sc	0.961538
+q 3443.72	sc	0.961538
+q 3443.75	sc	0.961538
+q 3444.35	sc	1.04
+q 3444.85	sc	1.04
+q 3444.9	sc	1.04
+q 3444.96	sc	1.04
+q 3444.98	sc	1.04
+q 3445	sc	1.04
+q 3445.02	sc	1.04
+q 3445.05	sc	1.04
+q 3445.08	sc	1.04
+q 3445.11	sc	1.04
+q 3445.14	sc	1.04
+q 3446.79	sc	1.04
+q 3465.34	cs	
+q 3465.34	--	
+q 3466.92	Cm	d46e1538d254c08b26675c7a5c3b5392,0.68,0.46,16
+q 3467.12	cm	d46e1538d254c08b26675c7a5c3b5392
+q 3467.12	in	
+q 3468.83	ff	-1
+q 3469.03	ff	-1
+q 3469.4	ff	-1
+q 3469.59	ff	-1
+q 3469.83	ff	-1
+q 3471.02	cs	
+q 3471.02	--	
+q 3472.33	Cm	c4cb6693ee1f34d03f7f3ed2c3c690fe,0.795,0.6266667,23
+q 3472.64	cm	c4cb6693ee1f34d03f7f3ed2c3c690fe
+q 3472.64	in	
+q 3474.22	ff	-1
+q 3479.76	sc	0.961538
+q 3493.77	--	
+q 3496.29	tq	chair
+q 3515.71	Cm	7b12801f2f4e5176d28af681b592671c,0.685,0.6,23
+q 3515.97	cm	7b12801f2f4e5176d28af681b592671c
+q 3515.97	in	
+q 3518.25	ro	0.785398
+q 3519.08	sc	1.04
+q 3519.6	sc	1.04
+q 3519.65	sc	1.04
+q 3519.7	sc	1.04
+q 3519.72	sc	1.04
+q 3519.75	sc	1.04
+q 3519.78	sc	1.04
+q 3519.81	sc	1.04
+q 3520.23	sc	0.961538
+q 3520.46	sc	0.961538
+q 3523.14	sc	1.04
+q 3523.88	sc	0.961538
+q 3524.23	sc	0.961538
+q 3526.58	cs	
+q 3526.58	--	
+q 3533.1	Cm	bb193a047168eb0584f5fa5400431f62,0.665,0.6133333,9
+q 3533.33	cm	bb193a047168eb0584f5fa5400431f62
+q 3533.33	in	
+q 3534.72	ro	-0.785398
+q 3534.87	ro	-0.785398
+q 3535.1	ro	-0.785398
+q 3536.39	cs	
+q 3536.39	--	
+q 3541.74	Cm	f814eb2a6234540aa35a7666f0cfa5bb,0.635,0.4866667,32
+q 3542	cm	f814eb2a6234540aa35a7666f0cfa5bb
+q 3542	in	
+q 3543.83	ro	-0.785398
+q 3543.98	ro	-0.785398
+q 3544.14	ro	-0.785398
+q 3545.98	sc	1.04
+q 3546.52	sc	0.961538
+q 3549.48	sc	1.04
+q 3549.77	sc	1.04
+q 3551.75	sc	0.961538
+q 3555.18	ro	0.785398
+q 3556.65	ro	-0.0261799
+q 3557.15	ro	-0.0261799
+q 3557.19	ro	-0.0261799
+q 3557.22	ro	-0.0261799
+q 3557.25	ro	-0.0261799
+q 3557.28	ro	-0.0261799
+q 3557.31	ro	-0.0261799
+q 3557.34	ro	-0.0261799
+q 3557.37	ro	-0.0261799
+q 3557.4	ro	-0.0261799
+q 3557.43	ro	-0.0261799
+q 3557.46	ro	-0.0261799
+q 3557.49	ro	-0.0261799
+q 3562.42	--	
+q 3568.67	tq	note
+q 3584.33	Cm	610a9f79a2f2faacc43c9f60fcc79b4c,0.33,0.6066667,66
+q 3584.65	cm	610a9f79a2f2faacc43c9f60fcc79b4c
+q 3584.65	in	
+q 3588.05	sc	0.961538
+q 3588.56	sc	0.961538
+q 3588.59	sc	0.961538
+q 3588.62	sc	0.961538
+q 3588.65	sc	0.961538
+q 3588.68	sc	0.961538
+q 3588.71	sc	0.961538
+q 3588.74	sc	0.961538
+q 3588.77	sc	0.961538
+q 3588.8	sc	0.961538
+q 3588.83	sc	0.961538
+q 3588.86	sc	0.961538
+q 3588.89	sc	0.961538
+q 3588.92	sc	0.961538
+q 3588.95	sc	0.961538
+q 3588.99	sc	0.961538
+q 3589.02	sc	0.961538
+q 3589.05	sc	0.961538
+q 3589.08	sc	0.961538
+q 3602.19	--	
+q 3608.61	Cm	ac2ea2d41c57d1075999f9ba82d15928,0.91,0.4466667,84
+q 3608.88	cm	ac2ea2d41c57d1075999f9ba82d15928
+q 3608.88	in	
+q 3612.31	cs	
+q 3612.31	--	
+q 3626.23	tq	computer
+q 3662.26	Cm	bdc9396925b85ece906e1300808d8411,0.49,0.5733333,309
+q 3663.36	cm	bdc9396925b85ece906e1300808d8411
+q 3663.36	in	
+q 3667.15	Cm	b182a5fee570873110c9032b6ff923d,0.385,0.4133333,319
+q 3667.46	cm	b182a5fee570873110c9032b6ff923d
+q 3667.46	in	
+q 3669.69	cs	
+q 3669.69	--	
+q 3674.22	Cm	37f56901a07da69dac6b8e58caf61f95,0.715,0.6066667,322
+q 3674.79	cm	37f56901a07da69dac6b8e58caf61f95
+q 3674.79	in	
+q 3677.1	cs	
+q 3677.1	--	
+q 3679.86	Cm	b183d45de540d39592305e37247dd64a,0.485,0.4866667,332
+q 3680.09	cm	b183d45de540d39592305e37247dd64a
+q 3680.09	in	
+q 3682.81	ff	-1
+q 3683.32	ff	-1
+q 3687.97	sc	1.04
+q 3688.33	sc	1.04
+q 3688.54	ro	0.785398
+q 3689.54	ro	-0.785398
+q 3690.79	ro	-0.785398
+q 3691.55	sc	0.961538
+q 3691.76	sc	0.961538
+q 3691.95	sc	0.961538
+q 3692.14	sc	0.961538
+q 3692.35	sc	0.961538
+q 3692.84	sc	0.961538
+q 3695.47	ro	0.0261799
+q 3695.74	ro	0.0261799
+q 3695.94	ro	0.0261799
+q 3696.14	ro	0.0261799
+q 3696.64	ro	0.0261799
+q 3696.68	ro	0.0261799
+q 3696.71	ro	0.0261799
+q 3696.77	ro	0.0261799
+q 3696.79	ro	0.0261799
+q 3698.01	--	
+q 3702.47	Cm	c179b4234e00c6d2ba58668e02b0b051,0.605,0.3933333,335
+q 3702.83	cm	c179b4234e00c6d2ba58668e02b0b051
+q 3702.83	in	
+q 3704.33	cs	
+q 3704.33	--	
+q 3710.77	Cm	53476e51e6bb59eaf35de0153a1c1eca,0.82,0.34,356
+q 3711.03	cm	53476e51e6bb59eaf35de0153a1c1eca
+q 3711.03	in	
+q 3712.29	Cm	9f68fb5f1a04eb3dc0f0f455e22baaf1,0.7,0.4333333,358
+q 3712.52	cm	9f68fb5f1a04eb3dc0f0f455e22baaf1
+q 3712.52	in	
+q 3713.54	cs	
+q 3713.54	--	
+q 3714.74	sa	*
+qe 3714.96

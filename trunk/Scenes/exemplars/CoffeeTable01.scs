@@ -1,6 +1,635 @@
 SceneStudio A
 v 1
-modelCount 13
+modelCount 14
+z dresser
+z bottle
+z apple_23_cinema_hd_display
+z bed
+z shelf
+z book
+z books
+z rubi
+z plush
+z teddy
+z cow
+z pad
+z books
+z toy
+z plane
+z desk
+z dresser
+z bin
+z trash
+z mains
+z socket
+z plug
+z extension
+z chair
+z laptop
+z keyboard
+z mouse
+z box
+z tissue
+z books
+z pad
+z desk_lamp
+z headphones
+z usb
+z computer
+z enclosure
+z hard_drive
+z power
+z cell_phone
+z droid
+z keys
+z wallet
+z glasses
+z ball
+z crystal
+z globe
+z bottle
+z shell
+z nightstand
+z socket
+z plug
+z switch
+z thermostat
+z painting
+z scroll
+z picture
+z poster
+z game
+z frame
+z glass
+z clock
+z bag
+z backpack
+z book
+z pill
+z clothes
+z shoes
+z poster
+z notepad
+z can
+z blinds
+z shirt
+z pants
+z book
+z bed
+z shelf
+z book
+z books
+z rubi
+z plush
+z teddy
+z cow
+z pad
+z books
+z toy
+z plane
+z desk
+z dresser
+z bin
+z trash
+z mains
+z socket
+z plug
+z extension
+z chair
+z laptop
+z keyboard
+z mouse
+z box
+z tissue
+z books
+z pad
+z desk_lamp
+z headphones
+z usb
+z computer
+z enclosure
+z hard_drive
+z power
+z cell_phone
+z droid
+z keys
+z wallet
+z glasses
+z ball
+z crystal
+z globe
+z bottle
+z shell
+z nightstand
+z socket
+z plug
+z switch
+z thermostat
+z painting
+z scroll
+z picture
+z poster
+z game
+z frame
+z glass
+z clock
+z bag
+z backpack
+z book
+z pill
+z clothes
+z shoes
+z poster
+z notepad
+z can
+z blinds
+z shirt
+z pants
+z book
+z desk
+z copier
+z monitor
+z keyboard
+z chair
+z office_chair
+z computer
+z mouse
+z router
+z pad
+z cup
+z mug
+z book
+z newspaper
+z new
+z news
+z paper
+z pencil
+z notepad
+z sketch
+z cs
+z usb
+z phone
+z fax
+z speaker
+z glass
+z painting
+z pad
+z note_pad
+z book
+z desk_lamp
+z hard_disk
+z tape
+z cd
+z stapler
+z notepad
+z book
+z mug
+z trophy
+z plaque
+z frame
+z picture
+z camera
+z calculator
+z bookss
+z books
+z nameplate
+z name_plate
+z chair
+z light
+z floor_light
+z floor_lamp
+z plug
+z switch
+z book_shelf
+z plug
+z socket
+z electric
+z picture
+z books
+z frame
+z office
+z suitcase
+z bag
+z trophy
+z file
+z folder
+z notepad
+z books
+z light
+z toy
+z architect
+z projector
+z clock
+z table
+z conference
+z corner_table
+z monitor
+z laptop
+z keyboard
+z mouse
+z mouse_pad
+z books
+z oaoer
+z paper
+z punch
+z map
+z paper
+z pencil
+z decoration
+z toy
+z desk
+z flower
+z coat
+z couch
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z desk
+z computer_desk
+z desk_chair
+z standing_lamp
+z trash_can
+z computer
+z calendar
+z keyboard
+z mouse_pad
+z mouse
+z monitor
+z power_strip
+z speakers
+z printer
+z briefcase
+z desk
+z computer_desk
+z desk_chair
+z power_strip
+z outlet
+z computer
+z laptop
+z mouse
+z speakers
+z desk
+z computer_desk
+z white_board
+z sofa
+z couch
+z pillow
+z exercise_ball
+z bean_bag
+z coffee_table
+z painting
+z rug
+z desk_chair
+z clock
+z trash
+z outlet
+z computer
+z monitor
+z mac
+z mac
+z apple
+z power_strip
+z coaster
+z mug
+z magazine
+z plate
+z bagel
+z donut
+z bagel
+z donut
+z pillow
+z jacket
+z coat
+z scarf
+z hat
+z cd
+z dvd
+z notebook
+z paper
+z pen
+z headphones
+z book
+z picture_frane
+z picture_frame
+z desk_stuff
+z desk_lamp
+z lamp
+z wallet
+z keys
+z iphone
+z android
+z phone
+z android
+z stapler
+z white_out
+z staple
+z books
+z book
+z trophy
+z book
+z headphones
+z paper
+z pencil
+z cup
+z router
+z note
+z book
+z soda
+z book
+z paperweight
+z snow_globe
+z rug
+z picture_frame
+z pencil_holder
+z watch
+z glasses
+z globe
+z tv
+z dresser
+z couch
+z speakers
+z refridgerator
+z ceiling_light
+z light_switch
+z recliner
+z ez_chair
+z xbox
+z power_outlet
+z xbox_controller
+z desk
+z computer_desk
+z monitor
+z keyboard
+z computer
+z computer_chair
+z couch
+z bed
+z desk
+z dildo
+z bed
+z chair
+z trash_can
+z table
+z television
+z desk
+z desk
+z computer
+z keyboard
+z mouse
+z book
+z printer
+z paper
+z pencil
+z sharpener
+z eraser
+z book
+z speakers
+z book
+z cereal
+z bowl
+z cup
+z coke
+z bottle
+z stand
+z book
+z paper
+z pen
+z toy
+z controller
+z xbox
+z ga,e
+z game
+z xbox
+z desk
+z video
+z CD
+z speaker
+z keyboard
+z mouse
+z CD
+z speaker
+z desk
+z computer_desk
+z desk_chair
+z standing_lamp
+z trash_can
+z computer
+z calendar
+z keyboard
+z mouse_pad
+z mouse
+z monitor
+z power_strip
+z speakers
+z printer
+z briefcase
+z desk
+z computer_desk
+z desk_chair
+z power_strip
+z outlet
+z computer
+z laptop
+z mouse
+z speakers
+z desk
+z computer_desk
+z white_board
+z sofa
+z couch
+z pillow
+z exercise_ball
+z bean_bag
+z coffee_table
+z painting
+z rug
+z desk_chair
+z clock
+z trash
+z outlet
+z computer
+z monitor
+z mac
+z mac
+z apple
+z power_strip
+z coaster
+z mug
+z magazine
+z plate
+z bagel
+z donut
+z bagel
+z donut
+z pillow
+z jacket
+z coat
+z scarf
+z hat
+z cd
+z dvd
+z notebook
+z paper
+z pen
+z headphones
+z book
+z picture_frane
+z picture_frame
+z desk_stuff
+z desk_lamp
+z lamp
+z wallet
+z keys
+z iphone
+z android
+z phone
+z android
+z stapler
+z white_out
+z staple
+z books
+z book
+z trophy
+z book
+z headphones
+z paper
+z pencil
+z cup
+z router
+z note
+z book
+z soda
+z book
+z paperweight
+z snow_globe
+z rug
+z picture_frame
+z pencil_holder
+z watch
+z glasses
+z globe
+z tv
+z dresser
+z couch
+z speakers
+z refridgerator
+z ceiling_light
+z light_switch
+z recliner
+z ez_chair
+z xbox
+z power_outlet
+z xbox_controller
+z desk
+z computer_desk
+z monitor
+z keyboard
+z computer
+z computer_chair
+z couch
+z coffee
+z plate
+z book
+z plant
+z pac
+z phone
+z notepad
+z box
+z shoes
+z book
+z books
+z map
+z books
+z poster
+z painting
+z toy
 z bed
 z desk
 z dildo
@@ -159,7 +788,7 @@ po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 1 0
-c 2 4 6 8 9 
+c 2 4 6 8 9 12 13 
 n d656a6250fe0058fd810b14a81e12eca
 f 0
 s ccaafcf3
@@ -175,29 +804,29 @@ n 17a95ccadaa7818db5e08197be0feebd
 f 0
 s 4bba2ec3
 pg 0
-pt 157
-pu aceddae35aff21f3
+pt 153
+pu ec5785f3494280e3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 3 2
-n 46ed9dad0440c043d33646b0990bb4a
+n 48e260a614c0fd4434a8988fdcee4fde
 f 0
-s 22c65ad3
+s 8295e9f3
 pg 7
 pt 60
-pu 6a08ffe31d7567e3
+pu b5b9dde33eecfbe3
 po 000000000000000000000000
-ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000001ee7c8140000006a000008f3
-tb 4f4053fb2f4053f300000000000000002f4053fb4f4053fb00000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f30000000093b1470c45d7c50c00000000000008f3
+tb 3f4053f33f4053f300000000000000003f4053fb3f4053f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 4 1
 c 5 
 n 17a95ccadaa7818db5e08197be0feebd
 f 0
 s 4bba2ec3
 pg 0
-pt 145
-pu 57bbe3e3478e00f3
+pt 143
+pu 5c92c9e3ce17cbe3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
@@ -217,21 +846,21 @@ n 17a95ccadaa7818db5e08197be0feebd
 f 0
 s 4bba2ec3
 pg 0
-pt 152
-pu c5611ee3824a3be3
+pt 158
+pu de03ecc3d86df8e3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 7 6
-n 48e260a614c0fd4434a8988fdcee4fde
+n 46ed9dad0440c043d33646b0990bb4a
 f 0
-s 8295e9f3
+s 22c65ad3
 pg 7
 pt 60
-pu b5b9dde33eecfbe3
+pu 6a08ffe31d7567e3
 po 000000000000000000000000
-ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f30000000093b1470c45d7c50c00000000000008f3
-tb 3f4053f33f4053f300000000000000003f4053fb3f4053f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000001ee7c8140000006a000008f3
+tb 4f4053fb2f4053f300000000000000002f4053fb4f4053fb00000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 m 8 1
 n d5030e978cceae91f11c3739edd52fa3
 f 0
@@ -248,8 +877,8 @@ n 3b8cd62e5842a4c98870030ed2672a1d
 f 0
 s f75a7ef3
 pg 0
-pt 150
-pu f77066e3e5cce2d3
+pt 147
+pu 156991e355cd60d3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
@@ -273,7 +902,27 @@ pu 302103e398b481f3
 po 000000000000000000000000
 ta 4958f7f3606c39b3efe897d300000000606c39b3e763d7f39fe961eb00000000efe897db9fe961e321cbc7f300000000728a28d3e37bd1eb7d1548fb000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
-qs 6937
+m 12 1
+n 7685495f6e5aac1339a00425b5e3771a
+f 1
+s 858bfad3
+pg 0
+pt 153
+pu 566aded3e408fec3
+po 000000000000000000000000
+ta 0000000000000000000008f30000000000000000000008f30000000000000000000008fb00000000000000000000000067b937240f8cd42c76451b1c000008f3
+tb 3f4053f33f4053f300000000000000003f4053fb3f4053f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+m 13 1
+n 4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+f 0
+s 65a64bc3
+pg 0
+pt 151
+pu a01cdde3e575b3d3
+po 000000000000000000000000
+ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f30000000063b0c54c0b2ab944f67bbb0c000008f3
+tb 529dc7f3c50302eb0000000000000000c50302e3529dc7f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
+qs 7141
 q 6.89026e-005	rc	124.461,-219.61,66.739,0.0136147,-1,0,0,0,1,-1,0,0,0,0,1
 q 2.43944	lo	
 q 2.66964	--	
@@ -7211,4 +7860,208 @@ q 4049.27	--
 q 4049.56	lo	
 q 4051.16	--	
 q 4061.11	sa	C:\code\scenegallery\Scenes\exemplars\2\CoffeeTable01.scs
-qe 4061.46
+q 4081.15	Cm	7685495f6e5aac1339a00425b5e3771a,0.485,0.5333334,26
+q 4081.48	cm	7685495f6e5aac1339a00425b5e3771a
+q 4081.48	in	
+q 4083.94	sc	0.961538
+q 4084.45	sc	0.961538
+q 4084.48	sc	0.961538
+q 4084.51	sc	0.961538
+q 4084.54	sc	0.961538
+q 4084.57	sc	0.961538
+q 4084.6	sc	0.961538
+q 4084.63	sc	0.961538
+q 4084.67	sc	0.961538
+q 4084.7	sc	0.961538
+q 4084.73	sc	0.961538
+q 4084.76	sc	0.961538
+q 4084.79	sc	0.961538
+q 4084.82	sc	0.961538
+q 4084.85	sc	0.961538
+q 4084.88	sc	0.961538
+q 4084.91	sc	0.961538
+q 4084.94	sc	0.961538
+q 4084.97	sc	0.961538
+q 4085	sc	0.961538
+q 4085.03	sc	0.961538
+q 4085.06	sc	0.961538
+q 4085.1	sc	0.961538
+q 4085.13	sc	0.961538
+q 4085.16	sc	0.961538
+q 4085.19	sc	0.961538
+q 4085.22	sc	0.961538
+q 4085.25	sc	0.961538
+q 4085.28	sc	0.961538
+q 4085.31	sc	0.961538
+q 4085.34	sc	0.961538
+q 4085.37	sc	0.961538
+q 4085.4	sc	0.961538
+q 4085.68	sc	0.961538
+q 4086.19	sc	0.961538
+q 4086.22	sc	0.961538
+q 4086.25	sc	0.961538
+q 4086.28	sc	0.961538
+q 4086.31	sc	0.961538
+q 4086.34	sc	0.961538
+q 4086.37	sc	0.961538
+q 4086.68	sc	0.961538
+q 4086.88	sc	0.961538
+q 4087.11	sc	0.961538
+q 4087.29	sc	0.961538
+q 4087.94	ff	-1
+q 4088.42	ff	-1
+q 4089.02	ff	-1
+q 4089.65	ff	-1
+q 4090.09	ff	-1
+q 4091.7	sc	0.961538
+q 4092.2	sc	0.961538
+q 4092.24	sc	0.961538
+q 4092.27	sc	0.961538
+q 4092.3	sc	0.961538
+q 4092.33	sc	0.961538
+q 4092.36	sc	0.961538
+q 4094.14	sc	0.961538
+q 4097.04	--	
+q 4108.53	Cm	4c0f3b3cbcc7fb2cf3ac19bff5ba499a,0.425,0.7933334,24
+q 4109.31	cm	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4109.31	in	
+q 4110.04	sc	0.961538
+q 4110.53	sc	0.961538
+q 4110.56	sc	0.961538
+q 4110.59	sc	0.961538
+q 4110.62	sc	0.961538
+q 4110.65	sc	0.961538
+q 4110.68	sc	0.961538
+q 4110.71	sc	0.961538
+q 4110.74	sc	0.961538
+q 4110.77	sc	0.961538
+q 4110.8	sc	0.961538
+q 4110.83	sc	0.961538
+q 4110.87	sc	0.961538
+q 4110.9	sc	0.961538
+q 4110.93	sc	0.961538
+q 4110.96	sc	0.961538
+q 4110.99	sc	0.961538
+q 4111.02	sc	0.961538
+q 4111.05	sc	0.961538
+q 4111.08	sc	0.961538
+q 4111.11	sc	0.961538
+q 4111.14	sc	0.961538
+q 4111.17	sc	0.961538
+q 4111.2	sc	0.961538
+q 4111.24	sc	0.961538
+q 4111.27	sc	0.961538
+q 4111.3	sc	0.961538
+q 4111.33	sc	0.961538
+q 4111.36	sc	0.961538
+q 4111.39	sc	0.961538
+q 4111.42	sc	0.961538
+q 4111.45	sc	0.961538
+q 4111.48	sc	0.961538
+q 4111.51	sc	0.961538
+q 4111.54	sc	0.961538
+q 4111.58	sc	0.961538
+q 4111.61	sc	0.961538
+q 4111.64	sc	0.961538
+q 4111.67	sc	0.961538
+q 4111.7	sc	0.961538
+q 4111.73	sc	0.961538
+q 4111.76	sc	0.961538
+q 4111.79	sc	0.961538
+q 4111.82	sc	0.961538
+q 4111.85	sc	0.961538
+q 4111.88	sc	0.961538
+q 4111.91	sc	0.961538
+q 4111.94	sc	0.961538
+q 4111.97	sc	0.961538
+q 4112.01	sc	0.961538
+q 4112.04	sc	0.961538
+q 4112.07	sc	0.961538
+q 4112.1	sc	0.961538
+q 4112.13	sc	0.961538
+q 4112.16	sc	0.961538
+q 4112.19	sc	0.961538
+q 4112.22	sc	0.961538
+q 4112.25	sc	0.961538
+q 4112.28	sc	0.961538
+q 4112.77	sc	1.04
+q 4113.1	sc	1.04
+q 4113.82	sc	1.04
+q 4114.11	sc	1.04
+q 4114.75	sc	1.04
+q 4120.38	sc	1.04
+q 4120.67	sc	1.04
+q 4120.91	sc	1.04
+q 4121.11	sc	1.04
+q 4121.32	sc	1.04
+q 4121.69	--	
+q 4122.44	se	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4122.52	--	
+q 4122.92	ms	7685495f6e5aac1339a00425b5e3771a
+q 4124.18	--	
+q 4124.33	ro	0.785398
+q 4125.24	se	7685495f6e5aac1339a00425b5e3771a
+q 4125.7	--	
+q 4125.93	ms	7685495f6e5aac1339a00425b5e3771a
+q 4126.47	--	
+q 4126.62	sc	0.961538
+q 4126.86	sc	0.961538
+q 4127.05	sc	0.961538
+q 4127.57	se	7685495f6e5aac1339a00425b5e3771a
+q 4127.65	--	
+q 4128.12	ms	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4130.27	--	
+q 4130.41	sc	1.04
+q 4130.65	sc	1.04
+q 4130.92	sc	1.04
+q 4131.68	se	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4131.72	--	
+q 4132.05	ms	17a95ccadaa7818db5e08197be0feebd
+q 4133.08	--	
+q 4133.8	se	17a95ccadaa7818db5e08197be0feebd
+q 4133.87	--	
+q 4134.75	se	46ed9dad0440c043d33646b0990bb4a
+q 4134.86	--	
+q 4135.73	ms	17a95ccadaa7818db5e08197be0feebd
+q 4136.88	--	
+q 4137.68	se	17a95ccadaa7818db5e08197be0feebd
+q 4137.76	--	
+q 4138.43	ms	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4139.39	--	
+q 4139.91	sc	1.04
+q 4140.17	sc	1.04
+q 4140.43	sc	1.04
+q 4140.83	ms	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4142.71	--	
+q 4143.16	se	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4143.23	--	
+q 4143.48	ms	3b8cd62e5842a4c98870030ed2672a1d
+q 4145.15	--	
+q 4145.76	se	3b8cd62e5842a4c98870030ed2672a1d
+q 4145.86	--	
+q 4146.3	ms	17a95ccadaa7818db5e08197be0feebd
+q 4147.33	--	
+q 4147.89	se	17a95ccadaa7818db5e08197be0feebd
+q 4147.96	--	
+q 4148.24	ms	3b8cd62e5842a4c98870030ed2672a1d
+q 4149.8	--	
+q 4150.38	se	3b8cd62e5842a4c98870030ed2672a1d
+q 4150.45	--	
+q 4150.76	ms	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4152.23	ro	0.785398
+q 4153.01	ro	-0.785398
+q 4153.45	--	
+q 4154.86	ro	0.0261799
+q 4155.55	ro	-0.0261799
+q 4155.76	ro	-0.0261799
+q 4155.96	ro	-0.0261799
+q 4156.14	ro	-0.0261799
+q 4156.31	ro	-0.0261799
+q 4156.49	ro	-0.0261799
+q 4156.68	ro	-0.0261799
+q 4157.08	ms	4c0f3b3cbcc7fb2cf3ac19bff5ba499a
+q 4159.04	--	
+q 4159.99	cs	
+q 4159.99	--	
+q 4171.39	sa	*
+qe 4171.73
