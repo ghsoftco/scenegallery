@@ -115,10 +115,10 @@ void App::RenderFrame()
 
     _state.scene.RenderNormal(_state, _state.mode == ModeInsert);
 
-    if(_state.mode != ModeInsert)
-    {
-        _state.scene.RenderSelectionSphere(_state);
-    }
+    //if(_state.mode != ModeInsert)
+    //{
+    //    _state.scene.RenderSelectionSphere(_state);
+    //}
 
     if(_state.showSurfaceSamples)
     {

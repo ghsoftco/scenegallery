@@ -76,8 +76,12 @@ void ModelInstance::Render(AppState &state, RenderParameters &parameters) const
     parameters.pickerIDBase = baseId;
 
     //bool selected = (state.selectedGeometryIndex < state.scene._modelFromGeometryIndex.Length() && state.scene._modelFromGeometryIndex[state.selectedGeometryIndex] == this);
-    bool selected = (state.selectedModel == this);
-    
+    bool selected = state.selectedModel == this;
+    if (model != NULL && model->name().StartsWith("room") && model->name().Length() == 6)
+    {
+        selected = false;
+    }
+
     if(selected)
     {
         bool moving = (state.mode == ModeMoveSurfaces || state.mode == ModeMovePlane || state.mode == ModeLevitate);
