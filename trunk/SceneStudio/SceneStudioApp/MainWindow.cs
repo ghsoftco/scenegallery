@@ -403,7 +403,9 @@ namespace SceneStudioApp
                     e.Cancel = true;
                     if (Constants.restrictModelSearchToExemplarContents)
                     {
-                        clickedModelOriginatingExemplar = database.getInstanceScenesOfModel(sceneHash)[0];
+                        List<SceneEntry> originatingScenes = database.getInstanceScenesOfModel(sceneHash);
+                        Utility.showThumbnails(exemplarBrowser, originatingScenes, Constants.exemplarImgDim);
+                        clickedModelOriginatingExemplar = originatingScenes[0];
                     }
                     else
                     {
@@ -938,7 +940,7 @@ namespace SceneStudioApp
             if (exemplarSearchBox.Text.Length != 0)
             {
                 exemplarSearchBox.SelectionStart = 0;
-                exemplarSearchBox.SelectionLength = modelSearchBox.Text.Length;
+                exemplarSearchBox.SelectionLength = exemplarSearchBox.Text.Length;
             }
         }
 
@@ -1002,21 +1004,24 @@ namespace SceneStudioApp
             int panelW = splitContainer1.Panel2.Width;
             int panelH = splitContainer1.Panel2.Height;
 
-            modelSearchBox.Left = 5;
-            modelSearchBox.Top = 0;
-            modelSearchButton.Left = modelSearchBox.Right + 5;
             modelSearchButton.Width = modelSearchButton.PreferredSize.Width;
-            modelNameLabel.Left = modelSearchButton.Right + 5;
+            modelSearchButton.Left = splitContainer1.Panel2.Width - (modelSearchButton.Width + 5);
+            modelSearchBox.Left = modelSearchButton.Left - (modelSearchBox.Width + 5);
+            modelNameLabel.Left = 5;
+            modelNameLabel.Width = modelSearchBox.Left - 10;
 
             modelBrowser.Left = 5;
             modelBrowser.Top = modelSearchBox.Bottom;
             modelBrowser.Height = 300;
             modelBrowser.Width = panelW - 5;
 
-            exemplarSearchBox.Left = 5;
-            exemplarSearchBox.Top = modelBrowser.Bottom + 5;
-            exemplarSearchButton.Left = exemplarSearchBox.Right + 5;
-            exemplarSearchButton.Top = exemplarSearchBox.Top;
+            
+            exemplarSearchButton.Top = modelBrowser.Bottom + 5;
+            exemplarSearchButton.Left = splitContainer1.Panel2.Width - (exemplarSearchButton.Width + 5);
+            exemplarSearchBox.Left = exemplarSearchButton.Left - (exemplarSearchBox.Width + 5);
+            exemplarSearchBox.Top = exemplarSearchButton.Top;
+            resetExemplarsButton.Left = 5;
+            resetExemplarsButton.Top = exemplarSearchBox.Top;
 
             exemplarBrowser.Left = 5;
             exemplarBrowser.Top = exemplarSearchBox.Bottom;
@@ -1028,6 +1033,7 @@ namespace SceneStudioApp
                 exemplarSearchBox.Visible = false;
                 exemplarSearchButton.Visible = false;
                 exemplarBrowser.Visible = false;
+                resetExemplarsButton.Visible = false;
                 modelSearchBox.Visible = true;
                 modelSearchButton.Visible = true;
                 modelBrowser.Height = panelH - modelSearchBox.Height - 5;
@@ -1037,6 +1043,7 @@ namespace SceneStudioApp
                 exemplarSearchBox.Visible = true;
                 exemplarSearchButton.Visible = true;
                 exemplarBrowser.Visible = true;
+                resetExemplarsButton.Visible = true;
                 modelSearchBox.Visible = false;
                 modelSearchButton.Visible = false;
             }
@@ -1059,12 +1066,19 @@ namespace SceneStudioApp
             }
             else mode = BrowserMode.ExemplarsAvailable;
 
+            Utility.showThumbnails(modelBrowser, new List<SceneEntry>(), Constants.sceneImgDim);
+            Utility.showThumbnails(exemplarBrowser, database.getExemplars(), Constants.exemplarImgDim);
             UpdatePanel2Components();
         }
 
         private void SwitchRestrictModelSearchToExemplars()
         {
             Constants.restrictModelSearchToExemplarContents = !Constants.restrictModelSearchToExemplarContents;
+        }
+
+        private void resetExemplarsButton_Click(object sender, EventArgs e)
+        {
+            Utility.showThumbnails(exemplarBrowser, database.getExemplars(), Constants.exemplarImgDim);
         }
     }
 }
