@@ -343,6 +343,7 @@ namespace SceneStudioApp
         private void modelSearchButton_Click(object sender, EventArgs e)
         {
             Utility.showThumbnails(modelBrowser, issueTextQuery(modelSearchBox.Text), Constants.sceneImgDim);
+            LogUIEvent(UIEventType.UIEventKeywordSearchModel, modelSearchButton.Text);
         }
 
         private void newSelectedModel(string sceneHash)
@@ -426,6 +427,7 @@ namespace SceneStudioApp
                 e.Handled = true;
                 e.SuppressKeyPress = true;
                 Utility.showThumbnails(modelBrowser, issueTextQuery(modelSearchBox.Text), Constants.sceneImgDim);
+                LogUIEvent(UIEventType.UIEventKeywordSearchModel, modelSearchBox.Text);
             }
         }
 
