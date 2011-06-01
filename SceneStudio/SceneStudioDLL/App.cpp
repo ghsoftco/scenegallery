@@ -535,7 +535,7 @@ void App::KeyPress(int key, bool shift, bool ctrl)
         // Create Thumbnails
         if (key == KEY_T)
         {
-            CreateSceneThumbnails(exemplarsDirectory, screenshotDim);
+            CreateSceneThumbnails(resultsDirectory, screenshotDimLarge);
         }
 
         // Re-Root
@@ -1153,5 +1153,5 @@ void App::SaveSceneThumbnail(const String &filename, const Vec2i &dim)
     LoadScene(filename);
     String basename = filename.RemoveSuffix(".scs");
     Screenshot(basename + String(".png"), dim);
-    _state.picker.SaveModelNameGrid(_state, basename + String(".txt"), dim);
+    //_state.picker.SaveModelNameGrid(_state, basename + String(".txt"), dim);
 }

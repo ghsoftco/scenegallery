@@ -10,8 +10,10 @@ const bool runningLocalDirectoryTasks = false;
 const bool SkipTextureLoading = false;
 
 const Vec2i screenshotDim(400, 400);
+const Vec2i screenshotDimLarge(1000, 1000);
 const String screenshotDirectory("../../Scenes/");
 const String exemplarsDirectory("../../Scenes/exemplars/");
+const String resultsDirectory("../../Scenes/results/");
 const String noModelHash("*");
 
 const bool DebuggingMode = false;
