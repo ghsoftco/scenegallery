@@ -1,6 +1,154 @@
 SceneStudio A
 v 1
 modelCount 23
+z desk
+z samsung_syncmaster_940nw_tft_monitor
+z my_keyboard
+z mouse
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z laptop
+z bookshelf
+z books
+z leather_bound_books_-_yellow
+z leather_bound_books_-_yellow
+z stack_of_books
+z book
+z leather_bound_books_-_yellow
+z tea_cup
+z nike_hightop_shoe_prodject
+z clock
+z hp_printer
+z book_shelf
+z book_shelf
+z yoshi
+z plant
+z potted_flowers
+z han_solo_vs._boba_fett_poster_set
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z concept_apple_macbook_pro_17in
+z jar_of_pencils
+z black_desktop_telephone
+z desk
+z samsung_syncmaster_940nw_tft_monitor
+z my_keyboard
+z mouse
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z laptop
+z bookshelf
+z books
+z leather_bound_books_-_yellow
+z leather_bound_books_-_yellow
+z stack_of_books
+z book
+z leather_bound_books_-_yellow
+z tea_cup
+z nike_hightop_shoe_prodject
+z clock
+z hp_printer
+z book_shelf
+z book_shelf
+z yoshi
+z plant
+z potted_flowers
+z han_solo_vs._boba_fett_poster_set
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z concept_apple_macbook_pro_17in
+z jar_of_pencils
+z black_desktop_telephone
+z desk
+z bear_bottle
+z beer_bottle
+z books
+z thshirts
+z tshirts
+z shirts
+z towl
+z towel
+z towel
+z cloth
+z pants
+z jacket
+z papers
+z caNS
+z cans
+z can
+z paper
+z DVD
+z poster
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z lamp
+z bookshelf
+z books
+z cat
+z decoration
+z picture_frame
+z seashells
+z sea
+z shell
+z CD
+z storage_box
+z phonebook
+z directory
+z globe
+z desk
+z gray_mousepad
+z desk
+z desk
+z samsung_syncmaster_940nw_tft_monitor
+z samsung_syncmaster_940nw_tft_monitor
+z desk_lamp
+z clock
+z bag
+z alienware_area_51_computer_case_(scale)
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z coffee_table
+z books
+z picture_sunflower
+z an_inconsequential_event_in_the_affairs_of_the_cosmos
+z dell_inspiron
+z dell_ultrasharp_widescreen_monitor
+z my_keyboard
+z blue_mousepad
+z blue_mousepad
+z unique_designed_pepsi_can
+z apple_23_cinema_hd_display
+z stack_of_books
+z opened_hard_back_book
+z calendario_-_calendar
+z desk_lamp
+z clock
+z arranjo_planta_(original_graham)
+z drinks_gulp_cup_(large)
+z shoes
+z glasses
+z sticky_note
+z sketchup_notebook_with_pencil
+z sticky_note
+z sticky_note
+z sticky_note
+z sketchup_notebook_with_pencil
 z a_fruit_bowl
 z table
 z table
@@ -30,7 +178,7 @@ z budweiser_bottle
 z stack_of_books
 z office_desk
 z a_pencil
-C 116.779,120.49,133.398,5.62171e-005,-0.903704,0.428159,0.00642263,0.428151,0.903683,-0.999886,0.0149995,-1.27975e-009,0,0,1
+C 124.261,163.43,111.972,0.0801663,-0.804089,0.589079,-0.0485493,0.58714,0.808026,-0.996597,-0.0824062,-1.16084e-009,0,0,1
 m 0
 c 1 22 
 n room01
@@ -264,7 +412,7 @@ pu 811fbae38a834fe3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000bc42213caa84882ce3cfd92c000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
-qs 470
+qs 485
 q 3.49277	lo	
 q 4.01295	--	
 q 4.23931	lo	
@@ -735,4 +883,19 @@ q 518.397	do	-12
 q 518.549	do	-12
 q 518.789	do	12
 q 532.053	sa	C:\code\SceneGallery\Scenes\tasks\gabor-bookshelf.scs
-qe 532.078
+q 534.272	do	-12
+q 534.312	do	-12
+q 535.313	lo	
+q 536.552	--	
+q 537.056	do	-12
+q 539.329	lo	
+q 540.648	--	
+q 542.824	do	-12
+q 543.713	lo	
+q 544.344	--	
+q 544.593	lo	
+q 545.216	--	
+q 545.889	lo	
+q 547.832	--	
+q 552.538	sa	*
+qe 552.569

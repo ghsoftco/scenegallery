@@ -36,6 +36,40 @@ z concept_apple_macbook_pro_17in
 z jar_of_pencils
 z black_desktop_telephone
 z desk
+z samsung_syncmaster_940nw_tft_monitor
+z my_keyboard
+z mouse
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z laptop
+z bookshelf
+z books
+z leather_bound_books_-_yellow
+z leather_bound_books_-_yellow
+z stack_of_books
+z book
+z leather_bound_books_-_yellow
+z tea_cup
+z nike_hightop_shoe_prodject
+z clock
+z hp_printer
+z book_shelf
+z book_shelf
+z yoshi
+z plant
+z potted_flowers
+z han_solo_vs._boba_fett_poster_set
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z concept_apple_macbook_pro_17in
+z jar_of_pencils
+z black_desktop_telephone
+z desk
 z bear_bottle
 z beer_bottle
 z books
@@ -55,7 +89,7 @@ z can
 z paper
 z DVD
 z poster
-C 108.341,98.1859,69.9442,-0.133337,-0.973387,0.186385,0.0278555,0.18431,0.982472,-0.988769,0.149437,-3.47095e-008,0,0,1
+C 70.5435,142.79,89.809,-0.371799,-0.71748,0.589057,0.279861,0.518429,0.808026,-0.879966,0.47503,-3.33462e-008,0,0,1
 m 0
 c 1 17 19 20 21 22 23 24 25 26 27 28 29 30 31 
 n room01
@@ -380,7 +414,7 @@ pu 0f0771e38589a9e3
 po 000000000000000000000000
 ta 00000000000008fb0000000000000000000008f30000000000000000000000000000000000000000000008f300000000e4a8a83c7dc98f14000e673c000008f3
 tb 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
-qs 544
+qs 583
 q 12.194	Cm	62b25a5e3119b8409023147b38c03c9f,0.55,0.66,12
 q 12.9053	cm	62b25a5e3119b8409023147b38c03c9f
 q 12.9053	in	
@@ -925,4 +959,43 @@ q 917.302	--
 q 920.531	do	-12
 q 920.651	do	-12
 q 941.468	sa	C:\code\SceneGallery\Scenes\tasks\anant-desk.scs
-qe 941.497
+q 943.865	lo	
+q 945.265	--	
+q 945.561	do	-12
+q 945.594	do	-12
+q 945.627	do	-12
+q 945.66	do	-12
+q 946.122	lo	
+q 946.435	--	
+q 946.581	lo	
+q 947.064	--	
+q 947.302	lo	
+q 950.565	--	
+q 950.953	lo	
+q 951.818	--	
+q 952.057	lo	
+q 953.057	--	
+q 953.249	lo	
+q 954.521	--	
+q 954.945	lo	
+q 956.665	--	
+q 956.897	lo	
+q 958.097	--	
+q 958.417	lo	
+q 961.001	--	
+q 961.433	lo	
+q 962.218	--	
+q 962.489	lo	
+q 963.305	--	
+q 964.489	lo	
+q 966.425	--	
+q 966.898	do	12
+q 967.905	lo	
+q 970.137	--	
+q 976.601	lo	
+q 978.88	--	
+q 979.176	do	12
+q 979.209	do	12
+q 980.16	do	-12
+q 987.05	sa	*
+qe 987.081
