@@ -1,6 +1,94 @@
 SceneStudio A
 v 1
 modelCount 19
+z desk
+z samsung_syncmaster_940nw_tft_monitor
+z my_keyboard
+z mouse
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z laptop
+z bookshelf
+z books
+z leather_bound_books_-_yellow
+z leather_bound_books_-_yellow
+z stack_of_books
+z book
+z leather_bound_books_-_yellow
+z tea_cup
+z nike_hightop_shoe_prodject
+z clock
+z hp_printer
+z book_shelf
+z book_shelf
+z yoshi
+z plant
+z potted_flowers
+z han_solo_vs._boba_fett_poster_set
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z concept_apple_macbook_pro_17in
+z jar_of_pencils
+z black_desktop_telephone
+z desk
+z samsung_syncmaster_940nw_tft_monitor
+z my_keyboard
+z mouse
+z table
+z table
+z mug
+z book
+z paper
+z candle
+z floor_lamp
+z poster
+z laptop
+z bookshelf
+z books
+z leather_bound_books_-_yellow
+z leather_bound_books_-_yellow
+z stack_of_books
+z book
+z leather_bound_books_-_yellow
+z tea_cup
+z nike_hightop_shoe_prodject
+z clock
+z hp_printer
+z book_shelf
+z book_shelf
+z yoshi
+z plant
+z potted_flowers
+z han_solo_vs._boba_fett_poster_set
+z herman_miller&reg;_eames&reg;_softpad_executive_chair_from_smart_furniture
+z concept_apple_macbook_pro_17in
+z jar_of_pencils
+z black_desktop_telephone
+z desk
+z bear_bottle
+z beer_bottle
+z books
+z thshirts
+z tshirts
+z shirts
+z towl
+z towel
+z towel
+z cloth
+z pants
+z jacket
+z papers
+z caNS
+z cans
+z can
+z paper
+z DVD
+z poster
 z table
 z table
 z mug
@@ -61,7 +149,7 @@ z sticky_note
 z sticky_note
 z sticky_note
 z sketchup_notebook_with_pencil
-C 166.973,94.354,40.7668,0.392366,-0.918709,-0.0449819,0.017102,-0.0416072,0.998987,-0.924908,-0.380187,4.43882e-010,0,0,1
+C 134.919,132.239,89.5551,0.299245,-0.852718,0.428164,-0.135713,0.406124,0.903683,-0.948444,-0.316937,-1.64513e-009,0,0,1
 m 0
 c 1 10 11 12 13 14 16 17 18 
 n room01
@@ -256,7 +344,7 @@ pu 8faa52e38af2d6e3
 po 000000000000000000000000
 ta 000008f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3000000003c0db63cdb3815244c0f02e3000008f3
 tb 2f4053f32f4053f300000000000000002f4053fb2f4053f300000000000000000000000000000000000008f300000000000000000000000000000000000008f3
-qs 542
+qs 570
 q 2.39426	se	
 q 2.474	--	
 q 5.4431	se	room01
@@ -799,4 +887,32 @@ q 682.664	--
 q 682.984	do	-12
 q 683.032	do	-12
 q 699.489	sa	C:\code\SceneGallery\Scenes\tasks\chinmay-desk.scs
-qe 699.519
+q 701.625	lo	
+q 702.342	--	
+q 702.56	lo	
+q 703.848	--	
+q 704.129	lo	
+q 704.633	--	
+q 704.793	lo	
+q 705.504	--	
+q 705.737	lo	
+q 706.208	--	
+q 706.432	lo	
+q 707.12	--	
+q 707.432	do	-12
+q 707.504	do	-12
+q 708.056	do	-12
+q 708.941	lo	
+q 712.328	--	
+q 713.777	lo	
+q 714.6	--	
+q 717.617	lo	
+q 719.544	--	
+q 720.84	lo	
+q 723.064	--	
+q 723.392	lo	
+q 725.176	--	
+q 725.856	do	-12
+q 726.32	do	12
+q 727.874	sa	*
+qe 727.905
