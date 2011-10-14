@@ -679,9 +679,10 @@
             this.Controls.Add(this.toolBar);
             this.Controls.Add(this.menuBar);
             this.Name = "MainWindow";
-            this.Text = "SceneStudio";
+            this.Text = "SceneGallery";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

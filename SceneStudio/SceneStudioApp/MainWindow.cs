@@ -1082,5 +1082,10 @@ namespace SceneStudioApp
         {
             Utility.showThumbnails(exemplarBrowser, database.getExemplars(), Constants.exemplarImgDim);
         }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
